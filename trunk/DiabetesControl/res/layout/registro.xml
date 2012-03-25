@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget46"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/widget64"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/tvTipo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="Tipo:" />
+
+        <Spinner
+            android:id="@+id/spTipo"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/tvTipo"
+            android:layout_toRightOf="@id/tvTipo"
+            android:prompt="@string/tipoRegistro" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/widget65"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/tvDataHora"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="Data/Hora:" />
+
+        <Button
+            android:id="@+id/btData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/tvDataHora"
+            android:layout_toRightOf="@id/tvDataHora"
+            android:text="Data" />
+
+        <Button
+            android:id="@+id/btHora"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/btData"
+            android:layout_toRightOf="@id/btData"
+            android:text="Hora" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/widget66"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/tvCategoria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="Categoria: " />
+
+        <Spinner
+            android:id="@+id/spCategoria"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/tvCategoria"
+            android:layout_toRightOf="@id/tvCategoria"
+            android:prompt="@string/tipoCategoria" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/widget67"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/tvValor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="Valor: " />
+
+        <EditText
+            android:id="@+id/etValor"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/tvValor"
+            android:layout_toRightOf="@id/tvValor" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/widget68"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/btSalvar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="Salvar" />
+
+        <Button
+            android:id="@+id/btLimpar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/btSalvar"
+            android:layout_toRightOf="@id/btSalvar"
+            android:text="Limpar" />
+    </RelativeLayout>
+
+</TableLayout>
