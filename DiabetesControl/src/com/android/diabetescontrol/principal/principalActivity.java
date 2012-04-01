@@ -8,10 +8,10 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.diabetescontrol.activities.R;
 import com.android.diabetescontrol.activities.consultaRegistroActivity;
 import com.android.diabetescontrol.activities.cadastroRegistroActivity;
 import com.android.diabetescontrol.database.ContextoDados;
-import com.diabetescontrol.principal.R;
 
 public class principalActivity extends Activity {
 	/** Called when the activity is first created. */

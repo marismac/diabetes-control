@@ -1,35 +1,50 @@
 package com.android.diabetescontrol.activities;
 
-import com.diabetescontrol.principal.R;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import android.app.ListActivity;
+import android.database.Cursor;
 import android.os.Bundle;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
-import android.view.*;
-import android.widget.TextView;
+import android.widget.SimpleAdapter;
+
+import com.android.diabetescontrol.database.RegistroDAO;
+import com.android.diabetescontrol.model.Registro;
 
 public class consultaRegistroActivity extends ListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		String[] countries = getResources().getStringArray(R.array.countries);
+		List<Map<String, String>> regs = getRegistrosList();
 
-		ListView lv = getListView();
-		lv.setTextFilterEnabled(true);
+		String[] from = { "Master", "Detail" };
+		int[] to = { android.R.id.text1, android.R.id.text2 };
 
-		lv.setOnItemClickListener(new OnItemClickListener() {
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				// When clicked, show a toast with the TextView text
-				Toast.makeText(getApplicationContext(),
-						((TextView) view).getText(), Toast.LENGTH_SHORT).show();
-			}
-		});
-		setListAdapter(new ArrayAdapter<String>(this,
-				R.layout.consultaregistros, countries));
+		SimpleAdapter ad = new SimpleAdapter(this, regs,
+				R.layout.consultaregistros, from, to);
+		ListView lv = (ListView) findViewById(R.id.list);
+		lv.setAdapter(ad);
+	}
+
+	private List<Map<String, String>> getRegistrosList() {
+		List<Map<String, String>> l = new ArrayList<Map<String, String>>();
+		RegistroDAO regDAO = new RegistroDAO(this);
+		regDAO.open();
+		Cursor c = regDAO.consultarTodosRegistrosV1();
+		regDAO.close();
+		if (!c.isAfterLast()) {
+			Map<String, String> m = new HashMap<String, String>();
+			Registro reg = regDAO.deCursorParaRegistro(c);
+			m.put("Master", reg.getDatahora().toString() + " V: "
+					+ reg.getValor().toString());
+			m.put("Detail", reg.getTipo().toString() + " - "
+					+ reg.getCategoria().toString());
+			l.add(m);
+			c.moveToNext();
+		}
+		return l;
 	}
 
 }
