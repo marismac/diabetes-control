@@ -1,53 +1,58 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-
-    <string name="hello">Hello World, DiabetesControlActivity!</string>
-    <string name="app_name">DiabetesControl</string>
+	<string name="hello">Hello World, DiabetesControlActivity!</string>
+	<string name="app_name">DiabetesControl</string>
 	<string name="tipoRegistro">Tipo Registro</string>
-    <string-array name="tipoReg_array">
-        <item>Glicose</item>
-        <item>Medicamento</item>
-        <item>Peso</item>
-        <item>Pressão</item>
-        <item>Pulso</item>
-        <item>Gordura</item>
-    </string-array>
-    <string name="tipoCategoria">Tipo Categoria</string>
-    <string-array name="tipoCat_array">
-        <item>Café</item>
-        <item>Janta</item>
-        <item>Almoço</item>
-        <item>Lanche</item>
-    </string-array>
-    <string-array name="countries">
-        <item>Bahrain</item>
-        <item>Bangladesh</item>
-        <item>Barbados</item>
-        <item>Belarus</item>
-        <item>Belgium</item>
-        <item>Belize</item>
-        <item>Benin</item>
-        <item>Bahrain</item>
-        <item>Bangladesh</item>
-        <item>Barbados</item>
-        <item>Belarus</item>
-        <item>Belgium</item>
-        <item>Belize</item>
-        <item>Benin</item>
-        <item>Bahrain</item>
-        <item>Bangladesh</item>
-        <item>Barbados</item>
-        <item>Belarus</item>
-        <item>Belgium</item>
-        <item>Belize</item>
-        <item>Benin</item>
-        <item>Bahrain</item>
-        <item>Bangladesh</item>
-        <item>Barbados</item>
-        <item>Belarus</item>
-        <item>Belgium</item>
-        <item>Belize</item>
-        <item>Benin</item>
-    </string-array>
-    
+	<string-array name="tipoReg_array">
+		<item>Glicose</item>
+		<item>Medicamento</item>
+		<item>Peso</item>
+		<item>Pressão</item>
+		<item>Pulso</item>
+		<item>Gordura</item>
+	</string-array>
+	<string name="tipoCategoria">Tipo Categoria</string>
+	<string-array name="tipoCat_array">
+		<item>Café</item>
+		<item>Janta</item>
+		<item>Almoço</item>
+		<item>Lanche</item>
+	</string-array>
+	<string-array name="countries">
+		<item>Bahrain</item>
+		<item>Bangladesh</item>
+		<item>Barbados</item>
+		<item>Belarus</item>
+		<item>Belgium</item>
+		<item>Belize</item>
+		<item>Benin</item>
+		<item>Bahrain</item>
+		<item>Bangladesh</item>
+		<item>Barbados</item>
+		<item>Belarus</item>
+		<item>Belgium</item>
+		<item>Belize</item>
+		<item>Benin</item>
+		<item>Bahrain</item>
+		<item>Bangladesh</item>
+		<item>Barbados</item>
+		<item>Belarus</item>
+		<item>Belgium</item>
+		<item>Belize</item>
+		<item>Benin</item>
+		<item>Bahrain</item>
+		<item>Bangladesh</item>
+		<item>Barbados</item>
+		<item>Belarus</item>
+		<item>Belgium</item>
+		<item>Belize</item>
+		<item>Benin</item>
+	</string-array>
+	<string name="ContextoDados_onCreate">
+		CREATE TABLE Registro (ID INTEGER PRIMARY KEY AUTOINCREMENT, Tipo TEXT, Categoria TEXT, Valor INT);
+	</string>
+	<string name="ContextoDados_onUpgrade">"
+		DROP TABLE IF EXISTS Registro
+	</string>
+	<string name="registros">Registros</string>
 </resources>

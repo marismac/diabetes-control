@@ -1,6 +1,15 @@
 package com.diabetescontrol.principal;
 
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
+import com.diabetescontrol.database.ContextoDados;
+import com.diabetescontrol.database.RegistroDAO;
+import com.diabetescontrol.model.Registro;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -37,12 +46,12 @@ public class RegistroActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.registro);
-		setValorCampos();
+		setCampos();
 		carregaSpinners();
 		runListeners();
 	}
 
-	private void setValorCampos() {
+	private void setCampos() {
 		spinnerTipo = (Spinner) findViewById(R.id.spTipo);
 		spinnerCategoria = (Spinner) findViewById(R.id.spCategoria);
 		buttonSalvar = (Button) findViewById(R.id.btSalvar);
@@ -77,7 +86,6 @@ public class RegistroActivity extends Activity {
 
 	private void runListeners() {
 		buttonData.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
 				showDialog(DATE_DIALOG_ID);
@@ -90,6 +98,44 @@ public class RegistroActivity extends Activity {
 				showDialog(TIME_DIALOG_ID);
 			}
 		});
+		buttonSalvar.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Salvar();
+			}
+		});
+	}
+
+	private void Salvar() {
+		RegistroDAO regDao = new RegistroDAO(this);
+		regDao.open();
+		if (getValoresTela() != null) {
+			regDao.criarRegistro(getValoresTela());
+		}
+		regDao.close();
+	}
+
+	private Registro getValoresTela() {
+		if ("".equals(editTextValor.getText().toString())) {
+			editTextValor.setError("Campo Obrigatório");
+			editTextValor.setFocusable(true);
+			return null;
+		}
+		Registro reg = new Registro();
+		Timestamp timestamp = new Timestamp(mYear - 1900, mMonth, mDay, mHour,
+				mMinute, 0, 0);
+		reg.setDatahora(timestamp);
+		reg.setCategoria(spinnerCategoria.getSelectedItem().toString());
+		reg.setTipo(spinnerTipo.getSelectedItem().toString());
+		reg.setValor(Integer.valueOf(editTextValor.getText().toString()));
+		System.out.println("******** INICIO Registros Inseridos ******");
+		System.out.println(reg.getTipo());
+		System.out.println(reg.getCategoria());
+		System.out.println(reg.getValor());
+		System.out.println(reg.getDatahora());
+		System.out.println("******** FIM Registros Inseridos ******");
+		return reg;
 	}
 
 	private void updateDisplay() {
