@@ -16,10 +16,10 @@
 	android:layout_height="68dp"
 	android:text="Consultar" />
 <Button
-	android:id="@+id/widget48"
+	android:id="@+id/btConsultarDB"
 	android:layout_width="wrap_content"
 	android:layout_height="68dp"
-	android:text="Button" />
+	android:text="Consultar DB" />
 <Button
 	android:id="@+id/widget49"
 	android:layout_width="wrap_content"

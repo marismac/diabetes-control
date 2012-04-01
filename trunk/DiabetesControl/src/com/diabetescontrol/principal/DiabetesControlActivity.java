@@ -1,23 +1,25 @@
 package com.diabetescontrol.principal;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
+
+import com.diabetescontrol.database.ContextoDados;
 
 public class DiabetesControlActivity extends Activity {
 	/** Called when the activity is first created. */
 	private Button btAdicionar;
 	private Button btConsultar;
+	private Button btConsultarDB;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		new ContextoDados(this); 
 		setContentView(R.layout.main);
 		inicializaObjetos();
 		carregaListeners();
@@ -26,6 +28,7 @@ public class DiabetesControlActivity extends Activity {
 	private void inicializaObjetos() {
 		btAdicionar = (Button) findViewById(R.id.btAdicionar);
 		btConsultar = (Button) findViewById(R.id.btConsultar);
+		btConsultarDB = (Button) findViewById(R.id.btConsultarDB);
 	}
 
 	private void carregaListeners() {
@@ -43,6 +46,27 @@ public class DiabetesControlActivity extends Activity {
 				startActivity(i);
 			}
 		});
+		btConsultarDB.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				carregar();
+			}
+		});
+	}
+
+	public void carregar() {
+
+	}
+
+	public void ImprimirLinha(String nome, String telefone) {
+		TextView tv = (TextView) findViewById(R.id.listaRegistros);
+
+		if (tv.getText().toString()
+				.equalsIgnoreCase("Nenhum contato cadastrado."))
+			tv.setText("");
+
+		tv.setText(tv.getText() + "\r\n" + nome + " - " + telefone);
 	}
 
 	@Override
