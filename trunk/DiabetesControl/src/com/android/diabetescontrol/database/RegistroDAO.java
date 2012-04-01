@@ -128,7 +128,7 @@ public class RegistroDAO extends BasicoDAO {
 
 	}
 
-	public List<Registro> consultarQuantosEmprestimosBetween(Registro inicio,
+	public List<Registro> consultarQuantosRegistrosBetween(Registro inicio,
 			Registro fim) {
 		List<Registro> datas = new ArrayList<Registro>();
 
