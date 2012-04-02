@@ -17,25 +17,27 @@ import com.android.diabetescontrol.model.Registro;
 public class consultaRegistroActivity extends ListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.consultaregistros);
 		List<Map<String, String>> regs = getRegistrosList();
 
 		String[] from = { "Master", "Detail" };
 		int[] to = { android.R.id.text1, android.R.id.text2 };
 
 		SimpleAdapter ad = new SimpleAdapter(this, regs,
-				R.layout.consultaregistros, from, to);
-		ListView lv = (ListView) findViewById(R.id.list);
+				android.R.layout.simple_list_item_2, from, to);
+		ListView lv = (ListView) findViewById(android.R.id.list);
 		lv.setAdapter(ad);
 	}
 
 	private List<Map<String, String>> getRegistrosList() {
 		List<Map<String, String>> l = new ArrayList<Map<String, String>>();
 		RegistroDAO regDAO = new RegistroDAO(this);
+		Map<String, String> m = null;
 		regDAO.open();
 		Cursor c = regDAO.consultarTodosRegistrosV1();
-		regDAO.close();
-		if (!c.isAfterLast()) {
-			Map<String, String> m = new HashMap<String, String>();
+		c.moveToFirst();
+		while (!c.isAfterLast()) {
+			m = new HashMap<String, String>();
 			Registro reg = regDAO.deCursorParaRegistro(c);
 			m.put("Master", reg.getDatahora().toString() + " V: "
 					+ reg.getValor().toString());
@@ -44,6 +46,7 @@ public class consultaRegistroActivity extends ListActivity {
 			l.add(m);
 			c.moveToNext();
 		}
+		regDAO.close();
 		return l;
 	}
 
