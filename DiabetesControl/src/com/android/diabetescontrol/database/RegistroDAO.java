@@ -64,7 +64,7 @@ public class RegistroDAO extends BasicoDAO {
 		return reg;
 	}
 
-	public static Registro deCursorParaRegistro(Cursor c) {
+	public Registro deCursorParaRegistro(Cursor c) {
 		if (c == null || c.getCount() < 1) {
 			return null;
 		}
@@ -149,7 +149,7 @@ public class RegistroDAO extends BasicoDAO {
 	// mesmo passar todas as colunas ?
 	public Cursor consultarTodosRegistrosV1() {
 
-		return mDb.query(TABELA_REGISTRO, new String[] { COLUNA_ID, COLUNA_ID,
+		return mDb.query(TABELA_REGISTRO, new String[] { COLUNA_ID,
 				COLUNA_DATAHORA, COLUNA_VALOR, COLUNA_TIPO, COLUNA_CATEGORIA },
 				null, null, null, null, null);
 	}
