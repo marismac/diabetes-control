@@ -1,5 +1,6 @@
 package com.android.diabetescontrol.activities;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,9 +40,11 @@ public class consultaRegistroActivity extends ListActivity {
 		while (!c.isAfterLast()) {
 			m = new HashMap<String, String>();
 			Registro reg = regDAO.deCursorParaRegistro(c);
-			m.put("Master", reg.getDatahora().toString() + " V: "
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy HH:mm");
+			String formattedDate = sdf.format(reg.getDatahora());
+			m.put("Master", reg.getTipo().toString() + ": "
 					+ reg.getValor().toString());
-			m.put("Detail", reg.getTipo().toString() + " - "
+			m.put("Detail", formattedDate + " - "
 					+ reg.getCategoria().toString());
 			l.add(m);
 			c.moveToNext();

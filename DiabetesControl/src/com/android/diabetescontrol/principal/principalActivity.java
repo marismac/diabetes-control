@@ -17,12 +17,11 @@ public class principalActivity extends Activity {
 	/** Called when the activity is first created. */
 	private Button btAdicionar;
 	private Button btConsultar;
-	private Button btConsultarDB;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		new ContextoDados(this); 
+		new ContextoDados(this);
 		setContentView(R.layout.main);
 		inicializaObjetos();
 		carregaListeners();
@@ -31,7 +30,6 @@ public class principalActivity extends Activity {
 	private void inicializaObjetos() {
 		btAdicionar = (Button) findViewById(R.id.btAdicionar);
 		btConsultar = (Button) findViewById(R.id.btConsultar);
-		btConsultarDB = (Button) findViewById(R.id.btConsultarDB);
 	}
 
 	private void carregaListeners() {
@@ -47,13 +45,6 @@ public class principalActivity extends Activity {
 				Intent i = new Intent(principalActivity.this,
 						consultaRegistroActivity.class);
 				startActivity(i);
-			}
-		});
-		btConsultarDB.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				carregar();
 			}
 		});
 	}
