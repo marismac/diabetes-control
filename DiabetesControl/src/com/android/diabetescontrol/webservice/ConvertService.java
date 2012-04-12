@@ -7,16 +7,14 @@ import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
 public class ConvertService {
-	private static final String SOAP_ACTION = "http://zbra.com.br/springtutorial/Convert";
-	private static final String METHOD_NAME = "Convert";
-	private static final String NAMESPACE = "http://zbra.com.br/springtutorial";
-	private static final String URL = "http://192.168.10.103/SpringTutorialService/CurrencyServiceWS.asmx";
+	private static final String SOAP_ACTION = "http://tempuri.org/CelsiusToFahrenheit";
+	private static final String METHOD_NAME = "CelsiusToFahrenheit";
+	private static final String NAMESPACE = "http://tempuri.org/";
+	private static final String URL = "http://www.w3schools.com/webservices/tempconvert.asmx";
 
-	public String Convert(String fromCurrency, String toCurrency, String amount) {
+	public String Convert() {
 		SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
-		request.addProperty("from", fromCurrency);
-		request.addProperty("to", toCurrency);
-		request.addProperty("value", amount);
+		request.addProperty("Celsius", "30");
 
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
 				SoapEnvelope.VER11);
