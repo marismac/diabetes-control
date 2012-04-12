@@ -11,12 +11,14 @@ import android.widget.TextView;
 import com.android.diabetescontrol.activities.R;
 import com.android.diabetescontrol.activities.consultaRegistroActivity;
 import com.android.diabetescontrol.activities.cadastroRegistroActivity;
+import com.android.diabetescontrol.activities.testeWSActivity;
 import com.android.diabetescontrol.database.ContextoDados;
 
 public class principalActivity extends Activity {
 	/** Called when the activity is first created. */
 	private Button btAdicionar;
 	private Button btConsultar;
+	private Button btTesteWS;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,7 @@ public class principalActivity extends Activity {
 	private void inicializaObjetos() {
 		btAdicionar = (Button) findViewById(R.id.btAdicionar);
 		btConsultar = (Button) findViewById(R.id.btConsultar);
+		btTesteWS = (Button) findViewById(R.id.btTesteWS);
 	}
 
 	private void carregaListeners() {
@@ -44,6 +47,13 @@ public class principalActivity extends Activity {
 			public void onClick(View v) {
 				Intent i = new Intent(principalActivity.this,
 						consultaRegistroActivity.class);
+				startActivity(i);
+			}
+		});
+		btTesteWS.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				Intent i = new Intent(principalActivity.this,
+						testeWSActivity.class);
 				startActivity(i);
 			}
 		});
