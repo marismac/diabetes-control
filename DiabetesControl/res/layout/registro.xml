@@ -2,14 +2,15 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/widget46"
     android:layout_width="fill_parent"
-    android:background="@color/branco"
-    android:layout_height="fill_parent" >
-
+    android:layout_height="fill_parent"
+    android:background="@color/branco" >
+    
     <TableRow>
-       <TextView
+        <TextView
             android:id="@+id/tvTipo"
-            android:width="100dp"
-            android:text="Tipo:" />
+            android:text="@string/tipo"
+            android:width="100dp" />
+
         <Spinner
             android:id="@+id/spTipo"
             android:layout_width="fill_parent"
@@ -26,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:text="Data/Hora:" />
+            android:text="@string/datahora" />
 
         <Button
             android:id="@+id/btData"
@@ -34,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/tvDataHora"
             android:layout_toRightOf="@id/tvDataHora"
-            android:text="Data" />
+            android:text="@string/data" />
 
         <Button
             android:id="@+id/btHora"
@@ -42,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/btData"
             android:layout_toRightOf="@id/btData"
-            android:text="Hora" />
+            android:text="@string/hora" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -55,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:text="Categoria: " />
+            android:text="@string/categoria" />
 
         <Spinner
             android:id="@+id/spCategoria"
@@ -76,15 +77,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:text="Valor: " />
+            android:text="@string/valor" />
 
         <EditText
             android:id="@+id/etValor"
-            android:inputType="numberDecimal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/tvValor"
-            android:layout_toRightOf="@id/tvValor" />
+            android:layout_toRightOf="@id/tvValor"
+            android:inputType="numberDecimal" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -97,7 +98,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:text="Salvar" />
+            android:text="@string/salvar" />
 
         <Button
             android:id="@+id/btLimpar"
@@ -105,7 +106,7 @@
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/btSalvar"
             android:layout_toRightOf="@id/btSalvar"
-            android:text="Limpar" />
+            android:text="@string/limpar" />
     </RelativeLayout>
 
 </TableLayout>

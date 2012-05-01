@@ -60,8 +60,6 @@ public class cadastroRegistroActivity extends Activity {
 		mDay = c.get(Calendar.DAY_OF_MONTH);
 		mHour = c.get(Calendar.HOUR_OF_DAY);
 		mMinute = c.get(Calendar.MINUTE);
-
-		// display the current date (this method is below)
 		updateDisplay();
 	}
 
