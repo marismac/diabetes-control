@@ -1,59 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/widget46"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/branco"
-    android:orientation="vertical" >
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/scrollView1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/branco" >
+		<TableLayout 
+		    android:id="@+id/widget46"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/btAdicionar"
-        android:layout_width="wrap_content"
-        android:layout_height="68dp"
-        android:textSize="24dp"
-        android:text="Adicionar" />
+		    <Button
+		        android:id="@+id/btAdicionar"
+		        android:layout_width="wrap_content"
+		        android:layout_height="68dp"
+		        android:text="@string/adicionar"
+		        android:textSize="24dp" />
 
-    <Button
-        android:id="@+id/btConsultar"
-        android:layout_width="wrap_content"
-        android:layout_height="68dp"
-        android:textSize="24dp"
-        android:text="Consultar" />
-
-    <Button
-        android:id="@+id/btGraficos"
-        android:layout_width="wrap_content"
-        android:layout_height="68dp"
-        android:textSize="24dp"
-        android:text="Gráficos" />
-
-    <Button
-        android:id="@+id/btRelatorios"
-        android:layout_width="wrap_content"
-        android:layout_height="68dp"
-        android:textSize="24dp"
-        android:text="Relatórios" />
-
-    <Button
-        android:id="@+id/btConfiguracoes"
-        android:layout_width="wrap_content"
-        android:layout_height="68dp"
-        android:textSize="24dp"
-        android:text="Configurações" />
-
-    <ToggleButton
-        android:id="@+id/btAtiva"
-        android:layout_width="wrap_content"
-        android:layout_height="68dp"
-        android:textSize="24dp"
-        android:textOff="Sincronização Off"
-        android:textOn="Sincronização On" />
-    
-    <Button
-        android:id="@+id/btTesteWS"
-        android:layout_width="wrap_content"
-        android:layout_height="68dp"
-        android:text="Teste WS"
-        android:textSize="24dp" />
-
-</TableLayout>
+		    <Button
+		        android:id="@+id/btConsultar"
+		        android:layout_width="wrap_content"
+		        android:layout_height="68dp"
+		        android:text="@string/consultar"
+		        android:textSize="24dp" />
+		    <Button
+		        android:id="@+id/btGraficos"
+		        android:layout_width="wrap_content"
+		        android:layout_height="68dp"
+		        android:text="@string/graficos"
+		        android:textSize="24dp" />
+		    <Button
+		        android:id="@+id/btRelatorios"
+		        android:layout_width="wrap_content"
+		        android:layout_height="68dp"
+		        android:text="@string/relatorios"
+		        android:textSize="24dp" />
+		    <Button
+		        android:id="@+id/btConfiguracoes"
+		        android:layout_width="wrap_content"
+		        android:layout_height="68dp"
+		        android:text="@string/configuracoes"
+		        android:textSize="24dp" />
+		    <ToggleButton
+		        android:id="@+id/btAtiva"
+		        android:layout_width="wrap_content"
+		        android:layout_height="68dp"
+		        android:textOff="Sincronização Off"
+		        android:textOn="Sincronização On"
+		        android:textSize="24dp" />
+		    <Button
+		        android:id="@+id/btTesteWS"
+		        android:layout_width="wrap_content"
+		        android:layout_height="68dp"
+		        android:text="Teste WS"
+		        android:textSize="24dp" />
+		</TableLayout>
+</ScrollView>

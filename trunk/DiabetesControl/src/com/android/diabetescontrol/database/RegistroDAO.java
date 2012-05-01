@@ -127,6 +127,20 @@ public class RegistroDAO extends BasicoDAO {
 		return datas;
 
 	}
+	
+	
+	/**
+	 * 
+	 * Busca a quantia total de registros salvos
+	 * 
+	 * @return	Integer com a quantidade total de registros no banco
+	 */
+	public Integer consultarQuantosRegistro() {
+		Cursor mCursor = mDb.query(TABELA_REGISTRO, null, null, null, null, null, null);
+		mCursor.getCount();
+		return mCursor.getCount();
+
+	}
 
 	public List<Registro> consultarQuantosRegistrosBetween(Registro inicio,
 			Registro fim) {
@@ -145,13 +159,27 @@ public class RegistroDAO extends BasicoDAO {
 
 	}
 
-	// Retorna TUDO que estiver na tabela Emprestimos. Funciona, mas precisa
-	// mesmo passar todas as colunas ?
 	public Cursor consultarTodosRegistrosV1() {
 
 		return mDb.query(TABELA_REGISTRO, new String[] { COLUNA_ID,
 				COLUNA_DATAHORA, COLUNA_VALOR, COLUNA_TIPO, COLUNA_CATEGORIA },
 				null, null, null, null, null);
+	}
+	
+	/**
+	 * 
+	 * Permite realizar uma consulta na tabela de Registros, informando um tipo de ordenação.
+	 * 
+	 * @param orderby
+	 * 			Coluna para informar a ordenação, que deve ser excluir o ORDER BY.
+	 * 			Exemplos: DATAHORA ASC ou VALOR DESC
+	 * 
+	 * @return	Cursos com os Registros ordenados
+	 */
+	public Cursor consultarTodosRegistrosOrdenados(String orderby) {
+		return mDb.query(TABELA_REGISTRO, new String[] { COLUNA_ID,
+				COLUNA_DATAHORA, COLUNA_VALOR, COLUNA_TIPO, COLUNA_CATEGORIA },
+				null, null, null, null, orderby);
 	}
 
 	// Retorna TUDO que estiver na tabela Emprestimos, assim como o método V1,

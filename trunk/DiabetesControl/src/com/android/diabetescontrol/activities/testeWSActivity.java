@@ -41,8 +41,6 @@ public class testeWSActivity extends Activity {
 		@Override
 		protected void onPostExecute(Void result) {
 			System.out.println("Teste");
-			System.out.println(resultado);
-			textView.setText(resultado);
 		}
 
 	}

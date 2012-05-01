@@ -3,6 +3,19 @@
 	<string name="hello">Hello World, DiabetesControlActivity!</string>
 	<string name="app_name">DiabetesControl</string>
 	<string name="tipoRegistro">Tipo Registro</string>
+	<string name="adicionar">Adicionar</string>
+	<string name="consultar">Consultar</string>
+	<string name="graficos">Gráficos</string>
+	<string name="relatorios">Relatórios</string>
+	<string name="configuracoes">Configurações</string>
+	<string name="tipo">Tipo</string>
+	<string name="datahora">Data/Hora</string>
+	<string name="data">Data</string>
+	<string name="hora">Hora</string>
+	<string name="categoria">Categoria</string>
+	<string name="valor">Valor</string>
+	<string name="salvar">Salvar</string>
+	<string name="limpar">Limpar</string>
 	<string-array name="tipoReg_array">
 		<item>Glicose</item>
 		<item>Medicamento</item>
@@ -55,4 +68,5 @@
 		DROP TABLE IF EXISTS Registro
 	</string>
 	<string name="registros">Registros</string>
+	<string name="filtro">Filtros Consulta</string>
 </resources>
