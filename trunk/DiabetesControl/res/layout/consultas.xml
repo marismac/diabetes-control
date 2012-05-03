@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/branco" >
+
+    <TableLayout
+        android:id="@+id/widget46"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/TextView01"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:text="@string/consultas"
+            android:textColor="@color/vermelho"
+            android:textSize="20dip"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btRegdia"
+            android:layout_width="wrap_content"
+            android:layout_height="58dp"
+            android:text="@string/regdia"
+            android:gravity="left|center"
+            android:textSize="24dp" />
+
+        <Button
+            android:id="@+id/btGlicoultregs"
+            android:layout_width="wrap_content"
+            android:layout_height="58dp"
+            android:text="@string/glicoultregs"
+            android:gravity="left|center"
+            android:textSize="24dp" />
+
+        <Button
+            android:id="@+id/btGlicomedias"
+            android:layout_width="wrap_content"
+            android:layout_height="58dp"
+            android:text="@string/glicomedias"
+            android:gravity="left|center"
+            android:textSize="24dp" />
+
+        <Button
+            android:id="@+id/btGlicovalor"
+            android:layout_width="wrap_content"
+            android:layout_height="58dp"
+            android:text="@string/glicovalor"
+            android:gravity="left|center"
+            android:textSize="24dp" />
+
+        <Button
+            android:id="@+id/btPesomed"
+            android:layout_width="wrap_content"
+            android:layout_height="58dp"
+            android:text="@string/pesomed"
+            android:gravity="left|center"
+            android:textSize="24dp" />
+
+        <Button
+            android:id="@+id/btInsulaplic"
+            android:layout_width="wrap_content"
+            android:layout_height="58dp"
+            android:text="@string/insulaplic"
+            android:gravity="left|center"
+            android:textSize="24dp" />
+
+        <Button
+            android:id="@+id/btGeraltipo"
+            android:layout_width="wrap_content"
+            android:layout_height="58dp"
+            android:text="@string/geraltipo"
+            android:gravity="left|center"
+            android:textSize="24dp" />
+
+    </TableLayout>
+
+</ScrollView>

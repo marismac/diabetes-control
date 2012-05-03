@@ -94,70 +94,72 @@ public class RegistroDAO extends BasicoDAO {
 		return new Date(mili);
 	}
 
-	public Cursor consultarRegistrosBetween(Timestamp inicio, Timestamp fim) {
-		Cursor mCursor =
-
-		mDb.query(
-				true,
-				TABELA_REGISTRO,
-				null,
-				COLUNA_DATAHORA + ">=? AND " + COLUNA_DATAHORA + "<=?",
-				new String[] { String.valueOf(inicio.getTime()),
-						String.valueOf(fim.getTime()) }, null, null, null, null);
-		if (mCursor != null) {
-			mCursor.moveToFirst();
-		}
+	/**
+	 * 
+	 * Permite realizar uma consulta de registros, selecionados apeneas
+	 * registros de uma determinada categoria.
+	 * 
+	 * @param tipoCategoria
+	 *            Coluna para informar a descrição do tipo de Cateforia para
+	 *            realizar os filtros. % busca todos
+	 * 
+	 * @return Cursor com os registros filtrados
+	 */
+	public Cursor consultarRegistrosPorTipo(String tipoCategoria) {
+		String selection = COLUNA_TIPO + " LIKE '" + tipoCategoria + "'";
+		Cursor mCursor = mDb.query(TABELA_REGISTRO, null, selection, null,
+				null, null, null);
 		return mCursor;
 
 	}
 
-	public List<Date> consultarQuantosRegistroBetween(Timestamp inicio,
-			Timestamp fim) {
-		List<Date> datas = new ArrayList<Date>();
+	// public List<Date> consultarQuantosRegistroBetween(Timestamp inicio,
+	// Timestamp fim) {
+	// List<Date> datas = new ArrayList<Date>();
+	//
+	// Cursor mCursor = consultarRegistrosBetween(inicio, fim);
+	// while (!mCursor.isAfterLast()) {
+	// Long mili = mCursor
+	// .getLong(mCursor.getColumnIndex(COLUNA_DATAHORA));
+	// datas.add(new Date(mili));
+	// mCursor.moveToNext();
+	// }
+	// mCursor.close();
+	//
+	// return datas;
+	//
+	// }
 
-		Cursor mCursor = consultarRegistrosBetween(inicio, fim);
-		while (!mCursor.isAfterLast()) {
-			Long mili = mCursor
-					.getLong(mCursor.getColumnIndex(COLUNA_DATAHORA));
-			datas.add(new Date(mili));
-			mCursor.moveToNext();
-		}
-		mCursor.close();
-
-		return datas;
-
-	}
-	
-	
 	/**
 	 * 
 	 * Busca a quantia total de registros salvos
 	 * 
-	 * @return	Integer com a quantidade total de registros no banco
+	 * @return Integer com a quantidade total de registros no banco
 	 */
 	public Integer consultarQuantosRegistro() {
-		Cursor mCursor = mDb.query(TABELA_REGISTRO, null, null, null, null, null, null);
+		Cursor mCursor = mDb.query(TABELA_REGISTRO, null, null, null, null,
+				null, null);
 		mCursor.getCount();
 		return mCursor.getCount();
 
 	}
 
-	public List<Registro> consultarQuantosRegistrosBetween(Registro inicio,
-			Registro fim) {
-		List<Registro> datas = new ArrayList<Registro>();
-
-		Cursor mCursor = consultarRegistrosBetween(inicio.getDatahora(),
-				fim.getDatahora());
-		while (!mCursor.isAfterLast()) {
-			Registro reg = deCursorParaRegistro(mCursor);
-			datas.add(reg);
-			mCursor.moveToNext();
-		}
-		mCursor.close();
-
-		return datas;
-
-	}
+	// public List<Registro> consultarQuantosRegistrosBetween(Registro inicio,
+	// Registro fim) {
+	// List<Registro> datas = new ArrayList<Registro>();
+	//
+	// Cursor mCursor = consultarRegistrosBetween(inicio.getDatahora(),
+	// fim.getDatahora());
+	// while (!mCursor.isAfterLast()) {
+	// Registro reg = deCursorParaRegistro(mCursor);
+	// datas.add(reg);
+	// mCursor.moveToNext();
+	// }
+	// mCursor.close();
+	//
+	// return datas;
+	//
+	// }
 
 	public Cursor consultarTodosRegistrosV1() {
 
@@ -165,16 +167,17 @@ public class RegistroDAO extends BasicoDAO {
 				COLUNA_DATAHORA, COLUNA_VALOR, COLUNA_TIPO, COLUNA_CATEGORIA },
 				null, null, null, null, null);
 	}
-	
+
 	/**
 	 * 
-	 * Permite realizar uma consulta na tabela de Registros, informando um tipo de ordenação.
+	 * Permite realizar uma consulta na tabela de Registros, informando um tipo
+	 * de ordenação.
 	 * 
 	 * @param orderby
-	 * 			Coluna para informar a ordenação, que deve ser excluir o ORDER BY.
-	 * 			Exemplos: DATAHORA ASC ou VALOR DESC
+	 *            Coluna para informar a ordenação, que deve ser excluir o ORDER
+	 *            BY. Exemplos: DATAHORA ASC ou VALOR DESC
 	 * 
-	 * @return	Cursos com os Registros ordenados
+	 * @return Cursos com os Registros ordenados
 	 */
 	public Cursor consultarTodosRegistrosOrdenados(String orderby) {
 		return mDb.query(TABELA_REGISTRO, new String[] { COLUNA_ID,

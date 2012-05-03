@@ -69,4 +69,12 @@
 	</string>
 	<string name="registros">Registros</string>
 	<string name="filtro">Filtros Consulta</string>
+	<string name="consultas">Consultas</string>
+	<string name="regdia">Registros por dia</string>
+	<string name="glicoultregs">Glicose últimos registros</string>
+	<string name="glicomedias">Glicose médias</string>
+	<string name="insulaplic">Insulina aplicações</string>
+	<string name="pesomed">Peso médio</string>
+	<string name="glicovalor">Glicose por valor</string>
+	<string name="geraltipo">Geral por tipo</string>
 </resources>

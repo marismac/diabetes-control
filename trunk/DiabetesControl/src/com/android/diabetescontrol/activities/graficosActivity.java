@@ -1,8 +1,12 @@
 package com.android.diabetescontrol.activities;
 
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
-import java.util.Map;
+
+import android.app.Activity;
+import android.database.Cursor;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.widget.LinearLayout;
 
 import com.android.diabetescontrol.database.RegistroDAO;
 import com.android.diabetescontrol.model.Registro;
@@ -10,13 +14,6 @@ import com.jjoe64.graphview.BarGraphView;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GraphView.GraphViewData;
 import com.jjoe64.graphview.GraphView.GraphViewSeries;
-import com.jjoe64.graphview.LineGraphView;
-
-import android.app.Activity;
-import android.database.Cursor;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.widget.LinearLayout;
 
 public class graficosActivity extends Activity {
 

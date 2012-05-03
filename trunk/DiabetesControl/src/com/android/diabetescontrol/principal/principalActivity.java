@@ -9,14 +9,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.diabetescontrol.activities.R;
-import com.android.diabetescontrol.activities.consultaRegistroActivity;
+import com.android.diabetescontrol.activities.consultaActivity;
+import com.android.diabetescontrol.activities.consultaRegistroDiaActivity;
 import com.android.diabetescontrol.activities.cadastroRegistroActivity;
 import com.android.diabetescontrol.activities.graficosActivity;
 import com.android.diabetescontrol.activities.testeWSActivity;
 import com.android.diabetescontrol.database.ContextoDados;
 
 public class principalActivity extends Activity {
-	/** Called when the activity is first created. */
 	private Button btAdicionar;
 	private Button btConsultar;
 	private Button btGraficos;
@@ -49,7 +49,7 @@ public class principalActivity extends Activity {
 		btConsultar.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				Intent i = new Intent(principalActivity.this,
-						consultaRegistroActivity.class);
+						consultaActivity.class);
 				startActivity(i);
 			}
 		});
