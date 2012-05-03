@@ -13,13 +13,13 @@
 
         <Spinner
             android:id="@+id/spTipo"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:prompt="@string/tipoRegistro" />
     </TableRow>
 
     <RelativeLayout
         android:id="@+id/widget65"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" >
 
         <TextView
@@ -48,7 +48,7 @@
 
     <RelativeLayout
         android:id="@+id/widget66"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" >
 
         <TextView
@@ -60,7 +60,7 @@
 
         <Spinner
             android:id="@+id/spCategoria"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/tvCategoria"
             android:layout_toRightOf="@id/tvCategoria"
@@ -69,7 +69,7 @@
 
     <RelativeLayout
         android:id="@+id/widget67"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" >
 
         <TextView
@@ -81,7 +81,7 @@
 
         <EditText
             android:id="@+id/etValor"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/tvValor"
             android:layout_toRightOf="@id/tvValor"
@@ -90,7 +90,7 @@
 
     <RelativeLayout
         android:id="@+id/widget68"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" >
 
         <Button

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:background="@color/branco"
     android:orientation="vertical" >
 
@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:textStyle="bold"
             android:text="@string/filtro"
             android:textColor="@color/vermelho"
             android:textSize="20dip" />
@@ -47,12 +48,15 @@
             android:textSize="17dip" />
     </TableRow>
 
-    <TableRow android:gravity="fill|fill_horizontal" >
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="fill|fill_horizontal" >
 
         <Button
             android:id="@+id/btData"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:text="@string/data" />
     </TableRow>
 
@@ -76,21 +80,47 @@
             android:id="@+id/TextView03"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/tipoCategoria"
+            android:text="@string/tipo"
             android:textColor="@color/preto"
             android:textSize="17dip" />
     </TableRow>
 
     <TableRow
         android:id="@+id/tableRow3"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <Spinner
+            android:id="@+id/spTipo"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="fill_vertical"
+            android:prompt="@string/tipoRegistro" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/TableRow04"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" >
 
-        <Spinner
-            android:id="@+id/spCategoria"
-            android:layout_width="fill_parent"
+        <TextView
+            android:id="@+id/TextView04"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:baselineAligned="false" >
+
+        <Button
+            android:id="@+id/btConsultarLista"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:prompt="@string/tipoCategoria" />
+            android:text="@string/consultar" />
     </TableRow>
 
 </TableLayout>
