@@ -72,9 +72,20 @@
 	<string name="consultas">Consultas</string>
 	<string name="regdia">Registros por dia</string>
 	<string name="glicoultregs">Glicose últimos registros</string>
-	<string name="glicomedias">Glicose médias</string>
+	<string name="glicomedias">Glicose média</string>
 	<string name="insulaplic">Insulina aplicações</string>
 	<string name="pesomed">Peso médio</string>
 	<string name="glicovalor">Glicose por valor</string>
 	<string name="geraltipo">Geral por tipo</string>
+	<string name="hoje">Hoje</string>
+	<string name="traco">--</string>
+	<string name="semreg">Sem Registros</string>
+	<string name="periodo">Período</string>
+	<string name="ontem">Ontem</string>
+	<string name="semana">Semana atual</string>
+	<string name="semanapass">Semana passada</string>
+	<string name="mes">Mês atual</string>
+	<string name="mespass">Mês passado</string>
+	<string name="ano">Anual</string>
+	<string name="geral">Geral</string>
 </resources>

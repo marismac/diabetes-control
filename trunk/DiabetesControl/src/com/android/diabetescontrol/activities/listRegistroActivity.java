@@ -11,11 +11,13 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import com.android.diabetescontrol.database.RegistroDAO;
 import com.android.diabetescontrol.model.Registro;
 
 public class listRegistroActivity extends ListActivity {
+	private TextView textSem;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,7 @@ public class listRegistroActivity extends ListActivity {
 
 	private List<Map<String, String>> getRegistrosList(String dataFiltro,
 			String tipoCategoriaFiltro) {
+		textSem = (TextView) findViewById(R.id.tvSemRes);
 		List<Map<String, String>> l = new ArrayList<Map<String, String>>();
 		RegistroDAO regDAO = new RegistroDAO(this);
 		Map<String, String> m = null;
@@ -61,6 +64,7 @@ public class listRegistroActivity extends ListActivity {
 			String formattedDate = sdf.format(reg.getDatahora());
 			System.out.println(dataFiltro + " - " + formattedDate + " - " + reg.getDatahora());
 			if (dataFiltro.equals(formattedDate)) {
+				textSem.setVisibility(textSem.INVISIBLE);
 				m.put("Master", reg.getTipo().toString() + ": "
 						+ reg.getValor().toString());
 				String formattedDateHour = sdhf.format(reg.getDatahora());

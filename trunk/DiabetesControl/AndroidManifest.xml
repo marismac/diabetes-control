@@ -12,21 +12,37 @@
     <application
         android:icon="@drawable/iv"
         android:label="@string/app_name" >
-        <activity android:name=".cadastroRegistroActivity" />
-        <activity android:name=".consultaRegistroDiaActivity" />
-        <activity android:name=".graficosActivity" />
-        <activity android:name=".testeWSActivity" />
-        <activity android:name=".listRegistroActivity" />
         <activity
-            android:name=".consultaActivity" >
-            <intent-filter >
+            android:name=".cadastroRegistroActivity"
+            android:theme="@style/MapBackgroundNoTitle" />
+        <activity
+            android:name=".consultaRegistroDiaActivity"
+            android:theme="@style/MapBackgroundNoTitle" />
+        <activity
+            android:name=".consultaGlicoseMediasActivity"
+            android:theme="@style/MapBackgroundNoTitle" />
+        <activity
+            android:name=".graficosActivity"
+            android:theme="@style/MapBackgroundNoTitle" />
+        <activity
+            android:name=".testeWSActivity"
+            android:theme="@style/MapBackgroundNoTitle" />
+        <activity
+            android:name=".listRegistroActivity"
+            android:theme="@style/MapBackgroundNoTitle" />
+        <activity
+            android:name=".consultaActivity"
+            android:theme="@style/MapBackground" >
+            <intent-filter>
                 <action android:name="com.ptandroid.tutorial.MENU" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
             android:name="com.android.diabetescontrol.principal.principalActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:theme="@style/MapBackground" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
