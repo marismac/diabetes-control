@@ -34,7 +34,9 @@ public class consultaActivity extends Activity {
 		});
 		btGlicoseUltimosRegs.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+				Intent i = new Intent(consultaActivity.this,
+						consultaGlicoseUltimosRegistrosActivity.class);
+				startActivity(i);
 			}
 		});
 		btGlicoseMedias.setOnClickListener(new OnClickListener() {
@@ -46,7 +48,9 @@ public class consultaActivity extends Activity {
 		});
 		btGlicoseValor.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+				Intent i = new Intent(consultaActivity.this,
+						consultaGlicoseValoresActivity.class);
+				startActivity(i);
 			}
 		});
 		btPesoMedio.setOnClickListener(new OnClickListener() {

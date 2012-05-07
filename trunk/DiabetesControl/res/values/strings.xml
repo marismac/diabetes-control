@@ -88,4 +88,6 @@
 	<string name="mespass">Mês passado</string>
 	<string name="ano">Anual</string>
 	<string name="geral">Geral</string>
+	<string name="valormax">Valor Máximo</string>
+	<string name="valormim">Valor Mínimo</string>
 </resources>

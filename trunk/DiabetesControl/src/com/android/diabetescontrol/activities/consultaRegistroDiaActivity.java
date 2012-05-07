@@ -44,7 +44,7 @@ public class consultaRegistroDiaActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(consultaRegistroDiaActivity.this,
-						listRegistroActivity.class);
+						ListaRegistroActivity.class);
 				i.putExtra("dataFiltro", buttonData.getText());
 				i.putExtra("tipoCategoria", spinnerTipo.getSelectedItem()
 						.toString());

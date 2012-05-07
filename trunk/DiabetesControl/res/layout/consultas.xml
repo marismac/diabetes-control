@@ -16,7 +16,7 @@
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
             android:text="@string/consultas"
-            android:textColor="@color/vermelho"
+            android:textColor="@color/branco"
             android:textSize="20dip"
             android:textStyle="bold" />
 

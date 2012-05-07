@@ -1,12 +1,11 @@
 package com.android.diabetescontrol.activities;
 
-import com.android.diabetescontrol.business.GlicoseMediaBusiness;
-import com.android.diabetescontrol.database.RegistroDAO;
-
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.TextView;
+
+import com.android.diabetescontrol.business.GlicoseMediaBusiness;
+import com.android.diabetescontrol.database.RegistroDAO;
 
 public class consultaGlicoseMediasActivity extends Activity {
 	private TextView tvValorHoje;
@@ -31,6 +30,12 @@ public class consultaGlicoseMediasActivity extends Activity {
 		gmb.getValorMedio(regDAO);
 		tvValorHoje.setText(gmb.getValorMedioHoje());
 		tvValorOntem.setText(gmb.getValorMedioOntem());
+		tvValorSemana.setText(gmb.getValorMedioSemana());
+		tvValorSemanaPass.setText(gmb.getValorMedioSemanaPassada());
+		tvValorMes.setText(gmb.getValorMedioMes());
+		tvValorMesPass.setText(gmb.getValorMedioMesPassado());
+		tvValorAno.setText(gmb.getValorMedioAnual());
+		tvValorTotal.setText(gmb.getValorMedioTotal());
 	}
 
 	private void inicializaObjetos() {
@@ -43,7 +48,5 @@ public class consultaGlicoseMediasActivity extends Activity {
 		tvValorAno = (TextView) findViewById(R.id.tvAnoPassValor);
 		tvValorTotal = (TextView) findViewById(R.id.tvGeralValor);
 	}
-	
-	
 
 }
