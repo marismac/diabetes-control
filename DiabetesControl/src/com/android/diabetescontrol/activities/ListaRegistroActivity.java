@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.android.diabetescontrol.database.RegistroDAO;
 import com.android.diabetescontrol.model.Registro;
 
-public class listRegistroActivity extends ListActivity {
+public class ListaRegistroActivity extends ListActivity {
 	private TextView textSem;
 
 	@Override

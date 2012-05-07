@@ -2,16 +2,15 @@ package com.android.diabetescontrol.database;
 
 import java.sql.Date;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.android.diabetescontrol.model.Registro;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.SQLException;
+
+import com.android.diabetescontrol.model.Registro;
+import com.android.diabetescontrol.util.Constante;
 
 public class RegistroDAO extends BasicoDAO {
 
@@ -183,6 +182,47 @@ public class RegistroDAO extends BasicoDAO {
 		return mDb.query(TABELA_REGISTRO, new String[] { COLUNA_ID,
 				COLUNA_DATAHORA, COLUNA_VALOR, COLUNA_TIPO, COLUNA_CATEGORIA },
 				null, null, null, null, orderby);
+	}
+
+	/**
+	 * 
+	 * Permite realizar uma consulta na tabela de Registros selecionando uma
+	 * quantidade máxima e informando um tipo de ordenação.
+	 * 
+	 * @param orderby
+	 *            Coluna para informar a ordenação, que deve ser excluir o ORDER
+	 *            BY. Exemplos: DATAHORA ASC ou VALOR DESC
+	 * @param qtde
+	 *            Coluna para informar a quantidade de registros a serem
+	 *            trazidos na consulta
+	 * 
+	 * @return Cursos com os Registros ordenados
+	 */
+	public Cursor consultarAlgunsRegistrosGlicoseOrdenados(String orderby,
+			Integer qtde) {
+		return mDb.query(TABELA_REGISTRO, null, COLUNA_TIPO + " = '"
+				+ Constante.TIPO_GLICOSE + "'", null, null, null, orderby,
+				qtde.toString());
+	}
+
+	/**
+	 * 
+	 * Permite realizar uma consulta na tabela de Registros selecionando
+	 * determinados registros e ordenando os mesmos.
+	 * 
+	 * @param orderby
+	 *            Coluna para informar a ordenação, que deve ser excluir o ORDER
+	 *            BY. Exemplos: DATAHORA ASC ou VALOR DESC
+	 * @param where
+	 *            Coluna para informar uma clausola where a ser utilizada na
+	 *            consulta
+	 * 
+	 * @return Cursor com os Registros selecionados e ordenados
+	 */
+	public Cursor consultarRegistrosWhereOrder(String where,
+			String orderby) {
+		return mDb.query(TABELA_REGISTRO, null, where, null, null, null,
+				orderby);
 	}
 
 	// Retorna TUDO que estiver na tabela Emprestimos, assim como o método V1,

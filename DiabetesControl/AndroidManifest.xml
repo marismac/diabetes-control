@@ -13,6 +13,12 @@
         android:icon="@drawable/iv"
         android:label="@string/app_name" >
         <activity
+            android:name="consultaGlicoseUltimosRegistrosActivity"
+            android:theme="@style/MapBackground" />
+        <activity
+            android:name="consultaGlicoseValoresActivity"
+            android:theme="@style/MapBackground" />
+        <activity
             android:name=".cadastroRegistroActivity"
             android:theme="@style/MapBackgroundNoTitle" />
         <activity
@@ -28,7 +34,7 @@
             android:name=".testeWSActivity"
             android:theme="@style/MapBackgroundNoTitle" />
         <activity
-            android:name=".listRegistroActivity"
+            android:name=".ListaRegistroActivity"
             android:theme="@style/MapBackgroundNoTitle" />
         <activity
             android:name=".consultaActivity"
