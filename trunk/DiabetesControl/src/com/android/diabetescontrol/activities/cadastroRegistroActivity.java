@@ -50,7 +50,6 @@ public class cadastroRegistroActivity extends Activity {
 		spinnerTipo = (Spinner) findViewById(R.id.spTipo);
 		spinnerCategoria = (Spinner) findViewById(R.id.spCategoria);
 		buttonSalvar = (Button) findViewById(R.id.btSalvar);
-		buttonLimpar = (Button) findViewById(R.id.btLimpar);
 		buttonData = (Button) findViewById(R.id.btData);
 		buttonHora = (Button) findViewById(R.id.btHora);
 		editTextValor = (EditText) findViewById(R.id.etValor);

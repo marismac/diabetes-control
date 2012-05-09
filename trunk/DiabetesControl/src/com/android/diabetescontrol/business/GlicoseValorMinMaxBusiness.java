@@ -45,7 +45,6 @@ public class GlicoseValorMinMaxBusiness {
 	private String getWhereValores(Double valorMin, Double valorMax,
 			RegistroDAO regDAO) {
 		StringBuilder where = new StringBuilder();
-		where.append("WHERE ");
 		if ((valorMax != null || !valorMax.isNaN())
 				&& (valorMin != null || !valorMin.isNaN())) {
 			where.append(regDAO.COLUNA_VALOR + " <= " + valorMax.intValue());

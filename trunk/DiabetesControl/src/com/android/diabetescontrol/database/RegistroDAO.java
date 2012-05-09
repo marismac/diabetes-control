@@ -215,7 +215,7 @@ public class RegistroDAO extends BasicoDAO {
 	 *            BY. Exemplos: DATAHORA ASC ou VALOR DESC
 	 * @param where
 	 *            Coluna para informar uma clausola where a ser utilizada na
-	 *            consulta
+	 *            consulta. NÃO DEVE CONTER O WHERE
 	 * 
 	 * @return Cursor com os Registros selecionados e ordenados
 	 */

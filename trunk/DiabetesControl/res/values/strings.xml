@@ -90,4 +90,8 @@
 	<string name="geral">Geral</string>
 	<string name="valormax">Valor Máximo</string>
 	<string name="valormim">Valor Mínimo</string>
+	<string name="nomepac">Nome</string>
+	<string name="datapac">Data Nascimento</string>
+	<string name="emailpac">E-mail</string>
+	<string name="sexo">Sexo</string>
 </resources>
