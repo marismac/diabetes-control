@@ -35,7 +35,7 @@ public class consultaActivity extends Activity {
 		btGlicoseUltimosRegs.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				Intent i = new Intent(consultaActivity.this,
-						consultaGlicoseUltimosRegistrosActivity.class);
+						ListaGlicoseUltimosRegistrosActivity.class);
 				startActivity(i);
 			}
 		});
@@ -49,7 +49,7 @@ public class consultaActivity extends Activity {
 		btGlicoseValor.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				Intent i = new Intent(consultaActivity.this,
-						consultaGlicoseValoresActivity.class);
+						ConsultaGlicoseValoresActivity.class);
 				startActivity(i);
 			}
 		});

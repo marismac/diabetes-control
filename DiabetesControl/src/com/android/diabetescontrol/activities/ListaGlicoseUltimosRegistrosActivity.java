@@ -11,7 +11,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
-public class consultaGlicoseUltimosRegistrosActivity extends ListActivity {
+public class ListaGlicoseUltimosRegistrosActivity extends ListActivity {
 	private TextView textSem;
 
 	@Override
@@ -33,5 +33,4 @@ public class consultaGlicoseUltimosRegistrosActivity extends ListActivity {
 			lv.setCacheColorHint(0);
 		}
 	}
-
 }
