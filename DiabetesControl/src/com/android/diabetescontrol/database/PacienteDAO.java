@@ -30,7 +30,7 @@ public class PacienteDAO extends BasicoDAO {
 			+ COLUNA_CODWS + " TEXT NOT NULL," + COLUNA_EDITAR
 			+ " TEXT);";
 
-	public void criarRegistro(Paciente paciente) {
+	public void criarPaciente(Paciente paciente) {
 		ContentValues values = dePacienteParaContentValues(paciente);
 		mDb.insert(TABELA_PACIENTES, null, values);
 	}
@@ -75,5 +75,11 @@ public class PacienteDAO extends BasicoDAO {
 	public boolean removerPaciente(long idPaciente) {
 		return mDb.delete(TABELA_PACIENTES, COLUNA_ID + "=?",
 				new String[] { String.valueOf(idPaciente) }) > 0;
+	}
+	
+	public Cursor consultarPacientesWhereOrder(String where,
+			String orderby) {
+		return mDb.query(TABELA_PACIENTES, null, where, null, null, null,
+				orderby);
 	}
 }

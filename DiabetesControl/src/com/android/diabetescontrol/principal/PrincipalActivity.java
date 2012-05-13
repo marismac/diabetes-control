@@ -1,5 +1,7 @@
 package com.android.diabetescontrol.principal;
 
+import java.sql.Timestamp;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +13,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.diabetescontrol.activities.ListaPacientes;
 import com.android.diabetescontrol.activities.PreferenciasActivity;
 import com.android.diabetescontrol.activities.R;
 import com.android.diabetescontrol.activities.cadastroRegistroActivity;
@@ -19,7 +22,9 @@ import com.android.diabetescontrol.activities.graficosActivity;
 import com.android.diabetescontrol.activities.testeWSActivity;
 import com.android.diabetescontrol.business.GlicoseMediaBusiness;
 import com.android.diabetescontrol.database.ContextoDados;
+import com.android.diabetescontrol.database.PacienteDAO;
 import com.android.diabetescontrol.database.RegistroDAO;
+import com.android.diabetescontrol.model.Paciente;
 import com.android.diabetescontrol.util.CadastrosUtil;
 
 public class PrincipalActivity extends Activity {
@@ -37,17 +42,26 @@ public class PrincipalActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		new ContextoDados(this);
+		//populaDadosParaTeste();
 		if (new CadastrosUtil().isPaciente(this)) {
 			setContentView(R.layout.mainpaciente);
 			inicializaObjetosPaciente();
 			carregaListenersPaciente();
 			carregaResumo();
-
 		} else {
 			setContentView(R.layout.mainmedico);
 			inicializaObjetosMedico();
 			carregaListenersMedico();
 		}
+	}
+
+	private void populaDadosParaTeste() {
+		PacienteDAO paciente = new PacienteDAO(this);
+		paciente.open();
+		paciente.criarPaciente(new Paciente(null, "Aldo Silva", "aldosilva@gmail.com", new Timestamp(0), "M", "aldosilvagmail.com", "N"));
+		paciente.criarPaciente(new Paciente(null, "Rubens Silva", "rubensilva@gmail.com", new Timestamp(0), "M", "rubensilvagmail.com", "N"));
+		paciente.close();
+		
 	}
 
 	@Override
@@ -85,7 +99,7 @@ public class PrincipalActivity extends Activity {
 		btRelatoriosPacientes.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				Intent i = new Intent(PrincipalActivity.this,
-						PreferenciasActivity.class);
+						ListaPacientes.class);
 				startActivity(i);
 
 			}
