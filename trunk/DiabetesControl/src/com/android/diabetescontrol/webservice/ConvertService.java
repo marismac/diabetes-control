@@ -14,14 +14,9 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 public class ConvertService {
-	// private static final String SOAP_ACTION =
-	// "http://tempuri.org/CelsiusToFahrenheit";
 	private static final String SOAP_ACTION = "";
-	// private static final String METHOD_NAME = "CelsiusToFahrenheit";
-	private static final String METHOD_NAME = "createOrUpdateRegistro";
-	private static final String NAMESPACE = "http://server.soap.codelab.appengine.google.com/";
-	// private static final String URL =
-	// "http://www.w3schools.com/webservices/tempconvert.asmx";
+	private static final String METHOD_NAME = "add";
+	private static final String NAMESPACE = "http://servico.diabetes.com/";
 	private static final String URL = "http://diabetescontrolws.appspot.com/EntityAPIService.wsdl";
 	private ProgressDialog progressDialog;
 

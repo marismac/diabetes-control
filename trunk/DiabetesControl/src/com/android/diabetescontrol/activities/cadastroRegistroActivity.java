@@ -4,9 +4,12 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,6 +22,7 @@ import android.widget.TimePicker;
 
 import com.android.diabetescontrol.database.RegistroDAO;
 import com.android.diabetescontrol.model.Registro;
+import com.android.diabetescontrol.util.CadastrosUtil;
 
 public class cadastroRegistroActivity extends Activity {
 
@@ -27,7 +31,6 @@ public class cadastroRegistroActivity extends Activity {
 	private Spinner spinnerTipo = null;
 	private Spinner spinnerCategoria = null;
 	private Button buttonSalvar = null;
-	private Button buttonLimpar = null;
 	private Button buttonData = null;
 	private Button buttonHora = null;
 	private EditText editTextValor = null;
@@ -37,10 +40,12 @@ public class cadastroRegistroActivity extends Activity {
 	private int mDay;
 	private int mHour;
 	private int mMinute;
+	private static Context ctx;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.registro);
+		ctx = this;
 		setCampos();
 		carregaSpinners();
 		runListeners();
@@ -95,6 +100,7 @@ public class cadastroRegistroActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				Salvar();
+
 			}
 		});
 	}
@@ -106,6 +112,7 @@ public class cadastroRegistroActivity extends Activity {
 			regDao.criarRegistro(getValoresTela());
 		}
 		regDao.close();
+		new CadastrosUtil().criaAlertSalvar(ctx);
 	}
 
 	private Registro getValoresTela() {
@@ -121,18 +128,18 @@ public class cadastroRegistroActivity extends Activity {
 		reg.setCategoria(spinnerCategoria.getSelectedItem().toString());
 		reg.setTipo(spinnerTipo.getSelectedItem().toString());
 		reg.setValor(Integer.valueOf(editTextValor.getText().toString()));
-		System.out.println("******** INICIO Registros Inseridos ******");
-		System.out.println(reg.getTipo());
-		System.out.println(reg.getCategoria());
-		System.out.println(reg.getValor());
-		System.out.println(reg.getDatahora());
-		System.out.println("******** FIM Registros Inseridos ******");
+		// System.out.println("******** INICIO Registros Inseridos ******");
+		// System.out.println(reg.getTipo());
+		// System.out.println(reg.getCategoria());
+		// System.out.println(reg.getValor());
+		// System.out.println(reg.getDatahora());
+		// System.out.println("******** FIM Registros Inseridos ******");
 		return reg;
 	}
 
 	private void updateDisplay() {
-		buttonData.setText(new StringBuilder().append(mMonth + 1).append("/")
-				.append(mDay).append("/").append(mYear).append(" "));
+		buttonData.setText(new StringBuilder().append(mDay).append("/")
+				.append(mMonth + 1).append("/").append(mYear).append(" "));
 		buttonHora.setText(new StringBuilder().append(pad(mHour)).append(":")
 				.append(pad(mMinute)));
 	}
@@ -174,5 +181,4 @@ public class cadastroRegistroActivity extends Activity {
 			updateDisplay();
 		}
 	};
-
 }
