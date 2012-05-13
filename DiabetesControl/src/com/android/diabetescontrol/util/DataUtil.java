@@ -7,9 +7,9 @@ public class DataUtil {
 	public static final long millisPorDia = 1000 * 60 * 60 * 24;
 
 	public final Date getDateOntem() {
-		Date ontem = new Date();
-		ontem.setDate(Calendar.DAY_OF_MONTH - 1);
-		return ontem;
+		Calendar cal = Calendar.getInstance();
+		cal.setTimeInMillis(cal.getTimeInMillis() - millisPorDia);
+		return cal.getTime();
 	}
 
 	public final Date getPrimeiroDiaSemana() {

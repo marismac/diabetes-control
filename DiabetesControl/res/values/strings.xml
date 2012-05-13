@@ -31,38 +31,17 @@
 		<item>Almoço</item>
 		<item>Lanche</item>
 	</string-array>
-	<string-array name="countries">
-		<item>Bahrain</item>
-		<item>Bangladesh</item>
-		<item>Barbados</item>
-		<item>Belarus</item>
-		<item>Belgium</item>
-		<item>Belize</item>
-		<item>Benin</item>
-		<item>Bahrain</item>
-		<item>Bangladesh</item>
-		<item>Barbados</item>
-		<item>Belarus</item>
-		<item>Belgium</item>
-		<item>Belize</item>
-		<item>Benin</item>
-		<item>Bahrain</item>
-		<item>Bangladesh</item>
-		<item>Barbados</item>
-		<item>Belarus</item>
-		<item>Belgium</item>
-		<item>Belize</item>
-		<item>Benin</item>
-		<item>Bahrain</item>
-		<item>Bangladesh</item>
-		<item>Barbados</item>
-		<item>Belarus</item>
-		<item>Belgium</item>
-		<item>Belize</item>
-		<item>Benin</item>
+	<string-array name="nome_modo">
+		<item>Médico</item>
+		<item>Paciente</item>
+	</string-array>
+	<string-array name="opcao_modo">
+		<item>M</item>
+		<item>P</item>
 	</string-array>
 	<string name="ContextoDados_onCreate">
-		CREATE TABLE Registro (ID INTEGER PRIMARY KEY AUTOINCREMENT, Tipo TEXT, Categoria TEXT, Valor INT);
+		CREATE TABLE Registro (ID INTEGER PRIMARY KEY
+		AUTOINCREMENT, Tipo TEXT, Categoria TEXT, Valor INT);
 	</string>
 	<string name="ContextoDados_onUpgrade">"
 		DROP TABLE IF EXISTS Registro
@@ -94,4 +73,13 @@
 	<string name="datapac">Data Nascimento</string>
 	<string name="emailpac">E-mail</string>
 	<string name="sexo">Sexo</string>
+	<string name="configs_label">Configurações</string>
+	<string name="configs_title">Configs do programa</string>
+	<string name="configs_atalhos">s</string>
+	<string name="ws_titulo">Registros</string>
+	<string name="ws_resumo">Enviar registros para dispositivo médico</string>
+	<string name="modo_titulo">Modo Médico</string>
+	<string name="modo_resumo">Configura o sistema como dispositivo médico</string>
+	<string name="selecpaciente">Selecionar Paciente</string>
+	<string name="sempac">Sem Pacientes</string>
 </resources>

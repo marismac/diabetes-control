@@ -1,5 +1,6 @@
 package com.android.diabetescontrol.business;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -102,10 +103,7 @@ public class GlicoseMediaBusiness {
 	}
 
 	public String getValorMedioHoje() {
-		if (valorMedioHoje == null || valorMedioHoje.isNaN()) {
-			return "--";
-		}
-		return valorMedioHoje.toString();
+		return returnValorMedio(valorMedioHoje);
 	}
 
 	public int getContMedioHoje() {
@@ -148,7 +146,8 @@ public class GlicoseMediaBusiness {
 		if (valor == null || valor.isNaN()) {
 			return "--";
 		}
-		return valor.toString();
+		DecimalFormat decimal = new DecimalFormat( "0.00" );
+		return decimal.format(valor).toString();
 	}
 
 }
