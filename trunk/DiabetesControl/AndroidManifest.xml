@@ -44,6 +44,9 @@
             android:name=".ListaRegistroActivity"
             android:theme="@style/MapBackgroundNoTitle" />
         <activity
+            android:name=".ListaPacientes"
+            android:theme="@style/MapBackgroundNoTitle" />
+        <activity
             android:name=".consultaActivity"
             android:theme="@style/MapBackground" >
             <intent-filter>

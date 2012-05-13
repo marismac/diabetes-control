@@ -34,6 +34,7 @@ public class ContextoDados {
 
 			db.execSQL(RegistroDAO.REGISTROS_CREATE_TABLE);
 			db.execSQL(PacienteDAO.PACIENTES_CREATE_TABLE);
+			db.execSQL(MedicoDAO.MEDICO_CREATE_TABLE);
 			// db.execSQL(EmprestimoDAO.EMPRESTIMOS_CREATE_TABLE);
 
 			Log.w("DbAdapter", "DB criado com sucesso!");
