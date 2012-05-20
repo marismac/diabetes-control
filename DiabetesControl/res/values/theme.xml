@@ -3,6 +3,8 @@
 
     <style name="MapBackground" parent="android:Theme">
         <item name="android:windowBackground">@drawable/fundo</item>
+        <item name="android:cacheColorHint">@color/transparente</item>
+        <item name="android:background">@color/transparente</item>
         <item name="android:windowNoTitle">true</item>
     </style>
 

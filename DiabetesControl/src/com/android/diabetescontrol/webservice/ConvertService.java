@@ -17,50 +17,14 @@ public class ConvertService {
 	private static final String SOAP_ACTION = "";
 	private static final String METHOD_NAME = "add";
 	private static final String NAMESPACE = "http://servico.diabetes.com/";
-	private static final String URL = "http://diabetescontrolws.appspot.com/EntityAPIService.wsdl";
-	private ProgressDialog progressDialog;
-
-	// public void isConnected() throws Exception {
-	// NetworkInfo info = null;
-	// info = ((ConvertService)
-	// this.context.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
-	// if (info == null || !info.isConnected()) {
-	// throw new Exception("Verifique sua conex�o com a Internet.");
-	// }
-	// if (info.isRoaming()) {
-	// throw new Exception("Verifique sua conex�o com a Internet.");
-	// }
-	// }
+	private static final String URL = "http://192.168.1.100:8080//DiabetesWS/DiabetesWS?WSDL";
 
 	@SuppressWarnings("deprecation")
 	public String Convert() {
 		SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
 		System.out.println("P1");
-
-		PropertyInfo propInfo = new PropertyInfo();
-		propInfo.name = "arg0";
-		propInfo.type = PropertyInfo.STRING_CLASS;
-		request.addProperty(propInfo, "30");
-		PropertyInfo propInfo1 = new PropertyInfo();
-		propInfo1.name = "arg1";
-		propInfo1.type = PropertyInfo.STRING_CLASS;
-		request.addProperty(propInfo1, "30");
-		PropertyInfo propInfo2 = new PropertyInfo();
-		propInfo2.name = "arg2";
-		propInfo2.type = PropertyInfo.STRING_CLASS;
-		request.addProperty(propInfo2, "30");
-		PropertyInfo propInfo3 = new PropertyInfo();
-		propInfo3.name = "arg3";
-		propInfo3.type = PropertyInfo.STRING_CLASS;
-		request.addProperty(propInfo3, "30");
-		PropertyInfo propInfo4 = new PropertyInfo();
-		propInfo4.name = "arg4";
-		propInfo4.type = PropertyInfo.STRING_CLASS;
-		request.addProperty(propInfo4, "30");
-		PropertyInfo propInfo5 = new PropertyInfo();
-		propInfo5.name = "arg5";
-		propInfo5.type = PropertyInfo.STRING_CLASS;
-		request.addProperty(propInfo5, "30");
+		request.addProperty("i", 2);
+		request.addProperty("j", 1);
 		System.out.println("P2");
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
 				SoapEnvelope.VER11);
