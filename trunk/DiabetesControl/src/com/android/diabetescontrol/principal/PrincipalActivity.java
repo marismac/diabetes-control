@@ -13,7 +13,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.android.diabetescontrol.activities.ListaPacientes;
+import com.android.diabetescontrol.activities.ListaPacientesActivity;
 import com.android.diabetescontrol.activities.PreferenciasActivity;
 import com.android.diabetescontrol.activities.R;
 import com.android.diabetescontrol.activities.cadastroRegistroActivity;
@@ -24,7 +24,9 @@ import com.android.diabetescontrol.business.GlicoseMediaBusiness;
 import com.android.diabetescontrol.database.ContextoDados;
 import com.android.diabetescontrol.database.PacienteDAO;
 import com.android.diabetescontrol.database.RegistroDAO;
+import com.android.diabetescontrol.database.RegistroMedicoDAO;
 import com.android.diabetescontrol.model.Paciente;
+import com.android.diabetescontrol.model.RegistroMedico;
 import com.android.diabetescontrol.util.CadastrosUtil;
 
 public class PrincipalActivity extends Activity {
@@ -58,10 +60,33 @@ public class PrincipalActivity extends Activity {
 	private void populaDadosParaTeste() {
 		PacienteDAO paciente = new PacienteDAO(this);
 		paciente.open();
-		paciente.criarPaciente(new Paciente(null, "Aldo Silva", "aldosilva@gmail.com", new Timestamp(0), "M", "aldosilvagmail.com", "N"));
-		paciente.criarPaciente(new Paciente(null, "Rubens Silva", "rubensilva@gmail.com", new Timestamp(0), "M", "rubensilvagmail.com", "N"));
+		paciente.criarPaciente(new Paciente(null, "Aldo Silva",
+				"aldosilva@gmail.com", new Timestamp(0), "M",
+				"aldosilva@gmail.com", "N"));
+		paciente.criarPaciente(new Paciente(null, "Rubens Silva",
+				"rubensilva@gmail.com", new Timestamp(0), "M",
+				"rubensilva@gmail.com", "N"));
+		paciente.criarPaciente(new Paciente(null, "Mauro", "Mauro@gmail.com",
+				new Timestamp(0), "M", "mauro@gmail.com", "N"));
 		paciente.close();
-		
+		RegistroMedicoDAO regMedDAO = new RegistroMedicoDAO(this);
+		regMedDAO.open();
+		regMedDAO.criarRegistro(new RegistroMedico("Glicose", "Café", 13,
+				new Timestamp(0), null, "mauro@gmail.com"));
+		regMedDAO.criarRegistro(new RegistroMedico("Glicose", "Café", 14,
+				new Timestamp(0), null, "mauro@gmail.com"));
+		regMedDAO.criarRegistro(new RegistroMedico("Glicose", "Café", 15,
+				new Timestamp(0), null, "mauro@gmail.com"));
+		regMedDAO.criarRegistro(new RegistroMedico("Glicose", "Café", 34,
+				new Timestamp(0), null, "aldosilva@gmail.com"));
+		regMedDAO.criarRegistro(new RegistroMedico("Glicose", "Café", 23,
+				new Timestamp(0), null, "aldosilva@gmail.com"));
+		regMedDAO.criarRegistro(new RegistroMedico("Glicose", "Café", 98,
+				new Timestamp(0), null, "aldosilva@gmail.com"));
+		regMedDAO.criarRegistro(new RegistroMedico("Glicose", "Café", 32,
+				new Timestamp(0), null, "aldosilva@gmail.com"));
+		regMedDAO.close();
+
 	}
 
 	@Override
@@ -99,7 +124,7 @@ public class PrincipalActivity extends Activity {
 		btRelatoriosPacientes.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				Intent i = new Intent(PrincipalActivity.this,
-						ListaPacientes.class);
+						ListaPacientesActivity.class);
 				startActivity(i);
 
 			}

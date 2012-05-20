@@ -9,4 +9,5 @@
     <color name="vermelho">#FF0000</color>
     <color name="amarelo">#EAEF92</color>
     <color name="Lavender">#E6E6FA</color>
+    <color name="transparente">#00000000</color>
 </resources>

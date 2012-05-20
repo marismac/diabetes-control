@@ -29,6 +29,9 @@
             android:name=".cadastroRegistroActivity"
             android:theme="@style/MapBackground" />
         <activity
+            android:name=".ListaRegistrosMedicosActivity"
+        	android:theme="@style/MapBackground" />
+        <activity
             android:name=".consultaRegistroDiaActivity"
             android:theme="@style/MapBackgroundNoTitle" />
         <activity
@@ -44,8 +47,8 @@
             android:name=".ListaRegistroActivity"
             android:theme="@style/MapBackgroundNoTitle" />
         <activity
-            android:name=".ListaPacientes"
-            android:theme="@style/MapBackgroundNoTitle" />
+            android:name=".ListaPacientesActivity"
+            android:theme="@style/MapBackground" />
         <activity
             android:name=".consultaActivity"
             android:theme="@style/MapBackground" >

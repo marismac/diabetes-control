@@ -11,16 +11,16 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-public class PacienteAdapter extends BaseAdapter{
-	
+public class PacienteAdapter extends BaseAdapter {
+
 	private Context ctx;
 	private List<Paciente> lista;
-	
-	public PacienteAdapter(Context ctx, List<Paciente> lista){
+
+	public PacienteAdapter(Context ctx, List<Paciente> lista) {
 		this.ctx = ctx;
-		this.lista= lista;
+		this.lista = lista;
 	}
-	
+
 	@Override
 	public int getCount() {
 		return lista.size();
