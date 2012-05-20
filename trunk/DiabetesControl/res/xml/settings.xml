@@ -1,18 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <ListPreference
-        android:dialogTitle="@string/modo_titulo"
-        android:entries="@array/nome_modo"
-        android:entryValues="@array/opcao_modo"
-        android:key="tipomodo"
-        android:summary="@string/modo_resumo"
-        android:title="@string/modo_titulo" />
+    <PreferenceCategory
+        android:key="opt_diabetes"
+        android:title="Opções de Diabetes" >
+        <ListPreference
+            android:dialogTitle="@string/modo_titulo"
+            android:entries="@array/nome_modo"
+            android:entryValues="@array/opcao_modo"
+            android:key="tipomodo"
+            android:summary="@string/modo_resumo"
+            android:title="@string/modo_titulo" />
 
-    <CheckBoxPreference
-        android:defaultValue="true"
-        android:key="webservice"
-        android:summary="@string/ws_resumo"
-        android:title="@string/ws_titulo" />
+        <EditTextPreference
+            android:defaultValue="mmol/l"
+            android:key="unidade_diabetes"
+            android:summary="Define a unidade de medida da diabetes"
+            android:title="Unidade" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="opt_sincr"
+        android:title="Opções de Sincronização" >
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="webservice"
+            android:summary="@string/ws_resumo"
+            android:title="@string/ws_titulo" />
+
+        <EditTextPreference
+            android:defaultValue="192.168.1.101"
+            android:key="endereco_ws"
+            android:summary="Define o endereço IP do Web Service"
+            android:title="Endereço WS" />
+    </PreferenceCategory>
 
 </PreferenceScreen>

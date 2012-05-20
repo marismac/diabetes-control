@@ -4,12 +4,11 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
-import android.content.DialogInterface;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,9 +21,10 @@ import android.widget.TimePicker;
 
 import com.android.diabetescontrol.database.RegistroDAO;
 import com.android.diabetescontrol.model.Registro;
-import com.android.diabetescontrol.util.CadastrosUtil;
+import com.android.diabetescontrol.util.Utils;
+import com.android.diabetescontrol.webservice.RegistroWS;
 
-public class cadastroRegistroActivity extends Activity {
+public class CadastroRegistroActivity extends Activity {
 
 	static final int TIME_DIALOG_ID = 1;
 	static final int DATE_DIALOG_ID = 0;
@@ -106,13 +106,18 @@ public class cadastroRegistroActivity extends Activity {
 	}
 
 	private void Salvar() {
+		Registro reg = getValoresTela();
 		RegistroDAO regDao = new RegistroDAO(this);
 		regDao.open();
-		if (getValoresTela() != null) {
-			regDao.criarRegistro(getValoresTela());
+		if (reg != null) {
+			regDao.criarRegistro(reg);
 		}
 		regDao.close();
-		new CadastrosUtil().criaAlertSalvar(ctx);
+		Utils.criaAlertSalvar(ctx);
+		if (Utils
+				.existConnectionInternet((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))) {
+			new RegistroWS(reg, this).sincRegistro();
+		}
 	}
 
 	private Registro getValoresTela() {

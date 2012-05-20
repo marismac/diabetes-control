@@ -8,18 +8,19 @@ public class Paciente {
 	private String email;
 	private Timestamp datanascimento;
 	private String sexo;
-	private String codWS;
-	private String editar;
+	private String codPaciente;
+	private String senhaPaciente;
 
 	public Paciente(Integer id, String nome, String email,
-			Timestamp datanascimento, String sexo, String codWS, String editar) {
+			Timestamp datanascimento, String sexo, String codPaciente,
+			String senhaPaciente) {
 		this.Id = id;
 		this.nome = nome;
 		this.email = email;
 		this.datanascimento = datanascimento;
 		this.sexo = sexo;
-		this.codWS = codWS;
-		this.editar = editar;
+		this.codPaciente = codPaciente;
+		this.senhaPaciente = senhaPaciente;
 	}
 
 	public Paciente() {
@@ -66,20 +67,20 @@ public class Paciente {
 		this.sexo = sexo;
 	}
 
-	public String getCodWS() {
-		return codWS;
+	public String getCodPaciente() {
+		return codPaciente;
 	}
 
-	public void setCodWS(String codWS) {
-		this.codWS = codWS;
+	public void setCodPaciente(String codPaciente) {
+		this.codPaciente = codPaciente;
 	}
 
-	public String getEditar() {
-		return editar;
+	public String getSenhaPaciente() {
+		return senhaPaciente;
 	}
 
-	public void setEditar(String editar) {
-		this.editar = editar;
+	public void setSenhaPaciente(String senhaPaciente) {
+		this.senhaPaciente = senhaPaciente;
 	}
 
 }
