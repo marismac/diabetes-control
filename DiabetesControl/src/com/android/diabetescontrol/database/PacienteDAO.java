@@ -19,15 +19,15 @@ public class PacienteDAO extends BasicoDAO {
 	public static final String COLUNA_EMAIL = "EMAIL";
 	public static final String COLUNA_NASCIMENTO = "NASCIMENTO";
 	public static final String COLUNA_SEXO = "SEXO";
-	public static final String COLUNA_CODWS = "WS";
-	public static final String COLUNA_EDITAR = "EDITAR";
+	public static final String COLUNA_CODPAC = "CODIGO_PACIENTE";
+	public static final String COLUNA_SENHAPAC = "SENHA_PACIENTE";
 
 	public static final String PACIENTES_CREATE_TABLE = "CREATE TABLE "
 			+ TABELA_PACIENTES + "  (" + COLUNA_ID
 			+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUNA_NASCIMENTO
 			+ " TIMESTAMP NOT NULL," + COLUNA_EMAIL + " TEXT NOT NULL,"
 			+ COLUNA_NOME + " TEXT NOT NULL," + COLUNA_SEXO + " TEXT NOT NULL,"
-			+ COLUNA_CODWS + " TEXT NOT NULL," + COLUNA_EDITAR
+			+ COLUNA_CODPAC + " TEXT NOT NULL," + COLUNA_SENHAPAC
 			+ " TEXT);";
 
 	public void criarPaciente(Paciente paciente) {
@@ -43,8 +43,8 @@ public class PacienteDAO extends BasicoDAO {
 		values.put(COLUNA_EMAIL, paciente.getEmail());
 		values.put(COLUNA_NASCIMENTO, paciente.getDatanascimento().getTime());
 		values.put(COLUNA_SEXO, paciente.getSexo());
-		values.put(COLUNA_CODWS, paciente.getCodWS());
-		values.put(COLUNA_EDITAR, paciente.getEditar());
+		values.put(COLUNA_CODPAC, paciente.getCodPaciente());
+		values.put(COLUNA_SENHAPAC, paciente.getSenhaPaciente());
 
 		return values;
 	}
@@ -66,8 +66,8 @@ public class PacienteDAO extends BasicoDAO {
 		paciente.setNome(c.getString(c.getColumnIndex(COLUNA_NOME)));
 		paciente.setEmail(c.getString(c.getColumnIndex(COLUNA_EMAIL)));
 		paciente.setSexo(c.getString(c.getColumnIndex(COLUNA_SEXO)));
-		paciente.setCodWS(c.getString(c.getColumnIndex(COLUNA_CODWS)));
-		paciente.setEditar(c.getString(c.getColumnIndex(COLUNA_EDITAR)));
+		paciente.setCodPaciente(c.getString(c.getColumnIndex(COLUNA_CODPAC)));
+		paciente.setSenhaPaciente(c.getString(c.getColumnIndex(COLUNA_SENHAPAC)));
 
 		return paciente;
 	}

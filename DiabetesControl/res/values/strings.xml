@@ -76,10 +76,10 @@
 	<string name="configs_label">Configurações</string>
 	<string name="configs_title">Configs do programa</string>
 	<string name="configs_atalhos">s</string>
-	<string name="ws_titulo">Registros</string>
-	<string name="ws_resumo">Enviar registros para dispositivo médico</string>
-	<string name="modo_titulo">Modo Médico</string>
-	<string name="modo_resumo">Configura o sistema como dispositivo médico</string>
+	<string name="ws_titulo">Sincronização</string>
+	<string name="ws_resumo">Caso selecionado, irá realizar a sincronização dos registros</string>
+	<string name="modo_titulo">Modo Aparelho</string>
+	<string name="modo_resumo">Configura o sistema como dispositivo médico ou paciente</string>
 	<string name="selecpaciente">Selecionar Paciente</string>
 	<string name="sempac">Sem Pacientes</string>
 </resources>

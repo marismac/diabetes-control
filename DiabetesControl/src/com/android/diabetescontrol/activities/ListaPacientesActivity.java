@@ -23,7 +23,7 @@ public class ListaPacientesActivity extends ListActivity {
 		Paciente paciente = (Paciente) l.getAdapter().getItem(position);
 		Intent i = new Intent(ListaPacientesActivity.this,
 				ListaRegistrosMedicosActivity.class);
-		i.putExtra("codPaciente", paciente.getCodWS());
+		i.putExtra("codPaciente", paciente.getCodPaciente());
 		startActivity(i);
 		super.onListItemClick(l, v, position, id);
 	}

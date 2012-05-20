@@ -13,13 +13,12 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.diabetescontrol.activities.CadastroRegistroActivity;
 import com.android.diabetescontrol.activities.ListaPacientesActivity;
 import com.android.diabetescontrol.activities.PreferenciasActivity;
 import com.android.diabetescontrol.activities.R;
-import com.android.diabetescontrol.activities.cadastroRegistroActivity;
 import com.android.diabetescontrol.activities.consultaActivity;
 import com.android.diabetescontrol.activities.graficosActivity;
-import com.android.diabetescontrol.activities.testeWSActivity;
 import com.android.diabetescontrol.business.GlicoseMediaBusiness;
 import com.android.diabetescontrol.database.ContextoDados;
 import com.android.diabetescontrol.database.PacienteDAO;
@@ -27,13 +26,12 @@ import com.android.diabetescontrol.database.RegistroDAO;
 import com.android.diabetescontrol.database.RegistroMedicoDAO;
 import com.android.diabetescontrol.model.Paciente;
 import com.android.diabetescontrol.model.RegistroMedico;
-import com.android.diabetescontrol.util.CadastrosUtil;
+import com.android.diabetescontrol.util.Utils;
 
 public class PrincipalActivity extends Activity {
 	private Button btAdicionar;
 	private Button btConsultar;
 	private Button btGraficos;
-	private Button btTesteWS;
 	private Button btConfiguracoes;
 	private Button btRelatoriosPacientes;
 	private TextView tvValorHoje;
@@ -44,9 +42,9 @@ public class PrincipalActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		new ContextoDados(this);
-		//populaDadosParaTeste();
-		if (new CadastrosUtil().isPaciente(this)) {
-			setContentView(R.layout.mainpaciente);
+		// populaDadosParaTeste();
+		if (Utils.isPaciente(this)) {
+			setContentView(R.layout.main_paciente);
 			inicializaObjetosPaciente();
 			carregaListenersPaciente();
 			carregaResumo();
@@ -114,13 +112,6 @@ public class PrincipalActivity extends Activity {
 
 			}
 		});
-		btTesteWS.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				Intent i = new Intent(PrincipalActivity.this,
-						testeWSActivity.class);
-				startActivity(i);
-			}
-		});
 		btRelatoriosPacientes.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				Intent i = new Intent(PrincipalActivity.this,
@@ -134,7 +125,6 @@ public class PrincipalActivity extends Activity {
 
 	private void inicializaObjetosMedico() {
 		btConfiguracoes = (Button) findViewById(R.id.btConfiguracoes);
-		btTesteWS = (Button) findViewById(R.id.btTesteWS);
 		btRelatoriosPacientes = (Button) findViewById(R.id.btRelatoriosPacientes);
 
 	}
@@ -143,7 +133,6 @@ public class PrincipalActivity extends Activity {
 		btConfiguracoes = (Button) findViewById(R.id.btConfiguracoes);
 		btAdicionar = (Button) findViewById(R.id.btAdicionar);
 		btConsultar = (Button) findViewById(R.id.btConsultar);
-		btTesteWS = (Button) findViewById(R.id.btTesteWS);
 		btGraficos = (Button) findViewById(R.id.btGraficos);
 		tvValorHoje = (TextView) findViewById(R.id.etvUltimoReg);
 		tvValorOntem = (TextView) findViewById(R.id.etvOntem);
@@ -154,7 +143,7 @@ public class PrincipalActivity extends Activity {
 		btAdicionar.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				Intent i = new Intent(PrincipalActivity.this,
-						cadastroRegistroActivity.class);
+						CadastroRegistroActivity.class);
 				startActivity(i);
 			}
 		});
@@ -171,13 +160,6 @@ public class PrincipalActivity extends Activity {
 			public void onClick(View v) {
 				Intent i = new Intent(PrincipalActivity.this,
 						graficosActivity.class);
-				startActivity(i);
-			}
-		});
-		btTesteWS.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				Intent i = new Intent(PrincipalActivity.this,
-						testeWSActivity.class);
 				startActivity(i);
 			}
 		});

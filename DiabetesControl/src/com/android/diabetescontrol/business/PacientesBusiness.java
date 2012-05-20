@@ -15,8 +15,8 @@ public class PacientesBusiness {
 		List<Paciente> lista = new ArrayList<Paciente>();
 		PacienteDAO pacDAO = new PacienteDAO(context);
 		pacDAO.open();
-		Cursor c = pacDAO.consultarPacientesWhereOrder(pacDAO.COLUNA_EDITAR
-				+ " == 'N'", pacDAO.COLUNA_NOME);
+		Cursor c = pacDAO.consultarPacientesWhereOrder(pacDAO.COLUNA_SENHAPAC
+				+ " IS NULL", pacDAO.COLUNA_NOME);
 		c.moveToFirst();
 		while (!c.isAfterLast()) {
 			lista.add(pacDAO.deCursorParaPaciente(c));
