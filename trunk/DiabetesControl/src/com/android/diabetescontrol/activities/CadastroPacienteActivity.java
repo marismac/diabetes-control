@@ -19,7 +19,6 @@ import com.android.diabetescontrol.database.PacienteDAO;
 import com.android.diabetescontrol.model.Paciente;
 import com.android.diabetescontrol.util.Utils;
 import com.android.diabetescontrol.webservice.PacienteWS;
-import com.android.diabetescontrol.webservice.RegistroWS;
 
 public class CadastroPacienteActivity extends Activity {
 	final Calendar c = Calendar.getInstance();
@@ -93,17 +92,25 @@ public class CadastroPacienteActivity extends Activity {
 		});
 	}
 
-	private void isObrigatorio(EditText edittext) {
+	private boolean isPrenchido(EditText edittext) {
 		if ("".equals(edittext.getText().toString())) {
 			edittext.setError("Campo Obrigatório");
 			edittext.setFocusable(true);
+			return false;
 		}
+		return true;
 	}
 
 	private Paciente getValoresTela() {
-		isObrigatorio(editTextNome);
-		isObrigatorio(editTextCodPac);
-		isObrigatorio(editTextSenhaPac);
+		if (!isPrenchido(editTextNome)) {
+			return null;
+		}
+		if (!isPrenchido(editTextCodPac)) {
+			return null;
+		}
+		if (!isPrenchido(editTextSenhaPac)) {
+			return null;
+		}
 		paciente.setDatanascimento(new Date(mYear - 1900, mMonth, mDay));
 		paciente.setCodPaciente(editTextCodPac.getText().toString());
 		paciente.setNome(editTextNome.getText().toString());
@@ -124,14 +131,14 @@ public class CadastroPacienteActivity extends Activity {
 				pacDao.atualizarPaciente(paciente);
 			}
 
+			Utils.criaAlertSalvar(ctx);
+			if (Utils
+					.existConnectionInternet((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))
+					&& Utils.isSelectSynchronize(ctx)) {
+				new PacienteWS(paciente, this).sincPaciente();
+			}
 		}
 		pacDao.close();
-		Utils.criaAlertSalvar(ctx);
-		if (Utils
-				.existConnectionInternet((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))
-				&& Utils.isSelectSynchronize(ctx)) {
-			new PacienteWS(paciente, this).sincPaciente();
-		}
 	}
 
 	private void updateDisplay() {

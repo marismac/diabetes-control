@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <TableLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/widget46"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <TableRow
+            android:id="@+id/TableRow06"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/TextView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/TextView04"
+                android:text="@string/nomepac"
+                android:width="220dp" />
+        </TableRow>
+
+        <TableRow>
+
+            <EditText
+                android:id="@+id/etNome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/nomemedico" >
+
+                <requestFocus />
+            </EditText>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/TableRow01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/TextView03"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/TextView01"
+                android:text="@string/emailpac"
+                android:width="100dp" />
+        </TableRow>
+
+        <TableRow>
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/emailmedico" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/TableRow02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/TextView05"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/TextView09"
+                android:text="@string/registromedico"
+                android:width="100dp" />
+        </TableRow>
+
+        <TableRow>
+
+            <EditText
+                android:id="@+id/etRegMedico"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/registromedicohint" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/TableRow03"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/TextView06"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/TextView13"
+                android:text="@string/codMedico"
+                android:width="160dp" />
+        </TableRow>
+
+        <TableRow>
+
+            <EditText
+                android:id="@+id/etCodMedico"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/codPacIntegracao" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/TableRow05"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/TextView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <RelativeLayout
+            android:id="@+id/widget68"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/btSalvar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/salvar" />
+        </RelativeLayout>
+
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+        </TableRow>
+    </TableLayout>
+
+</ScrollView>
