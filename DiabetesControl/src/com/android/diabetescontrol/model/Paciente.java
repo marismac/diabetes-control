@@ -1,18 +1,19 @@
 package com.android.diabetescontrol.model;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 public class Paciente {
 	private Integer Id;
 	private String nome;
 	private String email;
-	private Timestamp datanascimento;
+	private Date datanascimento;
 	private String sexo;
 	private String codPaciente;
 	private String senhaPaciente;
 
 	public Paciente(Integer id, String nome, String email,
-			Timestamp datanascimento, String sexo, String codPaciente,
+			Date datanascimento, String sexo, String codPaciente,
 			String senhaPaciente) {
 		this.Id = id;
 		this.nome = nome;
@@ -51,11 +52,11 @@ public class Paciente {
 		this.email = email;
 	}
 
-	public Timestamp getDatanascimento() {
+	public Date getDatanascimento() {
 		return datanascimento;
 	}
 
-	public void setDatanascimento(Timestamp datanascimento) {
+	public void setDatanascimento(Date datanascimento) {
 		this.datanascimento = datanascimento;
 	}
 

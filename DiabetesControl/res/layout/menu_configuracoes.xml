@@ -1,21 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/linear"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView1"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical" >
-
-    <TextView
-        android:id="@+id/tvSemRes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/semreg"
-        android:textSize="24dip" />
-
-    <ListView
-        android:id="@android:id/list"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+    android:layout_height="fill_parent" >
 
-</LinearLayout>
+    <TableLayout
+        android:id="@+id/widget46"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+        
+        <Button
+            android:id="@+id/btConfigAvanc"
+            android:layout_width="wrap_content"
+            android:layout_height="68dp"
+            android:text="@string/preferencias"
+            android:textSize="24dp" />
+
+        <Button
+            android:id="@+id/btPaciente"
+            android:layout_width="wrap_content"
+            android:layout_height="68dp"
+            android:text="@string/cadpaciente"
+            android:textSize="24dp" />
+
+        <Button
+            android:id="@+id/btMedico"
+            android:layout_width="wrap_content"
+            android:layout_height="68dp"
+            android:text="@string/cadmedico"
+            android:textSize="24dp" />
+    </TableLayout>
+
+</ScrollView>

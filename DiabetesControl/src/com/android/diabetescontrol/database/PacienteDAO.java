@@ -33,6 +33,7 @@ public class PacienteDAO extends BasicoDAO {
 	public void criarPaciente(Paciente paciente) {
 		ContentValues values = dePacienteParaContentValues(paciente);
 		mDb.insert(TABELA_PACIENTES, null, values);
+		
 	}
 
 	public static ContentValues dePacienteParaContentValues(Paciente paciente) {
@@ -50,8 +51,8 @@ public class PacienteDAO extends BasicoDAO {
 	}
 
 	public boolean atualizarPaciente(Paciente paciente) {
-		ContentValues values = new ContentValues();
-		return mDb.update(TABELA_PACIENTES, values, COLUNA_ID + "=?",
+		ContentValues values = dePacienteParaContentValues(paciente);
+		return mDb.update(TABELA_PACIENTES, values, COLUNA_ID + "= ?",
 				new String[] { String.valueOf(paciente.getId()) }) > 0;
 	}
 

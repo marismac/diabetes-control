@@ -22,6 +22,12 @@ public class Utils {
 		alertDialog.show();
 	}
 
+	public static boolean isSelectSynchronize(Context ctx) {
+		SharedPreferences prefs = null;
+		prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
+		return prefs.getBoolean("webservice", false);
+	}
+
 	public static boolean isPaciente(Context ctx) {
 		SharedPreferences prefs = null;
 		prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
