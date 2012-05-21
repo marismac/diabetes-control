@@ -26,10 +26,18 @@
 	</string-array>
 	<string name="tipoCategoria">Tipo Categoria</string>
 	<string-array name="tipoCat_array">
-		<item>Café</item>
-		<item>Janta</item>
-		<item>Almoço</item>
-		<item>Lanche</item>
+		<item>Antes do Café</item>
+		<item>Depois do Café</item>
+		<item>Antes do Almoço</item>
+		<item>Depois da Almoço</item>
+		<item>Antes do Lanche</item>
+		<item>Depois do Lanche</item>
+		<item>Antes do Almoço</item>
+		<item>Depois do Lanche</item>
+	</string-array>
+	<string-array name="sexo_array">
+		<item>Masculino</item>
+		<item>Feminino</item>
 	</string-array>
 	<string-array name="nome_modo">
 		<item>Médico</item>
@@ -82,4 +90,14 @@
 	<string name="modo_resumo">Configura o sistema como dispositivo médico ou paciente</string>
 	<string name="selecpaciente">Selecionar Paciente</string>
 	<string name="sempac">Sem Pacientes</string>
+	<string name="cadpaciente">Cadastrar Paciente</string>
+	<string name="cadmedico">Cadastrar Medico</string>
+	<string name="addpaciente">Adicionar paciente</string>
+	<string name="preferencias">Preferências</string>
+	<string name="codPaciente">Código Paciente</string>
+	<string name="senha">Senha</string>
+	<string name="emailHint">E-mail do paciente</string>
+	<string name="nomePacienteHint">Nome do paciente</string>
+	<string name="codPacIntegracao">Código para integração</string>
+	<string name="senhaHint">Senha para integração</string>
 </resources>

@@ -9,7 +9,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
-
         <Button
             android:id="@+id/btRelatoriosPacientes"
             android:layout_width="wrap_content"
@@ -18,19 +17,18 @@
             android:textSize="24dp" />
 
         <Button
+            android:id="@+id/btAddPaciente"
+            android:layout_width="wrap_content"
+            android:layout_height="68dp"
+            android:text="@string/addpaciente"
+            android:textSize="24dp" />
+
+        <Button
             android:id="@+id/btConfiguracoes"
             android:layout_width="wrap_content"
             android:layout_height="68dp"
             android:text="@string/configuracoes"
             android:textSize="24dp" />
-
-        <Button
-            android:id="@+id/btTesteWS"
-            android:layout_width="wrap_content"
-            android:layout_height="68dp"
-            android:text="Teste WS"
-            android:textSize="24dp" />
-
     </TableLayout>
 
 </ScrollView>

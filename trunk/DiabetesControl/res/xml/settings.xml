@@ -22,7 +22,7 @@
         android:key="opt_sincr"
         android:title="Opções de Sincronização" >
         <CheckBoxPreference
-            android:defaultValue="true"
+            android:defaultValue="false"
             android:key="webservice"
             android:summary="@string/ws_resumo"
             android:title="@string/ws_titulo" />

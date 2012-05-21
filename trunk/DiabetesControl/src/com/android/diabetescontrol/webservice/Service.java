@@ -22,6 +22,8 @@ public class Service {
 	public String execute(SoapObject request) {
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
 				SoapEnvelope.VER11);
+		MarshalDate md = new MarshalDate();
+		md.register(envelope);
 		envelope.setOutputSoapObject(request);
 		try {
 			HttpTransportSE androidHttpTransport = new HttpTransportSE(url);

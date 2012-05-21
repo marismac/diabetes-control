@@ -13,7 +13,9 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.diabetescontrol.activities.CadastroMedicoDoPaciente;
 import com.android.diabetescontrol.activities.CadastroRegistroActivity;
+import com.android.diabetescontrol.activities.ConfiguracoesActivity;
 import com.android.diabetescontrol.activities.ListaPacientesActivity;
 import com.android.diabetescontrol.activities.PreferenciasActivity;
 import com.android.diabetescontrol.activities.R;
@@ -34,6 +36,7 @@ public class PrincipalActivity extends Activity {
 	private Button btGraficos;
 	private Button btConfiguracoes;
 	private Button btRelatoriosPacientes;
+	private Button btAdicionarPaciente;
 	private TextView tvValorHoje;
 	private TextView tvValorOntem;
 	private TextView tvValorSemana;
@@ -49,7 +52,7 @@ public class PrincipalActivity extends Activity {
 			carregaListenersPaciente();
 			carregaResumo();
 		} else {
-			setContentView(R.layout.mainmedico);
+			setContentView(R.layout.main_medico);
 			inicializaObjetosMedico();
 			carregaListenersMedico();
 		}
@@ -107,9 +110,16 @@ public class PrincipalActivity extends Activity {
 		btConfiguracoes.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				Intent i = new Intent(PrincipalActivity.this,
-						PreferenciasActivity.class);
+						ConfiguracoesActivity.class);
 				startActivity(i);
 
+			}
+		});
+		btAdicionarPaciente.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				Intent i = new Intent(PrincipalActivity.this,
+						CadastroMedicoDoPaciente.class);
+				startActivity(i);
 			}
 		});
 		btRelatoriosPacientes.setOnClickListener(new OnClickListener() {
@@ -125,8 +135,8 @@ public class PrincipalActivity extends Activity {
 
 	private void inicializaObjetosMedico() {
 		btConfiguracoes = (Button) findViewById(R.id.btConfiguracoes);
+		btAdicionarPaciente = (Button) findViewById(R.id.btAddPaciente);
 		btRelatoriosPacientes = (Button) findViewById(R.id.btRelatoriosPacientes);
-
 	}
 
 	private void inicializaObjetosPaciente() {
@@ -166,7 +176,7 @@ public class PrincipalActivity extends Activity {
 		btConfiguracoes.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				Intent i = new Intent(PrincipalActivity.this,
-						PreferenciasActivity.class);
+						ConfiguracoesActivity.class);
 				startActivity(i);
 
 			}
