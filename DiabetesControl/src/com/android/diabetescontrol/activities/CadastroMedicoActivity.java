@@ -1,7 +1,5 @@
 package com.android.diabetescontrol.activities;
 
-import java.util.Date;
-
 import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
@@ -13,12 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.android.diabetescontrol.database.MedicoDAO;
-import com.android.diabetescontrol.database.PacienteDAO;
 import com.android.diabetescontrol.model.Medico;
-import com.android.diabetescontrol.model.Paciente;
 import com.android.diabetescontrol.util.Utils;
 import com.android.diabetescontrol.webservice.MedicoWS;
-import com.android.diabetescontrol.webservice.PacienteWS;
 
 public class CadastroMedicoActivity extends Activity {
 	private Button buttonSalvar = null;
@@ -38,22 +33,30 @@ public class CadastroMedicoActivity extends Activity {
 		setCampos();
 		runListeners();
 		if (!isFirst()) {
-			setCamposPaciente();
+			setCamposMedico();
 		}
+	}
+
+	private void setCamposMedico() {
+		editTextNome.setText(medico.getNome());
+		editTextEmail.setText(medico.getEmail());
+		editTextCodMed.setText(medico.getCodWS());
+		editTextRegistro.setText(medico.getRegistro());
 	}
 
 	private boolean isFirst() {
 		MedicoDAO medDAO = new MedicoDAO(this);
 		medDAO.open();
 		@SuppressWarnings("static-access")
-		Cursor c = medDAO.consultar
+		Cursor c = medDAO.consultarMedicosWhereOrder(medDAO.COLUNA_CODWS
+				+ " IS NOT NULL", medDAO.COLUNA_NOME + " ASC");
 		c.moveToFirst();
 		if (c.isFirst()) {
-			paciente = pacDAO.deCursorParaPaciente(c);
-			pacDAO.close();
+			medico = medDAO.deCursorParaMedico(c);
+			medDAO.close();
 			return false;
 		}
-		pacDAO.close();
+		medDAO.close();
 		return true;
 	}
 

@@ -83,5 +83,4 @@ public class Paciente {
 	public void setSenhaPaciente(String senhaPaciente) {
 		this.senhaPaciente = senhaPaciente;
 	}
-
 }

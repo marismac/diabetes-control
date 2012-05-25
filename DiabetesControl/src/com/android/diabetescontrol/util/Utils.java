@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.preference.PreferenceManager;
+import android.widget.EditText;
 
 import com.android.diabetescontrol.activities.R;
 
@@ -14,6 +15,18 @@ public class Utils {
 		AlertDialog alertDialog = new AlertDialog.Builder(ctx).create();
 		alertDialog.setTitle("Dados salvos!");
 		alertDialog.setIcon(R.drawable.save);
+		alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+				return;
+			}
+		});
+		alertDialog.show();
+	}
+	
+	public static void criarAlertaErro(Context ctx, String msg) {
+		AlertDialog alertDialog = new AlertDialog.Builder(ctx).create();
+		alertDialog.setTitle("msg");
+		alertDialog.setIcon(R.drawable.error);
 		alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
 				return;
@@ -41,6 +54,15 @@ public class Utils {
 		String url = PreferenceManager.getDefaultSharedPreferences(ctx)
 				.getString("endereco_ws", "192.168.2.2");
 		return "http://" + url + ":8080/DiabetesWS/DiabetesWS?WSDL";
+	}
+	
+	public static boolean isPrenchido(EditText edittext) {
+		if ("".equals(edittext.getText().toString())) {
+			edittext.setError("Campo obrigatório.");
+			edittext.setFocusable(true);
+			return false;
+		}
+		return true;
 	}
 
 	public static boolean existConnectionInternet(
