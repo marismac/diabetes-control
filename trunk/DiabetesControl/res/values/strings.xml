@@ -105,4 +105,5 @@
 	<string name="codMedico">Código Médico</string>
 	<string name="emailmedico">E-mail do Médico</string>
 	<string name="nomemedico">Nome do Médico</string>
+	<string name="helpAddPaciente">Informe o código e senha do cadastrados no dispositivo do paciente, para acessar suas informações.</string>
 </resources>

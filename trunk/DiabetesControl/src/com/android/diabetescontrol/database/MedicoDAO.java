@@ -67,4 +67,10 @@ public class MedicoDAO extends BasicoDAO {
 		return mDb.delete(TABELA_MEDICO, COLUNA_ID + "=?",
 				new String[] { String.valueOf(idMedico) }) > 0;
 	}
+	
+	public Cursor consultarMedicosWhereOrder(String where,
+			String orderby) {
+		return mDb.query(TABELA_MEDICO, null, where, null, null, null,
+				orderby);
+	}
 }

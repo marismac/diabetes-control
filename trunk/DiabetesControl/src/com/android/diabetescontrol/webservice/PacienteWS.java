@@ -10,15 +10,38 @@ import com.android.diabetescontrol.model.Paciente;
 
 public class PacienteWS {
 	private String namespace = "http://servico.diabetes.com/";
-	private String method_name = "addPaciente";
 	private Paciente pac;
 	private Context ctx;
 	private SoapObject request;
+	String[] mensagens = new String[10];
 
 	public PacienteWS(Paciente pac, Context ctx) {
 		this.pac = pac;
 		this.ctx = ctx;
-		this.request = new SoapObject(namespace, method_name);
+	}
+
+	public Paciente sincPacienteDoMedico() {
+		Paciente paciente = null;
+		this.request = new SoapObject(namespace, "addPacientedoMedico");
+		request.addProperty("codPaciente", pac.getCodPaciente());
+		request.addProperty("senhaPaciente", pac.getSenhaPaciente());
+		new servicoAsyncTask().execute();
+		if (mensagens != null) {
+			if ("Sucess".equals(mensagens[0].toString())) {
+				paciente = objectToPaciente(mensagens);
+			}
+		}
+		return paciente;
+
+	}
+
+	public Paciente objectToPaciente(String[] results) {
+		Paciente pac = new Paciente();
+		pac.setId(Integer.valueOf(results[1]));
+		pac.setNome(results[2]);
+		pac.setEmail(results[3]);
+		pac.setCodPaciente(results[4]);
+		return pac;
 	}
 
 	public void sincPaciente() {
@@ -37,7 +60,7 @@ public class PacienteWS {
 
 		@Override
 		protected Void doInBackground(Void... params) {
-			new Service(ctx, "").execute(request);
+			mensagens = new Service(ctx, "").execute(request);
 			return null;
 		}
 
