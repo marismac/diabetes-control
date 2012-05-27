@@ -6,11 +6,14 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import com.android.diabetescontrol.database.PacienteDAO;
 import com.android.diabetescontrol.model.Paciente;
+import com.android.diabetescontrol.util.Utils;
 
 public class PacienteWS {
 	private String namespace = "http://servico.diabetes.com/";
 	private Paciente pac;
+	private Paciente paciente;
 	private Context ctx;
 	private SoapObject request;
 	String[] mensagens = new String[10];
@@ -20,32 +23,31 @@ public class PacienteWS {
 		this.ctx = ctx;
 	}
 
-	public Paciente sincPacienteDoMedico() {
-		Paciente paciente = null;
+	public void sincPacienteDoMedico() {
 		this.request = new SoapObject(namespace, "addPacientedoMedico");
 		request.addProperty("codPaciente", pac.getCodPaciente());
 		request.addProperty("senhaPaciente", pac.getSenhaPaciente());
 		new servicoAsyncTask().execute();
-		if (mensagens != null) {
-			if ("Sucess".equals(mensagens[0].toString())) {
-				paciente = objectToPaciente(mensagens);
-			}
-		}
-		return paciente;
-
 	}
 
 	public Paciente objectToPaciente(String[] results) {
 		Paciente pac = new Paciente();
-		pac.setId(Integer.valueOf(results[1]));
-		pac.setNome(results[2]);
-		pac.setEmail(results[3]);
-		pac.setCodPaciente(results[4]);
+		// pac.setId(Integer.valueOf(results[1]));
+		pac.setNome(results[1]);
+		pac.setEmail(results[2]);
+		pac.setCodPaciente(results[3]);
+		salvaPaciente(pac);
 		return pac;
 	}
 
-	public void sincPaciente() {
+	private void salvaPaciente(Paciente pac) {
+		PacienteDAO pacDao = new PacienteDAO(ctx);
+		pacDao.open();
+		pacDao.criarPaciente(pac);
+		pacDao.close();
+	}
 
+	public void sincPaciente() {
 		request.addProperty("nomePac", pac.getNome());
 		request.addProperty("emailPac", pac.getEmail());
 		request.addProperty("codPaciente", pac.getCodPaciente());
@@ -61,6 +63,7 @@ public class PacienteWS {
 		@Override
 		protected Void doInBackground(Void... params) {
 			mensagens = new Service(ctx, "").execute(request);
+			progressDialog.cancel();
 			return null;
 		}
 
@@ -73,8 +76,14 @@ public class PacienteWS {
 
 		@Override
 		protected void onPostExecute(Void result) {
-			progressDialog.cancel();
+			if (mensagens != null) {
+				if ("sucess".equals(mensagens[0].toString())) {
+					paciente = objectToPaciente(mensagens);
+					Utils.criaAlertSalvar(ctx, null);
+				} else {
+					Utils.criarAlertaErro(ctx, mensagens[0]);
+				}
+			}
 		}
-
 	}
 }

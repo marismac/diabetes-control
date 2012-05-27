@@ -25,24 +25,24 @@ public class PacienteDAO extends BasicoDAO {
 	public static final String PACIENTES_CREATE_TABLE = "CREATE TABLE "
 			+ TABELA_PACIENTES + "  (" + COLUNA_ID
 			+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUNA_NASCIMENTO
-			+ " TIMESTAMP NOT NULL," + COLUNA_EMAIL + " TEXT NOT NULL,"
-			+ COLUNA_NOME + " TEXT NOT NULL," + COLUNA_SEXO + " TEXT NOT NULL,"
-			+ COLUNA_CODPAC + " TEXT NOT NULL," + COLUNA_SENHAPAC
-			+ " TEXT);";
+			+ " TIMESTAMP," + COLUNA_EMAIL + " TEXT NOT NULL," + COLUNA_NOME
+			+ " TEXT NOT NULL," + COLUNA_SEXO + " TEXT," + COLUNA_CODPAC
+			+ " TEXT NOT NULL," + COLUNA_SENHAPAC + " TEXT);";
 
 	public void criarPaciente(Paciente paciente) {
 		ContentValues values = dePacienteParaContentValues(paciente);
 		mDb.insert(TABELA_PACIENTES, null, values);
-		
 	}
 
 	public static ContentValues dePacienteParaContentValues(Paciente paciente) {
 		ContentValues values = new ContentValues();
-
 		values.put(COLUNA_ID, paciente.getId());
 		values.put(COLUNA_NOME, paciente.getNome());
 		values.put(COLUNA_EMAIL, paciente.getEmail());
-		values.put(COLUNA_NASCIMENTO, paciente.getDatanascimento().getTime());
+		if (paciente.getDatanascimento() != null) {
+			values.put(COLUNA_NASCIMENTO, paciente.getDatanascimento()
+					.getTime());
+		}
 		values.put(COLUNA_SEXO, paciente.getSexo());
 		values.put(COLUNA_CODPAC, paciente.getCodPaciente());
 		values.put(COLUNA_SENHAPAC, paciente.getSenhaPaciente());
@@ -77,9 +77,8 @@ public class PacienteDAO extends BasicoDAO {
 		return mDb.delete(TABELA_PACIENTES, COLUNA_ID + "=?",
 				new String[] { String.valueOf(idPaciente) }) > 0;
 	}
-	
-	public Cursor consultarPacientesWhereOrder(String where,
-			String orderby) {
+
+	public Cursor consultarPacientesWhereOrder(String where, String orderby) {
 		return mDb.query(TABELA_PACIENTES, null, where, null, null, null,
 				orderby);
 	}

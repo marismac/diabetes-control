@@ -1,5 +1,10 @@
 package com.android.diabetescontrol.util;
 
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -11,9 +16,12 @@ import android.widget.EditText;
 import com.android.diabetescontrol.activities.R;
 
 public class Utils {
-	public static void criaAlertSalvar(Context ctx) {
+	public static void criaAlertSalvar(Context ctx, String msg) {
 		AlertDialog alertDialog = new AlertDialog.Builder(ctx).create();
-		alertDialog.setTitle("Dados salvos!");
+		if (msg == null) {
+			msg = "Dados salvos!";
+		}
+		alertDialog.setTitle(msg);
 		alertDialog.setIcon(R.drawable.save);
 		alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
@@ -22,10 +30,19 @@ public class Utils {
 		});
 		alertDialog.show();
 	}
-	
+
+	public static Timestamp stringToTimestamp(String dataString)
+			throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		Date date = sdf.parse(dataString);
+		Timestamp timest = new Timestamp(date.getTime());
+		return timest;
+
+	}
+
 	public static void criarAlertaErro(Context ctx, String msg) {
 		AlertDialog alertDialog = new AlertDialog.Builder(ctx).create();
-		alertDialog.setTitle("msg");
+		alertDialog.setTitle(msg);
 		alertDialog.setIcon(R.drawable.error);
 		alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
@@ -50,12 +67,18 @@ public class Utils {
 		return false;
 	}
 
+	public static String tipo_modo(Context ctx) {
+		SharedPreferences prefs = null;
+		prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
+		return prefs.getString("tipomodo", "P");
+	}
+
 	public static final String URL_WS(Context ctx) {
 		String url = PreferenceManager.getDefaultSharedPreferences(ctx)
 				.getString("endereco_ws", "192.168.2.2");
 		return "http://" + url + ":8080/DiabetesWS/DiabetesWS?WSDL";
 	}
-	
+
 	public static boolean isPrenchido(EditText edittext) {
 		if ("".equals(edittext.getText().toString())) {
 			edittext.setError("Campo obrigatório.");

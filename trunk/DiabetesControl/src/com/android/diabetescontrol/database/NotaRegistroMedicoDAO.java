@@ -23,8 +23,8 @@ public class NotaRegistroMedicoDAO extends BasicoDAO {
 			+ TABELA_NOTA_REGISTRO_MEDICO + "  (" + COLUNA_ID
 			+ " INTEGER PRIMARY KEY AUTOINCREMENT, "
 			+ COLUNA_ID_REGISTRO_MEDICO + " INTEGER NOT NULL REFERENCES "
-			+ RegistroMedicoDAO.TABELA_REGISTRO_MEDICO + " "
-			+ RegistroMedicoDAO.COLUNA_ID + "," + COLUNA_TIPO
+			+ RegistroDAO.TABELA_REGISTRO + " "
+			+ RegistroDAO.COLUNA_ID + "," + COLUNA_TIPO
 			+ " TEXT NOT NULL," + COLUNA_DESCRICAO + " TEXT NOT NULL);";
 
 	public void criarNotaRegistroMedico(NotaRegistroMedico notaregMed) {

@@ -56,10 +56,10 @@ public class graficosActivity extends Activity {
 			Registro reg = regDAO.deCursorParaRegistro(c);
 			data[i] = new GraphViewData(i, reg.getValor());
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-			String formattedDate = sdf.format(reg.getDatahora());
+			String formattedDate = sdf.format(reg.getDataHora());
 			horizontalLabels[i] = new String (formattedDate);
 			System.out.println(i + " - " + reg.getValor());
-			System.out.println(reg.getDatahora());
+			System.out.println(reg.getDataHora());
 			c.moveToNext();
 		}
 		regDAO.close();

@@ -131,7 +131,7 @@ public class CadastroPacienteActivity extends Activity {
 				pacDao.atualizarPaciente(paciente);
 			}
 
-			Utils.criaAlertSalvar(ctx);
+			Utils.criaAlertSalvar(ctx, null);
 			if (Utils
 					.existConnectionInternet((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))
 					&& Utils.isSelectSynchronize(ctx)) {

@@ -48,37 +48,19 @@ public class CadastroMedicoDoPaciente extends Activity {
 		editTextSenha = (EditText) findViewById(R.id.etSenhaMedicoPac);
 	}
 
-	private void getValoresTela() {
+	private void salvar() {
 		if (!Utils.isPrenchido(editTextCod)) {
 			return;
 		}
 		if (!Utils.isPrenchido(editTextSenha)) {
 			return;
 		}
-	}
-
-	private void salvar() {
-		getValoresTela();
 		if (Utils
 				.existConnectionInternet((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))
 				&& Utils.isSelectSynchronize(ctx)) {
-			Paciente paciente = new PacienteWS(new Paciente(null, null, null,
-					null, null, editTextCod.getText().toString(), editTextSenha
-							.getText().toString()), this)
-					.sincPacienteDoMedico();
-			if (paciente == null) {
-				Utils.criarAlertaErro(ctx,
-						"Código e Senha do Paciente inexistentes!");
-			} else {
-				PacienteDAO pacDao = new PacienteDAO(ctx);
-				pacDao.open();
-				pacDao.criarPaciente(paciente);
-				pacDao.close();
-				Utils.criaAlertSalvar(ctx);
-			}
-		} else {
-			Utils.criarAlertaErro(ctx,
-					"É necessário conexão disponível para adicionar o paciente!");
+			new PacienteWS(new Paciente(null, null, null, null, null,
+					editTextCod.getText().toString(), editTextSenha.getText()
+							.toString()), this).sincPacienteDoMedico();
 		}
 	}
 }

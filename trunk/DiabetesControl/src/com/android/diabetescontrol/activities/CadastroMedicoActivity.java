@@ -71,7 +71,7 @@ public class CadastroMedicoActivity extends Activity {
 				medDao.atualizarMedico(medico);
 			}
 
-			Utils.criaAlertSalvar(ctx);
+			Utils.criaAlertSalvar(ctx, null);
 			if (Utils
 					.existConnectionInternet((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))
 					&& Utils.isSelectSynchronize(ctx)) {
