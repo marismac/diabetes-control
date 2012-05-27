@@ -9,14 +9,14 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.android.diabetescontrol.model.RegistroMedico;
+import com.android.diabetescontrol.model.Registro;
 
-public class RegistroMedicoAdapter extends BaseAdapter {
+public class RegistroAdapter extends BaseAdapter {
 
 	private Context ctx;
-	private List<RegistroMedico> lista;
+	private List<Registro> lista;
 
-	public RegistroMedicoAdapter(Context ctx, List<RegistroMedico> lista) {
+	public RegistroAdapter(Context ctx, List<Registro> lista) {
 		this.ctx = ctx;
 		this.lista = lista;
 	}
@@ -38,24 +38,24 @@ public class RegistroMedicoAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		RegistroMedico regMed = lista.get(position);
+		Registro registro = lista.get(position);
 		LayoutInflater layout = (LayoutInflater) ctx
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View v = layout.inflate(
-				com.android.diabetescontrol.activities.R.layout.listaregistromedico,
+				com.android.diabetescontrol.activities.R.layout.lista_registromedico,
 				null);
 		
 		TextView txtID = (TextView) v
 				.findViewById(com.android.diabetescontrol.activities.R.id.tvCod);
-		txtID.setText(regMed.getId().toString());
+		txtID.setText(registro.getId().toString());
 
 		TextView txtNome = (TextView) v
 				.findViewById(com.android.diabetescontrol.activities.R.id.tvPrinc);
-		txtNome.setText(regMed.getCategoria());
+		txtNome.setText(registro.getCategoria());
 
 		TextView txtEmail = (TextView) v
 				.findViewById(com.android.diabetescontrol.activities.R.id.tvSmall);
-		txtEmail.setText(regMed.getValor().toString());
+		txtEmail.setText(registro.getValor().toString());
 
 		return v;
 	}

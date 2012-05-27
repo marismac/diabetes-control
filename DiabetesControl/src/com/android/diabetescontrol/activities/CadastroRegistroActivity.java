@@ -113,10 +113,10 @@ public class CadastroRegistroActivity extends Activity {
 			regDao.criarRegistro(reg);
 		}
 		regDao.close();
-		Utils.criaAlertSalvar(ctx);
+		Utils.criaAlertSalvar(ctx, null);
 		if (Utils
 				.existConnectionInternet((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))) {
-			new RegistroWS(reg, this).sincRegistro();
+			//new RegistroWS(reg, this).sincRegistro();
 		}
 	}
 
@@ -129,10 +129,10 @@ public class CadastroRegistroActivity extends Activity {
 		Registro reg = new Registro();
 		Timestamp timestamp = new Timestamp(mYear - 1900, mMonth, mDay, mHour,
 				mMinute, 0, 0);
-		reg.setDatahora(timestamp);
+		reg.setDataHora(timestamp);
 		reg.setCategoria(spinnerCategoria.getSelectedItem().toString());
 		reg.setTipo(spinnerTipo.getSelectedItem().toString());
-		reg.setValor(Integer.valueOf(editTextValor.getText().toString()));
+		reg.setValor(Float.valueOf(editTextValor.getText().toString()));
 		// System.out.println("******** INICIO Registros Inseridos ******");
 		// System.out.println(reg.getTipo());
 		// System.out.println(reg.getCategoria());

@@ -25,12 +25,20 @@ public class RegistroDAO extends BasicoDAO {
 	public static final String COLUNA_DATAHORA = "DATAHORA";
 	public static final String COLUNA_CATEGORIA = "CATEGORIA";
 	public static final String COLUNA_VALOR = "VALOR";
+	public static final String COLUNA_UNIDADE = "UNIDADE";
+	public static final String COLUNA_SINCRONIZADO = "SINCRONIZADO";
+	public static final String COLUNA_CODPAC = "CODIGO_PACIENTE";
+	public static final String COLUNA_ID_REGISTRO_PAC = "ID_REGISTRO_PAC";
+	public static final String COLUNA_TIPO_USER = "TIPO_USER";
 
 	public static final String REGISTROS_CREATE_TABLE = "CREATE TABLE "
 			+ TABELA_REGISTRO + "  (" + COLUNA_ID
 			+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUNA_DATAHORA
-			+ " TIMESTAMP," + COLUNA_TIPO + " TEXT NOT NULL,"
-			+ COLUNA_CATEGORIA + " INTEGER NOT NULL," + COLUNA_VALOR + ");";
+			+ " TIMESTAMP, " + COLUNA_TIPO + " TEXT NOT NULL, "
+			+ COLUNA_CATEGORIA + " TEXT NOT NULL, " + COLUNA_VALOR
+			+ " DECIMAL(6, 2), " + COLUNA_UNIDADE + " TEXT NOT NULL, "
+			+ COLUNA_SINCRONIZADO + " TEXT NOT NULL, " + COLUNA_CODPAC
+			+ " TEXT, " + COLUNA_ID_REGISTRO_PAC + " INTEGER, " + COLUNA_TIPO_USER + " TEXT NOT NULL );";
 
 	public void criarRegistro(Registro registro) {
 		ContentValues values = deRegistroParaContentValues(registro);
@@ -42,9 +50,15 @@ public class RegistroDAO extends BasicoDAO {
 
 		values.put(COLUNA_TIPO, registro.getTipo());
 		values.put(COLUNA_CATEGORIA, registro.getCategoria());
-		values.put(COLUNA_DATAHORA, registro.getDatahora().getTime());
+		if (registro.getDataHora() != null) {
+			values.put(COLUNA_DATAHORA, registro.getDataHora().getTime());
+		}
 		values.put(COLUNA_VALOR, registro.getValor());
-
+		values.put(COLUNA_UNIDADE, registro.getUnidade());
+		values.put(COLUNA_SINCRONIZADO, registro.getSincronizado());
+		values.put(COLUNA_CODPAC, registro.getCodPaciente());
+		values.put(COLUNA_ID_REGISTRO_PAC, registro.getCodCelPac());
+		values.put(COLUNA_TIPO_USER, registro.getModoUser());
 		return values;
 	}
 
@@ -69,12 +83,16 @@ public class RegistroDAO extends BasicoDAO {
 		}
 		Registro reg = new Registro();
 		reg.setId(c.getInt(c.getColumnIndex(COLUNA_ID)));
-		reg.setDatahora(new Timestamp(c.getLong(c
+		reg.setDataHora(new Timestamp(c.getLong(c
 				.getColumnIndex(COLUNA_DATAHORA))));
 		reg.setCategoria(c.getString(c.getColumnIndex(COLUNA_CATEGORIA)));
 		reg.setTipo(c.getString(c.getColumnIndex(COLUNA_TIPO)));
-		reg.setValor(c.getInt(c.getColumnIndex(COLUNA_VALOR)));
-
+		reg.setValor(c.getFloat(c.getColumnIndex(COLUNA_VALOR)));
+		reg.setUnidade(c.getString(c.getColumnIndex(COLUNA_UNIDADE)));
+		reg.setSincronizado(c.getString(c.getColumnIndex(COLUNA_SINCRONIZADO)));
+		reg.setCodPaciente(c.getString(c.getColumnIndex(COLUNA_CODPAC)));
+		reg.setCodCelPac(c.getInt(c.getColumnIndex(COLUNA_ID_REGISTRO_PAC)));
+		reg.setModoUser(c.getString(c.getColumnIndex(COLUNA_TIPO_USER)));
 		return reg;
 	}
 
@@ -112,23 +130,6 @@ public class RegistroDAO extends BasicoDAO {
 
 	}
 
-	// public List<Date> consultarQuantosRegistroBetween(Timestamp inicio,
-	// Timestamp fim) {
-	// List<Date> datas = new ArrayList<Date>();
-	//
-	// Cursor mCursor = consultarRegistrosBetween(inicio, fim);
-	// while (!mCursor.isAfterLast()) {
-	// Long mili = mCursor
-	// .getLong(mCursor.getColumnIndex(COLUNA_DATAHORA));
-	// datas.add(new Date(mili));
-	// mCursor.moveToNext();
-	// }
-	// mCursor.close();
-	//
-	// return datas;
-	//
-	// }
-
 	/**
 	 * 
 	 * Busca a quantia total de registros salvos
@@ -142,23 +143,6 @@ public class RegistroDAO extends BasicoDAO {
 		return mCursor.getCount();
 
 	}
-
-	// public List<Registro> consultarQuantosRegistrosBetween(Registro inicio,
-	// Registro fim) {
-	// List<Registro> datas = new ArrayList<Registro>();
-	//
-	// Cursor mCursor = consultarRegistrosBetween(inicio.getDatahora(),
-	// fim.getDatahora());
-	// while (!mCursor.isAfterLast()) {
-	// Registro reg = deCursorParaRegistro(mCursor);
-	// datas.add(reg);
-	// mCursor.moveToNext();
-	// }
-	// mCursor.close();
-	//
-	// return datas;
-	//
-	// }
 
 	public Cursor consultarTodosRegistrosV1() {
 
@@ -219,17 +203,30 @@ public class RegistroDAO extends BasicoDAO {
 	 * 
 	 * @return Cursor com os Registros selecionados e ordenados
 	 */
-	public Cursor consultarRegistrosWhereOrder(String where,
-			String orderby) {
+	public Cursor consultarRegistrosWhereOrder(String where, String orderby) {
 		return mDb.query(TABELA_REGISTRO, null, where, null, null, null,
 				orderby);
 	}
-
-	// Retorna TUDO que estiver na tabela Emprestimos, assim como o método V1,
-	// mas é bem mais simples.
-	public Cursor consultarTodosRegistrosV2() {
-
-		return mDb.query(TABELA_REGISTRO, null, null, null, null, null, null);
+	
+	/**
+	 * 
+	 * Permite realizar uma consulta na tabela de Registros selecionando
+	 * determinados registros e ordenando os mesmos.
+	 * 
+	 * @param where
+	 *            Coluna para informar uma clausola where a ser utilizada na
+	 *            consulta. NÃO DEVE CONTER O WHERE
+	 * @param orderby
+	 *            Coluna para informar a ordenação, que deve ser excluir o ORDER
+	 *            BY. Exemplos: DATAHORA ASC ou VALOR DESC
+	 * @param limit
+	 *            Coluna para informar o número limite de dados apresentados
+	 * 
+	 * @return Cursor com os Registros selecionados e ordenados
+	 */
+	public Cursor consultarRegistrosWhereOrderLimit(String where, String orderby, String limit) {
+		return mDb.query(TABELA_REGISTRO, null, where, null, null, null,
+				orderby, limit);
 	}
 
 	public Cursor consultarRegistros(long idRegistro) throws SQLException {
@@ -262,5 +259,4 @@ public class RegistroDAO extends BasicoDAO {
 	public long getNumeroDeRegistros() {
 		return DatabaseUtils.queryNumEntries(mDb, TABELA_REGISTRO);
 	}
-
 }

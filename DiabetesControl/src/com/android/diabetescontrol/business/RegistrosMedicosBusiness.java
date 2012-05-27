@@ -6,22 +6,23 @@ import java.util.List;
 import android.content.Context;
 import android.database.Cursor;
 
-import com.android.diabetescontrol.database.RegistroMedicoDAO;
-import com.android.diabetescontrol.model.RegistroMedico;
+import com.android.diabetescontrol.database.RegistroDAO;
+import com.android.diabetescontrol.model.Registro;
+import com.android.diabetescontrol.util.Utils;
 
 public class RegistrosMedicosBusiness {
 	@SuppressWarnings("static-access")
-	public List<RegistroMedico> getRegistrosMedicosPaciente(Context context, String codPaciente) {
-		List<RegistroMedico> medicoPaciente = new ArrayList<RegistroMedico>();
-		RegistroMedicoDAO regMedDAO = new RegistroMedicoDAO(context);
-		regMedDAO.open();
-		Cursor c = regMedDAO.consultarRegistrosWhereOrderLimit(regMedDAO.COLUNA_CODPACIENTE + " = '" + codPaciente + "'", regMedDAO.COLUNA_DATAHORA + " ASC", "100");				
+	public List<Registro> getRegistrosPaciente(Context context, String codPaciente) {
+		List<Registro> medicoPaciente = new ArrayList<Registro>();
+		RegistroDAO regDAO = new RegistroDAO(context);
+		regDAO.open();
+		Cursor c = regDAO.consultarRegistrosWhereOrderLimit(regDAO.COLUNA_CODPAC + " = '" + codPaciente + "' AND " + regDAO.COLUNA_TIPO_USER + "= '" + Utils.tipo_modo(context) + "'", regDAO.COLUNA_DATAHORA + " ASC", "100");				
 		c.moveToFirst();
 		while (!c.isAfterLast()) {
-			medicoPaciente.add(regMedDAO.deCursorParaRegistroMedico(c));
+			medicoPaciente.add(regDAO.deCursorParaRegistro(c));
 			c.moveToNext();
 		}
-		regMedDAO.close();
+		regDAO.close();
 		return medicoPaciente;
 	}
 }

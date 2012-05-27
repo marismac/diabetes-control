@@ -9,6 +9,7 @@ import java.util.Map;
 import android.app.ListActivity;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -61,13 +62,14 @@ public class ListaRegistroActivity extends ListActivity {
 		while (!c.isAfterLast()) {
 			m = new HashMap<String, String>();
 			Registro reg = regDAO.deCursorParaRegistro(c);
-			String formattedDate = sdf.format(reg.getDatahora());
-			System.out.println(dataFiltro + " - " + formattedDate + " - " + reg.getDatahora());
+			String formattedDate = sdf.format(reg.getDataHora());
+			System.out.println(dataFiltro + " - " + formattedDate + " - "
+					+ reg.getDataHora());
 			if (dataFiltro.equals(formattedDate)) {
-				textSem.setVisibility(textSem.INVISIBLE);
+				textSem.setVisibility(View.INVISIBLE);
 				m.put("Master", reg.getTipo().toString() + ": "
 						+ reg.getValor().toString());
-				String formattedDateHour = sdhf.format(reg.getDatahora());
+				String formattedDateHour = sdhf.format(reg.getDataHora());
 				m.put("Detail", formattedDateHour + " - "
 						+ reg.getCategoria().toString());
 				l.add(m);

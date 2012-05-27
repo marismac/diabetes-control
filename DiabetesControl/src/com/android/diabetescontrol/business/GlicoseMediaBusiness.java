@@ -55,7 +55,7 @@ public class GlicoseMediaBusiness {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		while (!c.isAfterLast()) {
 			Registro reg = regDAO.deCursorParaRegistro(c);
-			String dataReg = sdf.format(reg.getDatahora());
+			String dataReg = sdf.format(reg.getDataHora());
 			if (dataHoje.equals(dataReg)) {
 				++contMedioHoje;
 				valorMedioHoje += reg.getValor();
@@ -63,29 +63,29 @@ public class GlicoseMediaBusiness {
 				++contMedioOntem;
 				valorMedioOntem += reg.getValor();
 			}
-			if (reg.getDatahora().after(dataPrimeiroDiaSemanaDate)
-					&& reg.getDatahora().before(dataHojeDate)) {
+			if (reg.getDataHora().after(dataPrimeiroDiaSemanaDate)
+					&& reg.getDataHora().before(dataHojeDate)) {
 				++contMedioSemana;
 				valorMedioSemana += reg.getValor();
-			} else if (reg.getDatahora().after(dataPrimeiroDiaSemanaPassada)) {
+			} else if (reg.getDataHora().after(dataPrimeiroDiaSemanaPassada)) {
 				++contMedioSemanaPassada;
 				valorMedioSemanaPassada += reg.getValor();
 			}
 
-			if (reg.getDatahora().after(dataPrimeiroDiaMes)) {
+			if (reg.getDataHora().after(dataPrimeiroDiaMes)) {
 				++contMedioMes;
 				valorMedioMes += reg.getValor();
-			} else if (reg.getDatahora().after(dataPrimeiroDiaMesPassado)) {
+			} else if (reg.getDataHora().after(dataPrimeiroDiaMesPassado)) {
 				++contMedioMesPassado;
 				valorMedioMesPassado += reg.getValor();
 			}
-			if (reg.getDatahora().after(dataPrimeiroDiaAno)) {
+			if (reg.getDataHora().after(dataPrimeiroDiaAno)) {
 				++contMedioAnual;
 				valorMedioAnual += reg.getValor();
 			}
 			++contMedioTotal;
 			valorMedioTotal += reg.getValor();
-			System.out.println(reg.getValor() + " - " + reg.getDatahora());
+			System.out.println(reg.getValor() + " - " + reg.getDataHora());
 
 			c.moveToNext();
 		}
@@ -146,7 +146,7 @@ public class GlicoseMediaBusiness {
 		if (valor == null || valor.isNaN()) {
 			return "--";
 		}
-		DecimalFormat decimal = new DecimalFormat( "0.00" );
+		DecimalFormat decimal = new DecimalFormat("0.00");
 		return decimal.format(valor).toString();
 	}
 

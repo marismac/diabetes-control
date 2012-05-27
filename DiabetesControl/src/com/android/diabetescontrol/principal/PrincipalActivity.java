@@ -25,9 +25,7 @@ import com.android.diabetescontrol.business.GlicoseMediaBusiness;
 import com.android.diabetescontrol.database.ContextoDados;
 import com.android.diabetescontrol.database.PacienteDAO;
 import com.android.diabetescontrol.database.RegistroDAO;
-import com.android.diabetescontrol.database.RegistroMedicoDAO;
 import com.android.diabetescontrol.model.Paciente;
-import com.android.diabetescontrol.model.RegistroMedico;
 import com.android.diabetescontrol.util.Utils;
 
 public class PrincipalActivity extends Activity {
@@ -70,24 +68,6 @@ public class PrincipalActivity extends Activity {
 		paciente.criarPaciente(new Paciente(null, "Mauro", "Mauro@gmail.com",
 				new Timestamp(0), "M", "mauro@gmail.com", "N"));
 		paciente.close();
-		RegistroMedicoDAO regMedDAO = new RegistroMedicoDAO(this);
-		regMedDAO.open();
-		regMedDAO.criarRegistro(new RegistroMedico("Glicose", "Café", 13,
-				new Timestamp(0), null, "mauro@gmail.com"));
-		regMedDAO.criarRegistro(new RegistroMedico("Glicose", "Café", 14,
-				new Timestamp(0), null, "mauro@gmail.com"));
-		regMedDAO.criarRegistro(new RegistroMedico("Glicose", "Café", 15,
-				new Timestamp(0), null, "mauro@gmail.com"));
-		regMedDAO.criarRegistro(new RegistroMedico("Glicose", "Café", 34,
-				new Timestamp(0), null, "aldosilva@gmail.com"));
-		regMedDAO.criarRegistro(new RegistroMedico("Glicose", "Café", 23,
-				new Timestamp(0), null, "aldosilva@gmail.com"));
-		regMedDAO.criarRegistro(new RegistroMedico("Glicose", "Café", 98,
-				new Timestamp(0), null, "aldosilva@gmail.com"));
-		regMedDAO.criarRegistro(new RegistroMedico("Glicose", "Café", 32,
-				new Timestamp(0), null, "aldosilva@gmail.com"));
-		regMedDAO.close();
-
 	}
 
 	@Override

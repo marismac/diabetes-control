@@ -31,7 +31,7 @@ public class GlicoseValorMinMaxBusiness {
 			m = new HashMap<String, String>();
 			Registro reg = regDAO.deCursorParaRegistro(c);
 			m.put("Master", reg.getValor().toString() + " mmo/l");
-			String formattedDateHour = sdhf.format(reg.getDatahora());
+			String formattedDateHour = sdhf.format(reg.getDataHora());
 			m.put("Detail", formattedDateHour + " - "
 					+ reg.getCategoria().toString());
 			l.add(m);
