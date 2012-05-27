@@ -3,13 +3,14 @@ package com.android.diabetescontrol.activities;
 import java.util.List;
 import java.util.Map;
 
-import com.android.diabetescontrol.business.GlicoseUltimosRegistrosBusiness;
-
 import android.app.ListActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+
+import com.android.diabetescontrol.business.GlicoseUltimosRegistrosBusiness;
 
 public class ListaGlicoseUltimosRegistrosActivity extends ListActivity {
 	private TextView textSem;
@@ -22,7 +23,7 @@ public class ListaGlicoseUltimosRegistrosActivity extends ListActivity {
 				.getUltimosRegistrosList(this);
 		if (regs != null && !regs.isEmpty()) {
 			textSem = (TextView) findViewById(R.id.tvSemRes);
-			textSem.setVisibility(textSem.INVISIBLE);
+			textSem.setVisibility(View.INVISIBLE);
 			String[] from = { "Master", "Detail" };
 			int[] to = { android.R.id.text1, android.R.id.text2 };
 

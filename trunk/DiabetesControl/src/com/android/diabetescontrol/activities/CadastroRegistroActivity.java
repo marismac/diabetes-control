@@ -22,7 +22,6 @@ import android.widget.TimePicker;
 import com.android.diabetescontrol.database.RegistroDAO;
 import com.android.diabetescontrol.model.Registro;
 import com.android.diabetescontrol.util.Utils;
-import com.android.diabetescontrol.webservice.RegistroWS;
 
 public class CadastroRegistroActivity extends Activity {
 

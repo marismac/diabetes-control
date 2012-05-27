@@ -9,7 +9,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.android.diabetescontrol.database.PacienteDAO;
 import com.android.diabetescontrol.model.Paciente;
 import com.android.diabetescontrol.util.Utils;
 import com.android.diabetescontrol.webservice.PacienteWS;

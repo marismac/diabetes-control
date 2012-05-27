@@ -5,6 +5,7 @@ import java.util.Map;
 
 import android.app.ListActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -21,12 +22,14 @@ public class ListaGlicoseValoresActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.consultaultimosregistros);
 		if (getIntent().getExtras().get("valorMax") != null
-				&& !"".equals(getIntent().getExtras().get("valorMax").toString())) {
+				&& !"".equals(getIntent().getExtras().get("valorMax")
+						.toString())) {
 			valorMax = Double.valueOf(getIntent().getExtras().get("valorMax")
 					.toString());
 		}
 		if (getIntent().getExtras().get("valorMin") != null
-				&& !"".equals(getIntent().getExtras().get("valorMin").toString())) {
+				&& !"".equals(getIntent().getExtras().get("valorMin")
+						.toString())) {
 			valorMin = Double.valueOf(getIntent().getExtras().get("valorMin")
 					.toString());
 		}
@@ -35,7 +38,7 @@ public class ListaGlicoseValoresActivity extends ListActivity {
 				.getUltimosRegistrosList(this, valorMax, valorMin);
 		if (regs != null && !regs.isEmpty()) {
 			textSem = (TextView) findViewById(R.id.tvSemRes);
-			textSem.setVisibility(textSem.INVISIBLE);
+			textSem.setVisibility(View.INVISIBLE);
 			String[] from = { "Master", "Detail" };
 			int[] to = { android.R.id.text1, android.R.id.text2 };
 

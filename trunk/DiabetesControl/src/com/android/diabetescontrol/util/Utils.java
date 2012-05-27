@@ -2,7 +2,6 @@ package com.android.diabetescontrol.util;
 
 import java.sql.Timestamp;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.app.AlertDialog;
@@ -33,8 +32,8 @@ public class Utils {
 
 	public static Timestamp stringToTimestamp(String dataString)
 			throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-		Date date = sdf.parse(dataString);
+		Long dataLong = Long.valueOf(dataString);
+		Date date = new Date(dataLong);
 		Timestamp timest = new Timestamp(date.getTime());
 		return timest;
 
