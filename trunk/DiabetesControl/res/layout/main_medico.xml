@@ -23,6 +23,13 @@
             android:layout_height="68dp"
             android:text="@string/notasmedicas"
             android:textSize="24dp" />
+
+        <Button
+            android:id="@+id/btGraficosPaciente"
+            android:layout_width="wrap_content"
+            android:layout_height="68dp"
+            android:text="@string/graficosPaciente"
+            android:textSize="24dp" />
 
         <Button
             android:id="@+id/btAddPaciente"
@@ -37,6 +44,7 @@
             android:layout_height="68dp"
             android:text="@string/configuracoes"
             android:textSize="24dp" />
+
     </TableLayout>
 
 </ScrollView>
