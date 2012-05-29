@@ -9,11 +9,19 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
+
         <Button
             android:id="@+id/btRelatoriosPacientes"
             android:layout_width="wrap_content"
             android:layout_height="68dp"
             android:text="@string/selecpaciente"
+            android:textSize="24dp" />
+
+        <Button
+            android:id="@+id/btNotasMedicas"
+            android:layout_width="wrap_content"
+            android:layout_height="68dp"
+            android:text="@string/notasmedicas"
             android:textSize="24dp" />
 
         <Button

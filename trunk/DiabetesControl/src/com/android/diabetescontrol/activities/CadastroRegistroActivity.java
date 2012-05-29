@@ -114,8 +114,9 @@ public class CadastroRegistroActivity extends Activity {
 		regDao.close();
 		Utils.criaAlertSalvar(ctx, null);
 		if (Utils
-				.existConnectionInternet((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))) {
-			//new RegistroWS(reg, this).sincRegistro();
+				.existConnectionInternet((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))
+				&& Utils.isSelectSynchronize(ctx)) {
+			// new RegistroWS(reg, this).sincRegistro();
 		}
 	}
 

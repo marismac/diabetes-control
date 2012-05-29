@@ -2,9 +2,28 @@ package com.android.diabetescontrol.model;
 
 public class NotaRegistroMedico {
 	private Integer Id;
-	private Integer Id_registro;
+	private Integer idRegistro;
 	private String descricao;
-	private String tipo;
+	private String sincronizado;
+	private String tipoUser;
+	private String infoRegistro;
+	private String nomePaciente;
+
+	public String getInfoRegistro() {
+		return infoRegistro;
+	}
+
+	public void setInfoRegistro(String infoRegistro) {
+		this.infoRegistro = infoRegistro;
+	}
+
+	public String getNomePaciente() {
+		return nomePaciente;
+	}
+
+	public void setNomePaciente(String nomePaciente) {
+		this.nomePaciente = nomePaciente;
+	}
 
 	public Integer getId() {
 		return Id;
@@ -14,12 +33,12 @@ public class NotaRegistroMedico {
 		Id = id;
 	}
 
-	public Integer getId_registro() {
-		return Id_registro;
+	public Integer getIdRegistro() {
+		return idRegistro;
 	}
 
-	public void setId_registro(Integer id_registro) {
-		Id_registro = id_registro;
+	public void setIdRegistro(Integer idRegistro) {
+		this.idRegistro = idRegistro;
 	}
 
 	public String getDescricao() {
@@ -30,22 +49,19 @@ public class NotaRegistroMedico {
 		this.descricao = descricao;
 	}
 
-	public String getTipo() {
-		return tipo;
+	public String getSincronizado() {
+		return sincronizado;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setSincronizado(String sincronizado) {
+		this.sincronizado = sincronizado;
 	}
 
-	public NotaRegistroMedico(Integer id, Integer id_registro,
-			String descricao, String tipo) {
-		this.Id = id;
-		this.Id_registro = id_registro;
-		this.descricao = descricao;
-		this.tipo = tipo;
+	public String getTipoUser() {
+		return tipoUser;
 	}
 
-	public NotaRegistroMedico() {
+	public void setTipoUser(String tipoUser) {
+		this.tipoUser = tipoUser;
 	}
 }

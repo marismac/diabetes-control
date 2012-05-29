@@ -19,8 +19,6 @@ public class CadastroMedicoDoPaciente extends Activity {
 	private EditText editTextCod = null;
 	private EditText editTextSenha = null;
 
-	// private Paciente paciente = null;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

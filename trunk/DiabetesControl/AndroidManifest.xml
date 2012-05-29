@@ -14,6 +14,9 @@
         android:icon="@drawable/iv"
         android:label="@string/app_name" >
         <activity
+            android:name=".ListaNotasRegistrosMedicosActivity"
+            android:theme="@style/MapBackground" />
+        <activity
             android:name=".CadastroMedicoDoPaciente"
             android:theme="@style/MapBackground" />
         <activity

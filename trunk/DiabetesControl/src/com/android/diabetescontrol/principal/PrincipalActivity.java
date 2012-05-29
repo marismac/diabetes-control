@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.android.diabetescontrol.activities.CadastroMedicoDoPaciente;
 import com.android.diabetescontrol.activities.CadastroRegistroActivity;
 import com.android.diabetescontrol.activities.ConfiguracoesActivity;
+import com.android.diabetescontrol.activities.ListaNotasRegistrosMedicosActivity;
 import com.android.diabetescontrol.activities.ListaPacientesActivity;
 import com.android.diabetescontrol.activities.PreferenciasActivity;
 import com.android.diabetescontrol.activities.R;
@@ -35,6 +36,7 @@ public class PrincipalActivity extends Activity {
 	private Button btConfiguracoes;
 	private Button btRelatoriosPacientes;
 	private Button btAdicionarPaciente;
+	private Button btNotasMedicas;
 	private TextView tvValorHoje;
 	private TextView tvValorOntem;
 	private TextView tvValorSemana;
@@ -110,6 +112,13 @@ public class PrincipalActivity extends Activity {
 
 			}
 		});
+		btNotasMedicas.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				Intent i = new Intent(PrincipalActivity.this,
+						ListaNotasRegistrosMedicosActivity.class);
+				startActivity(i);
+			}
+		});
 
 	}
 
@@ -117,6 +126,7 @@ public class PrincipalActivity extends Activity {
 		btConfiguracoes = (Button) findViewById(R.id.btConfiguracoes);
 		btAdicionarPaciente = (Button) findViewById(R.id.btAddPaciente);
 		btRelatoriosPacientes = (Button) findViewById(R.id.btRelatoriosPacientes);
+		btNotasMedicas = (Button) findViewById(R.id.btNotasMedicas);
 	}
 
 	private void inicializaObjetosPaciente() {
