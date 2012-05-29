@@ -107,4 +107,5 @@
 	<string name="nomemedico">Nome do Médico</string>
 	<string name="helpAddPaciente">Informe o código e senha do cadastrados no dispositivo do paciente, para acessar suas informações.</string>
 	<string name="notasmedicas">Notas Médicas</string>
+	<string name="graficosPaciente">Gráficos</string>
 </resources>

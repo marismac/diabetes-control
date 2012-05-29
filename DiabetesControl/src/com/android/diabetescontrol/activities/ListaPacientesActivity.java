@@ -21,10 +21,19 @@ public class ListaPacientesActivity extends ListActivity {
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		Paciente paciente = (Paciente) l.getAdapter().getItem(position);
-		Intent i = new Intent(ListaPacientesActivity.this,
-				ListaRegistrosMedicosActivity.class);
-		i.putExtra("codPaciente", paciente.getCodPaciente());
-		startActivity(i);
+		if (getIntent().getExtras() != null
+				&& getIntent().getExtras().get("origem") != null
+				&& "G".equals(getIntent().getExtras().get("origem"))) {
+			Intent i = new Intent(ListaPacientesActivity.this,
+					GraficosPacienteActivity.class);
+			i.putExtra("codPaciente", paciente.getCodPaciente());
+			startActivity(i);
+		} else {
+			Intent i = new Intent(ListaPacientesActivity.this,
+					ListaRegistrosMedicosActivity.class);
+			i.putExtra("codPaciente", paciente.getCodPaciente());
+			startActivity(i);
+		}
 		super.onListItemClick(l, v, position, id);
 	}
 }

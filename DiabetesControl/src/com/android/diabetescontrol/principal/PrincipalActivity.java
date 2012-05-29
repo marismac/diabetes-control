@@ -1,7 +1,5 @@
 package com.android.diabetescontrol.principal;
 
-import java.sql.Timestamp;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,9 +22,7 @@ import com.android.diabetescontrol.activities.consultaActivity;
 import com.android.diabetescontrol.activities.graficosActivity;
 import com.android.diabetescontrol.business.GlicoseMediaBusiness;
 import com.android.diabetescontrol.database.ContextoDados;
-import com.android.diabetescontrol.database.PacienteDAO;
 import com.android.diabetescontrol.database.RegistroDAO;
-import com.android.diabetescontrol.model.Paciente;
 import com.android.diabetescontrol.util.Utils;
 
 public class PrincipalActivity extends Activity {
@@ -36,6 +32,7 @@ public class PrincipalActivity extends Activity {
 	private Button btConfiguracoes;
 	private Button btRelatoriosPacientes;
 	private Button btAdicionarPaciente;
+	private Button btGraficosPaciente;
 	private Button btNotasMedicas;
 	private TextView tvValorHoje;
 	private TextView tvValorOntem;
@@ -45,7 +42,6 @@ public class PrincipalActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		new ContextoDados(this);
-		// populaDadosParaTeste();
 		if (Utils.isPaciente(this)) {
 			setContentView(R.layout.main_paciente);
 			inicializaObjetosPaciente();
@@ -56,20 +52,6 @@ public class PrincipalActivity extends Activity {
 			inicializaObjetosMedico();
 			carregaListenersMedico();
 		}
-	}
-
-	private void populaDadosParaTeste() {
-		PacienteDAO paciente = new PacienteDAO(this);
-		paciente.open();
-		paciente.criarPaciente(new Paciente(null, "Aldo Silva",
-				"aldosilva@gmail.com", new Timestamp(0), "M",
-				"aldosilva@gmail.com", "N"));
-		paciente.criarPaciente(new Paciente(null, "Rubens Silva",
-				"rubensilva@gmail.com", new Timestamp(0), "M",
-				"rubensilva@gmail.com", "N"));
-		paciente.criarPaciente(new Paciente(null, "Mauro", "Mauro@gmail.com",
-				new Timestamp(0), "M", "mauro@gmail.com", "N"));
-		paciente.close();
 	}
 
 	@Override
@@ -109,13 +91,20 @@ public class PrincipalActivity extends Activity {
 				Intent i = new Intent(PrincipalActivity.this,
 						ListaPacientesActivity.class);
 				startActivity(i);
-
 			}
 		});
 		btNotasMedicas.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				Intent i = new Intent(PrincipalActivity.this,
 						ListaNotasRegistrosMedicosActivity.class);
+				startActivity(i);
+			}
+		});
+		btGraficosPaciente.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				Intent i = new Intent(PrincipalActivity.this,
+						ListaPacientesActivity.class);
+				i.putExtra("origem", "G");
 				startActivity(i);
 			}
 		});
@@ -127,6 +116,7 @@ public class PrincipalActivity extends Activity {
 		btAdicionarPaciente = (Button) findViewById(R.id.btAddPaciente);
 		btRelatoriosPacientes = (Button) findViewById(R.id.btRelatoriosPacientes);
 		btNotasMedicas = (Button) findViewById(R.id.btNotasMedicas);
+		btGraficosPaciente = (Button) findViewById(R.id.btGraficosPaciente);
 	}
 
 	private void inicializaObjetosPaciente() {
