@@ -2,6 +2,7 @@
 <resources>
     <color name="blue">#0303ff</color>
     <color name="grey">#f7f7f7</color>
+    <color name="grey81">#CFCFCF</color>
     <color name="verde">#C0E814</color>
     <color name="laranja">#D0640D</color>
     <color name="preto">#000000</color>
@@ -10,4 +11,5 @@
     <color name="amarelo">#EAEF92</color>
     <color name="Lavender">#E6E6FA</color>
     <color name="transparente">#00000000</color>
+    <color name="back">#F5DEB3</color>
 </resources>

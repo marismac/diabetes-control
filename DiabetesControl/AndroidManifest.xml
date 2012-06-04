@@ -67,7 +67,7 @@
             android:name=".ListaPacientesActivity"
             android:theme="@style/MapBackground" />
         <activity
-            android:name=".consultaActivity"
+            android:name=".RelatoriosActivity"
             android:theme="@style/MapBackground" >
             <intent-filter>
                 <action android:name="com.ptandroid.tutorial.MENU" />

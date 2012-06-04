@@ -12,9 +12,9 @@ import android.content.Intent;
 import android.graphics.Color;
 
 public class GraficoLinha {
-	public Intent getIntent(Context context, int[] x, String[] y) {
-		//int[] x = { 1, 2, 3, 4, 5, 6, 7 };
-		//int[] y = { 30, 34, 45, 57, 77, 100, 20 };
+	public Intent getIntent(Context context) {
+		int[] x = { 1, 2, 3, 4, 5, 6, 7 };
+		int[] y = { 30, 34, 45, 57, 77, 100, 20 };
 		
 		
 		TimeSeries series = new TimeSeries("Line1");

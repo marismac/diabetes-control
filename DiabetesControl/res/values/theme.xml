@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="MapBackground" parent="android:Theme">
-        <item name="android:windowBackground">@drawable/fundo</item>
-        <item name="android:cacheColorHint">@color/transparente</item>
-        <item name="android:background">@color/transparente</item>
+    <style name="MapBackgroundNoTitle" parent="android:Theme">
         <item name="android:windowNoTitle">true</item>
     </style>
 
-    <style name="MapBackgroundNoTitle" parent="android:Theme">
-        <item name="android:windowNoTitle">true</item>
+    <style name="MapBackground" parent="@android:style/Theme.Light.NoTitleBar">
+        <item name="android:typeface">serif</item>
+        <item name="android:scrollbarStyle">insideInset</item>
     </style>
 
 </resources>

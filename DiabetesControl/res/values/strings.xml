@@ -3,6 +3,8 @@
 	<string name="hello">Hello World, DiabetesControlActivity!</string>
 	<string name="app_name">DiabetesControl</string>
 	<string name="tipoRegistro">Tipo Registro</string>
+	<string name="tipoMedicamento">Tipo Medicamento</string>
+	<string name="medicamento">Medicamento</string>
 	<string name="adicionar">Adicionar</string>
 	<string name="consultar">Consultar</string>
 	<string name="graficos">Gráficos</string>
@@ -85,12 +87,16 @@
 	<string name="configs_title">Configs do programa</string>
 	<string name="configs_atalhos">s</string>
 	<string name="ws_titulo">Sincronização</string>
-	<string name="ws_resumo">Caso selecionado, irá realizar a sincronização dos registros</string>
-	<string name="modo_titulo">Modo Aparelho</string>
-	<string name="modo_resumo">Configura o sistema como dispositivo médico ou paciente</string>
+	<string name="ws_resumo">Caso selecionado, irá realizar a sincronização dos
+		registros
+	</string>
+	<string name="modo_titulo">Módulo do Aparelho</string>
+	<string name="modo_resumo">Configura o sistema como sistema do médico ou
+		paciente
+	</string>
 	<string name="selecpaciente">Selecionar Paciente</string>
 	<string name="sempac">Sem Pacientes</string>
-	<string name="cadpaciente">Cadastrar Paciente</string>
+	<string name="cadpaciente">Paciente</string>
 	<string name="cadmedico">Cadastrar Medico</string>
 	<string name="addpaciente">Adicionar paciente</string>
 	<string name="preferencias">Preferências</string>
@@ -105,7 +111,13 @@
 	<string name="codMedico">Código Médico</string>
 	<string name="emailmedico">E-mail do Médico</string>
 	<string name="nomemedico">Nome do Médico</string>
-	<string name="helpAddPaciente">Informe o código e senha do cadastrados no dispositivo do paciente, para acessar suas informações.</string>
+	<string name="helpAddPaciente">Informe o código e senha do cadastrados no
+		dispositivo do paciente, para acessar suas informações.
+	</string>
 	<string name="notasmedicas">Notas Médicas</string>
 	<string name="graficosPaciente">Gráficos</string>
+	<string name="diabetescontrol">Diabetes Control</string>
+	<string name="editar">Editar</string>
+	<string name="cadregistrotitle">Cadastro de Registros</string>
+	<string name="qtde">qtde</string>
 </resources>

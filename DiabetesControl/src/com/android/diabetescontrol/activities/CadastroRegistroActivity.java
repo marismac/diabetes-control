@@ -8,17 +8,27 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.text.InputType;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
+import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.android.diabetescontrol.database.MedicamentoDAO;
 import com.android.diabetescontrol.database.RegistroDAO;
 import com.android.diabetescontrol.model.Registro;
 import com.android.diabetescontrol.util.Utils;
@@ -29,9 +39,13 @@ public class CadastroRegistroActivity extends Activity {
 	static final int DATE_DIALOG_ID = 0;
 	private Spinner spinnerTipo = null;
 	private Spinner spinnerCategoria = null;
+	private Spinner spinnerMedicamento = null;
+	private TableRow trMed = null;
+	private TableRow trMedSp = null;
 	private Button buttonSalvar = null;
 	private Button buttonData = null;
 	private Button buttonHora = null;
+	private TextView unidade = null;
 	private EditText editTextValor = null;
 	final Calendar c = Calendar.getInstance();
 	private int mYear;
@@ -43,7 +57,7 @@ public class CadastroRegistroActivity extends Activity {
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.registro);
+		setContentView(R.layout.cad_registro);
 		ctx = this;
 		setCampos();
 		carregaSpinners();
@@ -53,10 +67,14 @@ public class CadastroRegistroActivity extends Activity {
 	private void setCampos() {
 		spinnerTipo = (Spinner) findViewById(R.id.spTipo);
 		spinnerCategoria = (Spinner) findViewById(R.id.spCategoria);
+		spinnerMedicamento = (Spinner) findViewById(R.id.spMedicamentos);
+		trMed = (TableRow) findViewById(R.id.trMedicamentosTv);
+		trMedSp = (TableRow) findViewById(R.id.trMedicamentos);
 		buttonSalvar = (Button) findViewById(R.id.btSalvar);
 		buttonData = (Button) findViewById(R.id.btData);
 		buttonHora = (Button) findViewById(R.id.btHora);
 		editTextValor = (EditText) findViewById(R.id.etValor);
+		unidade = (TextView) findViewById(R.id.tvUnidade);
 
 		mYear = c.get(Calendar.YEAR);
 		mMonth = c.get(Calendar.MONTH);
@@ -65,7 +83,7 @@ public class CadastroRegistroActivity extends Activity {
 		mMinute = c.get(Calendar.MINUTE);
 		updateDisplay();
 	}
-
+	@SuppressWarnings("unchecked")
 	private void carregaSpinners() {
 		// Preenche o Spinner de Tipo com o valor do strings.xml
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
@@ -78,6 +96,19 @@ public class CadastroRegistroActivity extends Activity {
 				android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinnerCategoria.setAdapter(adapter);
+		
+		
+		MedicamentoDAO medDao = new MedicamentoDAO(this);
+		medDao.open();
+		Cursor c = medDao.consultarMedicamentos();
+		c.moveToFirst();
+		String[] from = new String[]{"TIPO"};
+		int[] to = new int[]{android.R.id.text1};
+		SimpleCursorAdapter adapter2 =
+		  new SimpleCursorAdapter(this, android.R.layout.simple_spinner_item, c, from, to);
+		adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
+		spinnerMedicamento.setAdapter(adapter2);
+		medDao.close();
 	}
 
 	private void runListeners() {
@@ -102,6 +133,118 @@ public class CadastroRegistroActivity extends Activity {
 
 			}
 		});
+
+		spinnerTipo.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+				int valor = (int) spinnerTipo.getSelectedItemId();
+				switch (valor) {
+				case 0:
+					selectTipoGlicose();
+					break;
+				case 1:
+					selectTipoMedicamento();
+					break;
+				case 2:
+					selectTipoPeso();
+					break;
+				case 3:
+					selectTipoPressao();
+					break;
+				case 4:
+					selectTipoPulso();
+					break;
+				case 5:
+					selectTipoGordura();
+					break;
+				case 6:
+					selectTipoHbA1c();
+					break;
+				default:
+					selectTipoGlicose();
+				}
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				//
+
+			}
+
+		});
+
+	}
+
+	private void selectTipoMedicamento() {
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(ctx);
+		unidade.setText(prefs.getString("unidade_medicamento", "3mL"));
+		trMed.setVisibility(View.VISIBLE);
+		trMedSp.setVisibility(View.VISIBLE);
+		editTextValor.setHint(null);
+		editTextValor.setInputType(InputType.TYPE_CLASS_NUMBER);
+	}
+
+	private void selectTipoGlicose() {
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(ctx);
+		unidade.setText(prefs.getString("unidade_glicose", "mmol/l"));
+		trMed.setVisibility(View.GONE);
+		trMedSp.setVisibility(View.GONE);
+		editTextValor.setHint(null);
+		editTextValor.setInputType(InputType.TYPE_CLASS_NUMBER);
+	}
+
+	private void selectTipoPeso() {
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(ctx);
+		unidade.setText(prefs.getString("unidade_peso", "kg"));
+		trMed.setVisibility(View.GONE);
+		trMedSp.setVisibility(View.GONE);
+		editTextValor.setHint(null);
+		editTextValor.setInputType(InputType.TYPE_CLASS_NUMBER);
+	}
+
+	private void selectTipoPressao() {
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(ctx);
+		unidade.setText(prefs.getString("unidade_pressao", "mmHg"));
+		trMed.setVisibility(View.GONE);
+		trMedSp.setVisibility(View.GONE);
+		editTextValor.setHint("15 - 20");
+		editTextValor.setInputType(InputType.TYPE_CLASS_TEXT);
+	}
+
+	private void selectTipoPulso() {
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(ctx);
+		unidade.setText(prefs.getString("unidade_pulso", "bpm"));
+		trMed.setVisibility(View.GONE);
+		trMedSp.setVisibility(View.GONE);
+		editTextValor.setHint(null);
+		editTextValor.setInputType(InputType.TYPE_CLASS_NUMBER);
+	}
+
+	private void selectTipoHbA1c() {
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(ctx);
+		unidade.setText(prefs.getString("unidade_hba1c", "%"));
+		trMed.setVisibility(View.GONE);
+		trMedSp.setVisibility(View.GONE);
+		editTextValor.setHint(null);
+		editTextValor.setInputType(InputType.TYPE_CLASS_NUMBER);
+	}
+
+	private void selectTipoGordura() {
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(ctx);
+		unidade.setText(prefs.getString("unidade_gordura", "qtde"));
+		trMed.setVisibility(View.GONE);
+		trMedSp.setVisibility(View.GONE);
+		editTextValor.setHint(null);
+		editTextValor.setInputType(InputType.TYPE_CLASS_NUMBER);
 	}
 
 	private void Salvar() {
