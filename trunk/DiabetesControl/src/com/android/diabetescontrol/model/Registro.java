@@ -12,11 +12,13 @@ public class Registro {
 	private String codPaciente;
 	private String unidade;
 	private Integer codCelPac;
+	private Integer medicamento;
 	private String modoUser;
 
 	public Registro(Integer Id, String tipo, String categoria, Float valor,
 			Timestamp dataHora, String sincronizado, String codPaciente,
-			String unidade, Integer codCelPac, String modoUser) {
+			String unidade, Integer codCelPac, String modoUser,
+			Integer medicamento) {
 		this.Id = Id;
 		this.tipo = tipo;
 		this.categoria = categoria;
@@ -27,14 +29,23 @@ public class Registro {
 		this.sincronizado = sincronizado;
 		this.codCelPac = codCelPac;
 		this.modoUser = modoUser;
+		this.medicamento = medicamento;
 	}
 
 	public Registro() {
-		// TODO Auto-generated constructor stub
+		// 
 	}
 
 	public Float getValor() {
 		return valor;
+	}
+
+	public Integer getMedicamento() {
+		return medicamento;
+	}
+
+	public void setMedicamento(Integer medicamento) {
+		this.medicamento = medicamento;
 	}
 
 	public void setValor(Float valor) {

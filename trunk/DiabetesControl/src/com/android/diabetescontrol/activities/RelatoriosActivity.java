@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class consultaActivity extends Activity {
+public class RelatoriosActivity extends Activity {
 	private Button btRegistroDia;
 	private Button btGlicoseUltimosRegs;
 	private Button btGlicoseMedias;
@@ -27,28 +27,28 @@ public class consultaActivity extends Activity {
 	private void carregaListeners() {
 		btRegistroDia.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				Intent i = new Intent(consultaActivity.this,
+				Intent i = new Intent(RelatoriosActivity.this,
 						consultaRegistroDiaActivity.class);
 				startActivity(i);
 			}
 		});
 		btGlicoseUltimosRegs.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				Intent i = new Intent(consultaActivity.this,
+				Intent i = new Intent(RelatoriosActivity.this,
 						ListaGlicoseUltimosRegistrosActivity.class);
 				startActivity(i);
 			}
 		});
 		btGlicoseMedias.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				Intent i = new Intent(consultaActivity.this,
+				Intent i = new Intent(RelatoriosActivity.this,
 						consultaGlicoseMediasActivity.class);
 				startActivity(i);
 			}
 		});
 		btGlicoseValor.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				Intent i = new Intent(consultaActivity.this,
+				Intent i = new Intent(RelatoriosActivity.this,
 						ConsultaGlicoseValoresActivity.class);
 				startActivity(i);
 			}

@@ -7,7 +7,27 @@
     <TableLayout
         android:id="@+id/widget46"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_height="wrap_content" >
+
+        <RelativeLayout>
+
+            <Button
+                android:id="@+id/btAdicionar"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_marginLeft="3dp"
+                android:background="@null"
+                android:drawableTop="@drawable/add" />
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/btAdicionar"
+                android:text="@string/cadregistrotitle"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+        </RelativeLayout>
 
         <TableRow>
 
@@ -22,6 +42,27 @@
             <Spinner
                 android:id="@+id/spTipo"
                 android:prompt="@string/tipoRegistro" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/trMedicamentosTv"
+            android:visibility="gone" >
+
+            <TextView
+                android:id="@+id/tvMedicamento"
+                android:layout_width="200dp"
+                android:text="@string/medicamento" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/trMedicamentos"
+            android:visibility="gone" >
+
+            <Spinner
+                android:id="@+id/spMedicamentos"
+                android:layout_width="200dp"
+                android:prompt="@string/tipoMedicamento" />
         </TableRow>
 
         <TableRow>
@@ -69,6 +110,11 @@
             <EditText
                 android:id="@+id/etValor"
                 android:inputType="numberDecimal" />
+
+            <TextView
+                android:id="@+id/tvUnidade"
+                android:gravity="center"
+                android:text="@string/qtde" />
         </TableRow>
 
         <TableRow>

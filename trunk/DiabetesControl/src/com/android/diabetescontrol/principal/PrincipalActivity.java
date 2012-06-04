@@ -12,13 +12,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.diabetescontrol.activities.CadastroMedicoDoPaciente;
+import com.android.diabetescontrol.activities.CadastroPacienteActivity;
 import com.android.diabetescontrol.activities.CadastroRegistroActivity;
 import com.android.diabetescontrol.activities.ConfiguracoesActivity;
 import com.android.diabetescontrol.activities.ListaNotasRegistrosMedicosActivity;
 import com.android.diabetescontrol.activities.ListaPacientesActivity;
 import com.android.diabetescontrol.activities.PreferenciasActivity;
 import com.android.diabetescontrol.activities.R;
-import com.android.diabetescontrol.activities.consultaActivity;
+import com.android.diabetescontrol.activities.RelatoriosActivity;
 import com.android.diabetescontrol.activities.graficosActivity;
 import com.android.diabetescontrol.business.GlicoseMediaBusiness;
 import com.android.diabetescontrol.database.ContextoDados;
@@ -27,10 +28,12 @@ import com.android.diabetescontrol.util.Utils;
 
 public class PrincipalActivity extends Activity {
 	private Button btAdicionar;
-	private Button btConsultar;
+	private Button btEditar;
 	private Button btGraficos;
 	private Button btConfiguracoes;
 	private Button btRelatoriosPacientes;
+	private Button btCadastrarPaciente;
+	private Button btRelatorios;
 	private Button btAdicionarPaciente;
 	private Button btGraficosPaciente;
 	private Button btNotasMedicas;
@@ -122,11 +125,13 @@ public class PrincipalActivity extends Activity {
 	private void inicializaObjetosPaciente() {
 		btConfiguracoes = (Button) findViewById(R.id.btConfiguracoes);
 		btAdicionar = (Button) findViewById(R.id.btAdicionar);
-		btConsultar = (Button) findViewById(R.id.btConsultar);
+		btRelatorios = (Button) findViewById(R.id.btRelatorios);
+		btEditar = (Button) findViewById(R.id.btEditar);
 		btGraficos = (Button) findViewById(R.id.btGraficos);
 		tvValorHoje = (TextView) findViewById(R.id.etvUltimoReg);
 		tvValorOntem = (TextView) findViewById(R.id.etvOntem);
 		tvValorSemana = (TextView) findViewById(R.id.etvSemana);
+		btCadastrarPaciente = (Button) findViewById(R.id.btCadastrarPaciente);
 	}
 
 	private void carregaListenersPaciente() {
@@ -137,15 +142,19 @@ public class PrincipalActivity extends Activity {
 				startActivity(i);
 			}
 		});
-		btConsultar.setOnClickListener(new OnClickListener() {
+		btCadastrarPaciente.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				Intent i = new Intent(PrincipalActivity.this,
-						consultaActivity.class);
+						CadastroPacienteActivity.class);
 				startActivity(i);
 			}
 		});
-		btGraficos.setOnClickListener(new OnClickListener() {
+		btEditar.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
 
+			}
+		});
+		btGraficos.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(PrincipalActivity.this,
@@ -159,6 +168,14 @@ public class PrincipalActivity extends Activity {
 						ConfiguracoesActivity.class);
 				startActivity(i);
 
+			}
+		});
+		btRelatorios.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(PrincipalActivity.this,
+						RelatoriosActivity.class);
+				startActivity(i);
 			}
 		});
 	}
@@ -200,4 +217,6 @@ public class PrincipalActivity extends Activity {
 		super.onDestroy();
 		// A activity foi destruída.
 	}
+
+	
 }
