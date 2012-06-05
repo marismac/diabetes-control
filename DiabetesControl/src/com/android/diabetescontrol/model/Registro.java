@@ -1,6 +1,13 @@
 package com.android.diabetescontrol.model;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+
+import android.content.Context;
+import android.database.Cursor;
+
+import com.android.diabetescontrol.database.RegistroDAO;
 
 public class Registro {
 	private String tipo;
@@ -13,12 +20,13 @@ public class Registro {
 	private String unidade;
 	private Integer codCelPac;
 	private Integer medicamento;
+	private String valorPressao;
 	private String modoUser;
 
 	public Registro(Integer Id, String tipo, String categoria, Float valor,
 			Timestamp dataHora, String sincronizado, String codPaciente,
 			String unidade, Integer codCelPac, String modoUser,
-			Integer medicamento) {
+			Integer medicamento, String valorPressao) {
 		this.Id = Id;
 		this.tipo = tipo;
 		this.categoria = categoria;
@@ -30,10 +38,26 @@ public class Registro {
 		this.codCelPac = codCelPac;
 		this.modoUser = modoUser;
 		this.medicamento = medicamento;
+		this.valorPressao = valorPressao;
 	}
 
 	public Registro() {
-		// 
+		//
+	}
+
+	public List<Registro> lista(Context ctx, String where, String limit) {
+		List<Registro> list = new ArrayList<Registro>();
+		RegistroDAO regDao = new RegistroDAO(ctx);
+		regDao.open();
+		Cursor c = regDao.consultarRegistrosWhereOrderLimit(where, "_id desc",
+				limit);
+		c.moveToFirst();
+		while (!c.isAfterLast()) {
+			list.add(regDao.deCursorParaRegistro(c));
+			c.moveToNext();
+		}
+		regDao.close();
+		return list;
 	}
 
 	public Float getValor() {
@@ -122,6 +146,14 @@ public class Registro {
 
 	public void setModoUser(String modoUser) {
 		this.modoUser = modoUser;
+	}
+
+	public String getValorPressao() {
+		return valorPressao;
+	}
+
+	public void setValorPressao(String valorPressao) {
+		this.valorPressao = valorPressao;
 	}
 
 }

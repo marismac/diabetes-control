@@ -47,6 +47,7 @@ public class CadastroRegistroActivity extends Activity {
 	private Button buttonHora = null;
 	private TextView unidade = null;
 	private EditText editTextValor = null;
+	private EditText editTextValorPressao = null;
 	final Calendar c = Calendar.getInstance();
 	private int mYear;
 	private int mMonth;
@@ -75,6 +76,7 @@ public class CadastroRegistroActivity extends Activity {
 		buttonHora = (Button) findViewById(R.id.btHora);
 		editTextValor = (EditText) findViewById(R.id.etValor);
 		unidade = (TextView) findViewById(R.id.tvUnidade);
+		editTextValorPressao = (EditText) findViewById(R.id.etValor);
 
 		mYear = c.get(Calendar.YEAR);
 		mMonth = c.get(Calendar.MONTH);
@@ -83,30 +85,29 @@ public class CadastroRegistroActivity extends Activity {
 		mMinute = c.get(Calendar.MINUTE);
 		updateDisplay();
 	}
-	@SuppressWarnings("unchecked")
+
 	private void carregaSpinners() {
-		// Preenche o Spinner de Tipo com o valor do strings.xml
+
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
 				this, R.array.tipoReg_array,
 				android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinnerTipo.setAdapter(adapter);
-		// Preenche o Spinner de Categoria com o valor do strings.xml
+
 		adapter = ArrayAdapter.createFromResource(this, R.array.tipoCat_array,
 				android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinnerCategoria.setAdapter(adapter);
-		
-		
+
 		MedicamentoDAO medDao = new MedicamentoDAO(this);
 		medDao.open();
 		Cursor c = medDao.consultarMedicamentos();
 		c.moveToFirst();
-		String[] from = new String[]{"TIPO"};
-		int[] to = new int[]{android.R.id.text1};
-		SimpleCursorAdapter adapter2 =
-		  new SimpleCursorAdapter(this, android.R.layout.simple_spinner_item, c, from, to);
-		adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
+		String[] from = new String[] { "TIPO" };
+		int[] to = new int[] { android.R.id.text1 };
+		SimpleCursorAdapter adapter2 = new SimpleCursorAdapter(this,
+				android.R.layout.simple_spinner_item, c, from, to);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinnerMedicamento.setAdapter(adapter2);
 		medDao.close();
 	}
@@ -249,13 +250,13 @@ public class CadastroRegistroActivity extends Activity {
 
 	private void Salvar() {
 		Registro reg = getValoresTela();
-		RegistroDAO regDao = new RegistroDAO(this);
-		regDao.open();
 		if (reg != null) {
+			RegistroDAO regDao = new RegistroDAO(this);
+			regDao.open();
 			regDao.criarRegistro(reg);
+			regDao.close();
+			Utils.criaAlertSalvar(ctx, null);
 		}
-		regDao.close();
-		Utils.criaAlertSalvar(ctx, null);
 		if (Utils
 				.existConnectionInternet((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))
 				&& Utils.isSelectSynchronize(ctx)) {
@@ -264,24 +265,50 @@ public class CadastroRegistroActivity extends Activity {
 	}
 
 	private Registro getValoresTela() {
-		if ("".equals(editTextValor.getText().toString())) {
-			editTextValor.setError("Campo Obrigatório");
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(ctx);
+		if ("".equals(editTextValor.getText().toString())
+				&& !"Pressão".equals(spinnerTipo.getSelectedItem().toString())) {
 			editTextValor.setFocusable(true);
+			editTextValor.setError("Obrigatório");
+			return null;
+		} else if ("".equals(editTextValorPressao.getText().toString())
+				&& "Pressão".equals(spinnerTipo.getSelectedItem().toString())) {
+			editTextValorPressao.setFocusable(true);
+			editTextValorPressao.setError("Obrigatório");
 			return null;
 		}
 		Registro reg = new Registro();
 		Timestamp timestamp = new Timestamp(mYear - 1900, mMonth, mDay, mHour,
 				mMinute, 0, 0);
 		reg.setDataHora(timestamp);
+		if ("Medicamento".equals(spinnerTipo.getSelectedItem().toString())) {
+			reg.setMedicamento(spinnerMedicamento.getSelectedItemPosition() + 1);
+			reg.setUnidade(prefs.getString("unidade_medicamento", "qtde"));
+			reg.setValor(Float.valueOf(editTextValor.getText().toString()));
+		} else if ("Pressão".equals(spinnerTipo.getSelectedItem().toString())) {
+			reg.setValorPressao(editTextValorPressao.getText().toString());
+			reg.setUnidade(prefs.getString("unidade_pressao", "qtde"));
+		} else if ("Glicose".equals(spinnerTipo.getSelectedItem().toString())) {
+			reg.setValor(Float.valueOf(editTextValor.getText().toString()));
+			reg.setUnidade(prefs.getString("unidade_glicose", "qtde"));
+		} else if ("Peso".equals(spinnerTipo.getSelectedItem().toString())) {
+			reg.setUnidade(prefs.getString("unidade_peso", "qtde"));
+			reg.setValor(Float.valueOf(editTextValor.getText().toString()));
+		} else if ("Gordura".equals(spinnerTipo.getSelectedItem().toString())) {
+			reg.setUnidade(prefs.getString("unidade_gordura", "qtde"));
+			reg.setValor(Float.valueOf(editTextValor.getText().toString()));
+		} else if ("Pulso".equals(spinnerTipo.getSelectedItem().toString())) {
+			reg.setUnidade(prefs.getString("unidade_pulso", "qtde"));
+			reg.setValor(Float.valueOf(editTextValor.getText().toString()));
+		} else {
+			reg.setValor(Float.valueOf(editTextValor.getText().toString()));
+			reg.setUnidade(prefs.getString("unidade_nova", "qtde"));
+		}
 		reg.setCategoria(spinnerCategoria.getSelectedItem().toString());
 		reg.setTipo(spinnerTipo.getSelectedItem().toString());
-		reg.setValor(Float.valueOf(editTextValor.getText().toString()));
-		// System.out.println("******** INICIO Registros Inseridos ******");
-		// System.out.println(reg.getTipo());
-		// System.out.println(reg.getCategoria());
-		// System.out.println(reg.getValor());
-		// System.out.println(reg.getDatahora());
-		// System.out.println("******** FIM Registros Inseridos ******");
+		reg.setSincronizado("N");
+		reg.setModoUser("P");
 		return reg;
 	}
 
