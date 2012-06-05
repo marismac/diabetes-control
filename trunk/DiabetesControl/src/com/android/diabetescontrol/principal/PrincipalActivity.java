@@ -15,6 +15,7 @@ import com.android.diabetescontrol.activities.CadastroMedicoDoPaciente;
 import com.android.diabetescontrol.activities.CadastroPacienteActivity;
 import com.android.diabetescontrol.activities.CadastroRegistroActivity;
 import com.android.diabetescontrol.activities.ConfiguracoesActivity;
+import com.android.diabetescontrol.activities.ListaEditarRegistrosActivity;
 import com.android.diabetescontrol.activities.ListaNotasRegistrosMedicosActivity;
 import com.android.diabetescontrol.activities.ListaPacientesActivity;
 import com.android.diabetescontrol.activities.PreferenciasActivity;
@@ -24,6 +25,7 @@ import com.android.diabetescontrol.activities.graficosActivity;
 import com.android.diabetescontrol.business.GlicoseMediaBusiness;
 import com.android.diabetescontrol.database.ContextoDados;
 import com.android.diabetescontrol.database.RegistroDAO;
+import com.android.diabetescontrol.model.Medicamento;
 import com.android.diabetescontrol.util.Utils;
 
 public class PrincipalActivity extends Activity {
@@ -45,6 +47,7 @@ public class PrincipalActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		new ContextoDados(this);
+		Medicamento.preencheListaMedicamento(this);
 		if (Utils.isPaciente(this)) {
 			setContentView(R.layout.main_paciente);
 			inicializaObjetosPaciente();
@@ -151,7 +154,9 @@ public class PrincipalActivity extends Activity {
 		});
 		btEditar.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-
+				Intent i = new Intent(PrincipalActivity.this,
+						ListaEditarRegistrosActivity.class);
+				startActivity(i);
 			}
 		});
 		btGraficos.setOnClickListener(new OnClickListener() {
@@ -218,5 +223,4 @@ public class PrincipalActivity extends Activity {
 		// A activity foi destruída.
 	}
 
-	
 }

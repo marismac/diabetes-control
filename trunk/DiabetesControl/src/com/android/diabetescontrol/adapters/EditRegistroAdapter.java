@@ -11,14 +11,15 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.diabetescontrol.model.Medicamento;
 import com.android.diabetescontrol.model.Registro;
 
-public class RegistroAdapter extends BaseAdapter {
+public class EditRegistroAdapter extends BaseAdapter {
 
 	private Context ctx;
 	private List<Registro> lista;
 
-	public RegistroAdapter(Context ctx, List<Registro> lista) {
+	public EditRegistroAdapter(Context ctx, List<Registro> lista) {
 		this.ctx = ctx;
 		this.lista = lista;
 	}
@@ -45,8 +46,16 @@ public class RegistroAdapter extends BaseAdapter {
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View v = layout
 				.inflate(
-						com.android.diabetescontrol.activities.R.layout.lista_registromedico,
+						com.android.diabetescontrol.activities.R.layout.lista_editregistro,
 						null);
+		if (position > 0) {
+			Button btEdit = (Button) v
+					.findViewById(com.android.diabetescontrol.activities.R.id.button1);
+			btEdit.setVisibility(View.GONE);
+			TextView tituloEdit = (TextView) v
+					.findViewById(com.android.diabetescontrol.activities.R.id.textView1);
+			tituloEdit.setVisibility(View.GONE);
+		}
 
 		TextView txtID = (TextView) v
 				.findViewById(com.android.diabetescontrol.activities.R.id.tvId);
@@ -55,9 +64,27 @@ public class RegistroAdapter extends BaseAdapter {
 
 		TextView txtNome = (TextView) v
 				.findViewById(com.android.diabetescontrol.activities.R.id.tvPrinc);
-		txtNome.setText(registro.getValor().toString() + " "
-				+ registro.getUnidade());
-
+		if ("Pressão".equals(registro.getTipo())
+				&& registro.getValorPressao() != null) {
+			txtNome.setText(registro.getValorPressao().toString() + " "
+					+ registro.getUnidade());
+		} else {
+			txtNome.setText(registro.getValor().toString() + " "
+					+ registro.getUnidade());
+		}
+		TextView txtSmallMed = (TextView) v
+				.findViewById(com.android.diabetescontrol.activities.R.id.tvSmallMed);
+		if ("Medicamento".equals(registro.getTipo())
+				&& registro.getMedicamento() != null) {
+			for (Medicamento med : Medicamento.LIST_MEDICAMENTOS) {
+				if (med.getId().equals(registro.getMedicamento())) {
+					txtSmallMed.setText(med.getTipo());
+					break;
+				}
+			}
+		} else {
+			txtSmallMed.setText("");
+		}
 		TextView txtCod = (TextView) v
 				.findViewById(com.android.diabetescontrol.activities.R.id.tvCod);
 		txtCod.setText(registro.getTipo());

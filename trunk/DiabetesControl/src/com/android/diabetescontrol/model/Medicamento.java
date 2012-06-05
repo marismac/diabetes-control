@@ -12,6 +12,7 @@ public class Medicamento {
 	private Integer Id;
 	private String descricao;
 	private String tipo;
+	public static List<Medicamento> LIST_MEDICAMENTOS = new ArrayList<Medicamento>();
 
 	public Medicamento(Integer id, String descricao, String tipo) {
 		this.Id = id;
@@ -21,6 +22,18 @@ public class Medicamento {
 
 	public Medicamento() {
 
+	}
+
+	public static void preencheListaMedicamento(Context ctx) {
+		MedicamentoDAO medDao = new MedicamentoDAO(ctx);
+		medDao.open();
+		Cursor c = medDao.consultarMedicamentos();
+		c.moveToFirst();
+		while (!c.isAfterLast()) {
+			LIST_MEDICAMENTOS.add(medDao.deCursorParaMedicamento(c));
+			c.moveToNext();
+		}
+		medDao.close();
 	}
 
 	@SuppressWarnings("rawtypes")

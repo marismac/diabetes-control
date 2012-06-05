@@ -16,6 +16,9 @@
         <activity android:name="org.achartengine.GraphicalActivity" />
         <activity android:name=".GeneratedChartDemo" />
         <activity
+            android:name=".ListaEditarRegistrosActivity"
+            android:theme="@style/MapBackground" />
+        <activity
             android:name=".GraficosPacienteActivity"
             android:theme="@style/MapBackground" />
         <activity

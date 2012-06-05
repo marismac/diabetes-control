@@ -25,11 +25,13 @@ public class RegistroDAO extends BasicoDAO {
 	public static final String COLUNA_DATAHORA = "DATAHORA";
 	public static final String COLUNA_CATEGORIA = "CATEGORIA";
 	public static final String COLUNA_VALOR = "VALOR";
+	public static final String COLUNA_VALOR_PRESSAO = "VALOR_PRESSAO";
 	public static final String COLUNA_UNIDADE = "UNIDADE";
 	public static final String COLUNA_SINCRONIZADO = "SINCRONIZADO";
 	public static final String COLUNA_CODPAC = "CODIGO_PACIENTE";
 	public static final String COLUNA_ID_REGISTRO_PAC = "ID_REGISTRO_PAC";
 	public static final String COLUNA_TIPO_USER = "TIPO_USER";
+	public static final String COLUNA_ID_MEDICAMENTO = "ID_MEDICAMENTO";
 
 	public static final String REGISTROS_CREATE_TABLE = "CREATE TABLE "
 			+ TABELA_REGISTRO + "  (" + COLUNA_ID
@@ -38,7 +40,12 @@ public class RegistroDAO extends BasicoDAO {
 			+ COLUNA_CATEGORIA + " TEXT NOT NULL, " + COLUNA_VALOR
 			+ " DECIMAL(6, 2), " + COLUNA_UNIDADE + " TEXT NOT NULL, "
 			+ COLUNA_SINCRONIZADO + " TEXT NOT NULL, " + COLUNA_CODPAC
-			+ " TEXT, " + COLUNA_ID_REGISTRO_PAC + " INTEGER, " + COLUNA_TIPO_USER + " TEXT NOT NULL );";
+			+ " TEXT, " + COLUNA_ID_REGISTRO_PAC + " INTEGER, "
+			+ COLUNA_TIPO_USER + " TEXT NOT NULL," + COLUNA_ID_MEDICAMENTO
+			+ " INTEGER REFERENCES "
+			+ MedicamentoDAO.TABELA_MEDICAMENTOS + " ( "
+			+ MedicamentoDAO.COLUNA_ID + ") ," + COLUNA_VALOR_PRESSAO
+			+ " TEXT );";
 
 	public void criarRegistro(Registro registro) {
 		ContentValues values = deRegistroParaContentValues(registro);
@@ -59,6 +66,9 @@ public class RegistroDAO extends BasicoDAO {
 		values.put(COLUNA_CODPAC, registro.getCodPaciente());
 		values.put(COLUNA_ID_REGISTRO_PAC, registro.getCodCelPac());
 		values.put(COLUNA_TIPO_USER, registro.getModoUser());
+		values.put(COLUNA_ID_MEDICAMENTO, registro.getMedicamento());
+		values.put(COLUNA_VALOR_PRESSAO, registro.getValorPressao());
+
 		return values;
 	}
 
@@ -93,6 +103,8 @@ public class RegistroDAO extends BasicoDAO {
 		reg.setCodPaciente(c.getString(c.getColumnIndex(COLUNA_CODPAC)));
 		reg.setCodCelPac(c.getInt(c.getColumnIndex(COLUNA_ID_REGISTRO_PAC)));
 		reg.setModoUser(c.getString(c.getColumnIndex(COLUNA_TIPO_USER)));
+		reg.setMedicamento(c.getInt(c.getColumnIndex(COLUNA_ID_MEDICAMENTO)));
+		reg.setValorPressao(c.getString(c.getColumnIndex(COLUNA_VALOR_PRESSAO)));
 		return reg;
 	}
 
@@ -207,7 +219,7 @@ public class RegistroDAO extends BasicoDAO {
 		return mDb.query(TABELA_REGISTRO, null, where, null, null, null,
 				orderby);
 	}
-	
+
 	/**
 	 * 
 	 * Permite realizar uma consulta na tabela de Registros selecionando
@@ -224,7 +236,8 @@ public class RegistroDAO extends BasicoDAO {
 	 * 
 	 * @return Cursor com os Registros selecionados e ordenados
 	 */
-	public Cursor consultarRegistrosWhereOrderLimit(String where, String orderby, String limit) {
+	public Cursor consultarRegistrosWhereOrderLimit(String where,
+			String orderby, String limit) {
 		return mDb.query(TABELA_REGISTRO, null, where, null, null, null,
 				orderby, limit);
 	}
