@@ -21,7 +21,7 @@ import com.android.diabetescontrol.activities.ListaPacientesActivity;
 import com.android.diabetescontrol.activities.PreferenciasActivity;
 import com.android.diabetescontrol.activities.R;
 import com.android.diabetescontrol.activities.RelatoriosActivity;
-import com.android.diabetescontrol.activities.graficosActivity;
+import com.android.diabetescontrol.activities.SelectGraficosActivity;
 import com.android.diabetescontrol.business.GlicoseMediaBusiness;
 import com.android.diabetescontrol.database.ContextoDados;
 import com.android.diabetescontrol.database.RegistroDAO;
@@ -163,7 +163,7 @@ public class PrincipalActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(PrincipalActivity.this,
-						graficosActivity.class);
+						SelectGraficosActivity.class);
 				startActivity(i);
 			}
 		});

@@ -58,8 +58,8 @@
             android:name=".consultaGlicoseMediasActivity"
             android:theme="@style/MapBackgroundNoTitle" />
         <activity
-            android:name=".graficosActivity"
-            android:theme="@style/MapBackgroundNoTitle" />
+            android:name=".SelectGraficosActivity"
+            android:theme="@style/MapBackground" />
         <activity
             android:name=".testeWSActivity"
             android:theme="@style/MapBackgroundNoTitle" />

@@ -30,6 +30,7 @@ import android.widget.TimePicker;
 
 import com.android.diabetescontrol.database.MedicamentoDAO;
 import com.android.diabetescontrol.database.RegistroDAO;
+import com.android.diabetescontrol.model.Medicamento;
 import com.android.diabetescontrol.model.Registro;
 import com.android.diabetescontrol.util.Utils;
 
@@ -63,6 +64,99 @@ public class CadastroRegistroActivity extends Activity {
 		setCampos();
 		carregaSpinners();
 		runListeners();
+		if (isEditar()) {
+			setValoresTela();
+		}
+	}
+
+	private Boolean isEditar() {
+		if (getIntent().getExtras() != null
+				&& getIntent().getExtras().get("editar") != null
+				&& (Boolean) getIntent().getExtras().get("editar")) {
+			return true;
+		}
+		return false;
+	}
+
+	private void setValoresTela() {
+		String data = "";
+		String hora = "";
+		data = getIntent().getExtras().get("dataHoraRegistro").toString()
+				.substring(0, 10);
+		hora = getIntent().getExtras().get("dataHoraRegistro").toString()
+				.substring(11, 16);
+		buttonData.setText(data);
+		buttonHora.setText(hora);
+		spinnerTipo.setSelection(selecionaSpinnerTipo(getIntent().getExtras()
+				.get("tipoRegistro").toString()));
+		spinnerCategoria.setSelection(selecionaSpinnerCategoria(getIntent()
+				.getExtras().get("categoriaRegistro").toString()));
+		if (getIntent().getExtras().get("medicamentoRegistro") != null) {
+			spinnerMedicamento
+					.setSelection(selecionaSpinnerMedicamento(getIntent()
+							.getExtras().get("medicamentoRegistro").toString()));
+		}
+		if (getIntent().getExtras().get("valorRegistro") != null) {
+			editTextValor.setText(getIntent().getExtras().get("valorRegistro")
+					.toString());
+		}
+		if (getIntent().getExtras().get("valorPressaoRegistro") != null) {
+			editTextValorPressao.setText(getIntent().getExtras()
+					.get("valorPressaoRegistro").toString());
+		}
+		unidade.setText(getIntent().getExtras().get("unidadeRegistro")
+				.toString());
+
+	}
+
+	private Integer selecionaSpinnerTipo(String text) {
+		if ("Glicose".equals(text)) {
+			return 0;
+		} else if ("Medicamento".equals(text)) {
+			return 1;
+		} else if ("Peso".equals(text)) {
+			return 2;
+		} else if ("Pressão".equals(text)) {
+			return 3;
+		} else if ("Pulso".equals(text)) {
+			return 4;
+		} else if ("Gordura".equals(text)) {
+			return 5;
+		} else if ("HbA1c".equals(text)) {
+			return 6;
+		} else {
+			return 7;
+		}
+	}
+
+	private Integer selecionaSpinnerCategoria(String text) {
+		if ("Antes do Café".equals(text)) {
+			return 0;
+		} else if ("Depois do Café".equals(text)) {
+			return 1;
+		} else if ("Antes do Almoço".equals(text)) {
+			return 2;
+		} else if ("Depois da Almoço".equals(text)) {
+			return 3;
+		} else if ("Antes do Lanche".equals(text)) {
+			return 4;
+		} else if ("Depois do Lanche".equals(text)) {
+			return 5;
+		} else if ("Antes do Almoço".equals(text)) {
+			return 6;
+		} else if ("Depois do Lanche".equals(text)) {
+			return 7;
+		}
+		return 8;
+	}
+
+	private Integer selecionaSpinnerMedicamento(String text) {
+		for (Medicamento med : Medicamento.LIST_MEDICAMENTOS) {
+			if (med.getTipo().equals(text)) {
+				return med.getId();
+			}
+		}
+		return 0;
 	}
 
 	private void setCampos() {
@@ -253,7 +347,14 @@ public class CadastroRegistroActivity extends Activity {
 		if (reg != null) {
 			RegistroDAO regDao = new RegistroDAO(this);
 			regDao.open();
-			regDao.criarRegistro(reg);
+			if (isEditar()) {
+				Integer codReg = (Integer) getIntent().getExtras().get(
+						"idRegistro");
+				reg.setId(codReg);
+				regDao.atualizaRegistro(reg);
+			} else {
+				regDao.criarRegistro(reg);
+			}
 			regDao.close();
 			Utils.criaAlertSalvar(ctx, null);
 		}
