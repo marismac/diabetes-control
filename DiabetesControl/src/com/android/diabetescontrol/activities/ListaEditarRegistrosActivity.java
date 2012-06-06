@@ -23,8 +23,30 @@ public class ListaEditarRegistrosActivity extends ListActivity {
 	}
 
 	@Override
+	protected void onRestart() {
+		setListAdapter(new EditRegistroAdapter(this, new Registro().lista(ctx,
+				null, "50")));
+		super.onRestart();
+	}
+
+	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
+		Registro registro = (Registro) l.getAdapter().getItem(position);
+		Intent i = new Intent(ListaEditarRegistrosActivity.this,
+				CadastroRegistroActivity.class);
+
+		i.putExtra("editar", true);
+		i.putExtra("idRegistro", registro.getId());
+		i.putExtra("valorRegistro", registro.getValor());
+		i.putExtra("valorPressaoRegistro", registro.getValorPressao());
+		i.putExtra("categoriaRegistro", registro.getCategoria());
+		i.putExtra("tipoRegistro", registro.getTipo());
+		i.putExtra("dataHoraRegistro", registro.getDataHora());
+		i.putExtra("unidadeRegistro", registro.getUnidade());
+		i.putExtra("medicamentoRegistro", registro.getMedicamento());
+
+		startActivity(i);
 	}
 
 	@Override

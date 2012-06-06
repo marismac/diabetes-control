@@ -42,9 +42,8 @@ public class RegistroDAO extends BasicoDAO {
 			+ COLUNA_SINCRONIZADO + " TEXT NOT NULL, " + COLUNA_CODPAC
 			+ " TEXT, " + COLUNA_ID_REGISTRO_PAC + " INTEGER, "
 			+ COLUNA_TIPO_USER + " TEXT NOT NULL," + COLUNA_ID_MEDICAMENTO
-			+ " INTEGER REFERENCES "
-			+ MedicamentoDAO.TABELA_MEDICAMENTOS + " ( "
-			+ MedicamentoDAO.COLUNA_ID + ") ," + COLUNA_VALOR_PRESSAO
+			+ " INTEGER REFERENCES " + MedicamentoDAO.TABELA_MEDICAMENTOS
+			+ " ( " + MedicamentoDAO.COLUNA_ID + ") ," + COLUNA_VALOR_PRESSAO
 			+ " TEXT );";
 
 	public void criarRegistro(Registro registro) {
@@ -52,8 +51,17 @@ public class RegistroDAO extends BasicoDAO {
 		mDb.insert(TABELA_REGISTRO, null, values);
 	}
 
+	public void atualizaRegistro(Registro registro) {
+		ContentValues values = deRegistroParaContentValues(registro);
+		mDb.update(TABELA_REGISTRO, values,
+				COLUNA_ID + " = " + registro.getId(), null);
+	}
+
 	public static ContentValues deRegistroParaContentValues(Registro registro) {
 		ContentValues values = new ContentValues();
+		if (registro.getId() != null) {
+			values.put(COLUNA_ID, registro.getId());
+		}
 
 		values.put(COLUNA_TIPO, registro.getTipo());
 		values.put(COLUNA_CATEGORIA, registro.getCategoria());
@@ -72,11 +80,11 @@ public class RegistroDAO extends BasicoDAO {
 		return values;
 	}
 
-	public boolean atualizarRegistro(Registro regis) {
-		ContentValues values = new ContentValues();
-		return mDb.update(TABELA_REGISTRO, values, COLUNA_ID + "=?",
-				new String[] { String.valueOf(regis.getId()) }) > 0;
-	}
+	// public boolean atualizarRegistro(Registro regis) {
+	// ContentValues values = new ContentValues();
+	// return mDb.update(TABELA_REGISTRO, values, COLUNA_ID + "=?",
+	// new String[] { String.valueOf(regis.getId()) }) > 0;
+	// }
 
 	public Registro getRegistro(long idRegistro) {
 

@@ -25,6 +25,7 @@
 		<item>Pressão</item>
 		<item>Pulso</item>
 		<item>Gordura</item>
+		<item>HbA1c</item>
 	</string-array>
 	<string name="tipoCategoria">Tipo Categoria</string>
 	<string-array name="tipoCat_array">
@@ -121,4 +122,5 @@
 	<string name="cadregistrotitle">Cadastro de Registros</string>
 	<string name="qtde">qtde</string>
 	<string name="edicaotitulo">Editar Registros</string>
+	<string name="graficosdasmaiores">Maiores marcações por Tipo</string>
 </resources>
