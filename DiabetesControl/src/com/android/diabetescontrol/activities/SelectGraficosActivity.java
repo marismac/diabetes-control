@@ -50,7 +50,7 @@ public class SelectGraficosActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				GraficoMediaCategoria g = new GraficoMediaCategoria();
+				GraficoUltimosRegistrosGerais g = new GraficoUltimosRegistrosGerais();
 				Intent liIntent = g.getIntent(SelectGraficosActivity.this);
 				startActivity(liIntent);
 			}

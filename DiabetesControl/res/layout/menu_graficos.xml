@@ -92,15 +92,15 @@
             android:text=""
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:visibility="invisible" />
-
+
         <Button
             android:id="@+id/btUltimasGeralMedias"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
             android:drawableTop="@drawable/chart4"
-            android:text="Button"
-            android:textSize="25dp" />
+            android:text="@string/MCatUldias"
+            android:textSize="20dp" />
 
     </LinearLayout>
 

@@ -31,37 +31,37 @@
             android:defaultValue="mmol/l"
             android:key="unidade_glicose"
             android:summary="Define a unidade de medida da glicose"
-            android:title="Unidade" />
+            android:title="Unidade glicose" />
         <EditTextPreference
             android:defaultValue="3mL"
             android:key="unidade_medicamento"
             android:summary="Define a unidade de medida do medicamento"
-            android:title="Unidade" />
+            android:title="Unidade medicamento" />
         <EditTextPreference
             android:defaultValue="kg"
             android:key="unidade_peso"
             android:summary="Define a unidade de medida do peso"
-            android:title="Unidade" />
+            android:title="Unidade peso" />
         <EditTextPreference
             android:defaultValue="mmHg"
             android:key="unidade_pressao"
             android:summary="Define a unidade de medida da pressão"
-            android:title="Unidade" />
+            android:title="Unidade pressão" />
         <EditTextPreference
             android:defaultValue="qtde"
             android:key="unidade_gordura"
             android:summary="Define a unidade de medida da gordura corporal"
-            android:title="Unidade" />
+            android:title="Unidade gordura" />
         <EditTextPreference
             android:defaultValue="%"
             android:key="unidade_hba1c"
             android:summary="Define a unidade de medida da HbA1c"
-            android:title="Unidade" />
+            android:title="Unidade HbA1c" />
         <EditTextPreference
             android:defaultValue="bpm"
             android:key="unidade_pulso"
             android:summary="Define a unidade de medida do pulso"
-            android:title="Unidade" />
+            android:title="Unidade pulso" />
     </PreferenceCategory>
 
 </PreferenceScreen>
