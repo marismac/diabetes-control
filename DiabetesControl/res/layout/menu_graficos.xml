@@ -6,6 +6,7 @@
     <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical" >
 
         <RelativeLayout
@@ -30,36 +31,36 @@
                 android:layout_marginLeft="18dp"
                 android:layout_toRightOf="@+id/Button06"
                 android:text="@string/graficos"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:textSize="25dp" />
         </RelativeLayout>
 
         <TextView
             android:id="@+id/TextView03"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Medium Text"
+            android:text=""
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:visibility="invisible" />
-
+
         <Button
-            android:id="@+id/btGraficoSemanal"
+            android:id="@+id/btGraficoUltimos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
             android:drawableTop="@drawable/chart1"
-            android:text="Button"
-            android:textSize="25dp" />
+            android:text="@string/ultimosregistro"
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/TextView01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Medium Text"
+            android:text=""
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:visibility="invisible" />
-
+
         <Button
-            android:id="@+id/btGraficoMaiores"
+            android:id="@+id/btGraficoTipo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
@@ -71,35 +72,36 @@
             android:id="@+id/TextView04"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Medium Text"
+            android:text=""
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:visibility="invisible" />
-
+
         <Button
-            android:id="@+id/btGraficoUltimos"
+            android:id="@+id/btGraficoMaiores"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
             android:drawableTop="@drawable/chart3"
-            android:text="Button"
-            android:textSize="25dp" />
+            android:text="@string/mediasglicosegraficos"
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/TextView02"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Medium Text"
+            android:text=""
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:visibility="invisible" />
-
+
         <Button
-            android:id="@+id/btHoariosPicos"
+            android:id="@+id/btUltimasGeralMedias"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
             android:drawableTop="@drawable/chart4"
             android:text="Button"
             android:textSize="25dp" />
+
     </LinearLayout>
 
 </ScrollView>

@@ -35,8 +35,8 @@
 		<item>Depois da Almoço</item>
 		<item>Antes do Lanche</item>
 		<item>Depois do Lanche</item>
-		<item>Antes do Almoço</item>
-		<item>Depois do Lanche</item>
+		<item>Antes da Janta</item>
+		<item>Depois da Janta</item>
 	</string-array>
 	<string-array name="sexo_array">
 		<item>Masculino</item>
@@ -122,5 +122,7 @@
 	<string name="cadregistrotitle">Cadastro de Registros</string>
 	<string name="qtde">qtde</string>
 	<string name="edicaotitulo">Editar Registros</string>
-	<string name="graficosdasmaiores">Maiores marcações por Tipo</string>
+	<string name="graficosdasmaiores">Maiores marcações por tipo</string>
+	<string name="mediasglicosegraficos">Glicose por categoria</string>
+	<string name="ultimosregistro">Últimos registro</string>
 </resources>

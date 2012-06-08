@@ -170,6 +170,10 @@ public class RegistroDAO extends BasicoDAO {
 				COLUNA_DATAHORA, COLUNA_VALOR, COLUNA_TIPO, COLUNA_CATEGORIA },
 				null, null, null, null, null);
 	}
+	
+	public Cursor consultar(String sql) {
+		return mDb.rawQuery(sql, null);
+	}
 
 	/**
 	 * 
