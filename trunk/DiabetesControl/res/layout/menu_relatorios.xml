@@ -10,79 +10,87 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/TextView02"
+        <RelativeLayout
+            android:id="@+id/relativeLayout1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:text="@string/consultas"
-            android:textColor="@color/branco"
-            android:textSize="20dip"
-            android:textStyle="bold" />
+            android:layout_height="wrap_content" >
 
-        <TextView
-            android:id="@+id/TextView01"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:text="" />
-
+            <Button
+                android:id="@+id/Button06"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_marginLeft="3dp"
+                android:background="@null"
+                android:drawableTop="@drawable/report" />
+
+            <TextView
+                android:id="@+id/TextView06"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="18dp"
+                android:layout_toRightOf="@+id/Button06"
+                android:text="@string/relatorios"
+                android:textSize="25dp" />
+
+        </RelativeLayout>
+
         <Button
             android:id="@+id/btRegdia"
             android:layout_width="wrap_content"
             android:layout_height="58dp"
-            android:text="@string/regdia"
             android:gravity="left|center"
+            android:text="@string/regdia"
             android:textSize="24dp" />
 
         <Button
             android:id="@+id/btGlicoultregs"
             android:layout_width="wrap_content"
             android:layout_height="58dp"
-            android:text="@string/glicoultregs"
             android:gravity="left|center"
+            android:text="@string/glicoultregs"
             android:textSize="24dp" />
 
         <Button
             android:id="@+id/btGlicomedias"
             android:layout_width="wrap_content"
             android:layout_height="58dp"
-            android:text="@string/glicomedias"
             android:gravity="left|center"
+            android:text="@string/glicomedias"
             android:textSize="24dp" />
 
         <Button
             android:id="@+id/btGlicovalor"
             android:layout_width="wrap_content"
             android:layout_height="58dp"
-            android:text="@string/glicovalor"
             android:gravity="left|center"
+            android:text="@string/glicovalor"
             android:textSize="24dp" />
 
         <Button
             android:id="@+id/btPesomed"
             android:layout_width="wrap_content"
             android:layout_height="58dp"
-            android:text="@string/pesomed"
             android:gravity="left|center"
+            android:text="@string/pesomed"
             android:textSize="24dp" />
-
+
         <Button
             android:id="@+id/btInsulaplic"
             android:layout_width="wrap_content"
             android:layout_height="58dp"
-            android:text="@string/insulaplic"
             android:gravity="left|center"
+            android:text="@string/insulaplic"
             android:textSize="24dp" />
-
+
         <Button
             android:id="@+id/btGeraltipo"
             android:layout_width="wrap_content"
             android:layout_height="58dp"
-            android:text="@string/geraltipo"
             android:gravity="left|center"
+            android:text="@string/geraltipo"
             android:textSize="24dp" />
-
     </TableLayout>
 
 </ScrollView>

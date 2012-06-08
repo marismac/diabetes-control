@@ -125,4 +125,5 @@
 	<string name="graficosdasmaiores">Maiores marcações por tipo</string>
 	<string name="mediasglicosegraficos">Glicose por categoria</string>
 	<string name="ultimosregistro">Últimos registro</string>
+	<string name="MCatUldias">Média por categoria últimos dias</string>
 </resources>
