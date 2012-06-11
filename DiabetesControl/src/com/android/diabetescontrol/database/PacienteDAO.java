@@ -58,6 +58,19 @@ public class PacienteDAO extends BasicoDAO {
 		return mCursor.getString(mCursor.getColumnIndex(mCursor
 				.getColumnName(0)));
 	}
+	
+	public String consultarPacienteCodPac(String codPac) {
+		Cursor mCursor = mDb.rawQuery("SELECT " + PacienteDAO.COLUNA_CODPAC
+				+ " FROM " + PacienteDAO.TABELA_PACIENTES + " WHERE "
+				+ PacienteDAO.COLUNA_CODPAC + " = '" + codPac + "' AND "
+				+ PacienteDAO.COLUNA_SENHAPAC + " IS NULL", null);
+		mCursor.moveToFirst();
+		if (mCursor.getCount() <= 0) {
+			return null;
+		}
+		return mCursor.getString(mCursor.getColumnIndex(mCursor
+				.getColumnName(0)));
+	}
 
 	public static ContentValues dePacienteParaContentValues(Paciente paciente) {
 		ContentValues values = new ContentValues();

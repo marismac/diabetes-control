@@ -1,10 +1,10 @@
 package com.android.diabetescontrol.webservice;
 
 import java.net.SocketTimeoutException;
+import java.util.Vector;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
-import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
@@ -17,46 +17,52 @@ import com.android.diabetescontrol.model.Paciente;
 import com.android.diabetescontrol.util.Constante;
 import com.android.diabetescontrol.util.Utils;
 
-public class CadPacienteWS {
+public class AddPacienteWS {
 	private String namespace = "http://servico.diabetes.com/";
 	private Paciente pac;
-	private Context ctx;
-	private SoapObject request;
 	private String soap_action = "";
 	private String url = "";
-	private String mensagem = "";
+	private Context ctx;
+	private SoapObject request;
+	String[] mensagens = new String[10];
 
-	public CadPacienteWS(Paciente pac, Context ctx) {
+	public AddPacienteWS(Paciente pac, Context ctx) {
 		this.pac = pac;
 		this.ctx = ctx;
 		this.url = Utils.URL_WS(ctx);
 	}
 
+	public void sincPacienteDoMedico() {
+		this.request = new SoapObject(namespace,
+				Constante.METODO_WS_ADDPACIENTEMEDICO);
+		request.addProperty("codPaciente", pac.getCodPaciente());
+		request.addProperty("senhaPaciente", pac.getSenhaPaciente());
+		PacienteDAO pacDao = new PacienteDAO(ctx);
+		pacDao.open();
+		if (pacDao.consultarPacienteCodPac(pac.getCodPaciente()) != null) {
+			Utils.criarAlertaErro(ctx,
+					"O paciente já foi adicionado " + pac.getCodPaciente());
+
+		} else {
+			new servicoAsyncTask().execute();
+		}
+
+	}
+
+	public Paciente objectToPaciente(String[] results) {
+		Paciente pac = new Paciente();
+		pac.setNome(results[1]);
+		pac.setEmail(results[2]);
+		pac.setCodPaciente(results[3]);
+		salvaPaciente(pac);
+		return pac;
+	}
+
 	private void salvaPaciente(Paciente pac) {
 		PacienteDAO pacDao = new PacienteDAO(ctx);
 		pacDao.open();
-		if (pac.getId() == null) {
-			pacDao.criarPaciente(pac);
-		} else {
-			pacDao.atualizarPaciente(pac);
-		}
+		pacDao.criarPaciente(pac);
 		pacDao.close();
-	}
-
-	public void sincPaciente() {
-		this.request = new SoapObject(namespace, Constante.METODO_WS_CADPACIENTE);
-		request.addProperty("nomePac", pac.getNome());
-		request.addProperty("emailPac", pac.getEmail());
-		request.addProperty("codPaciente", pac.getCodPaciente());
-		request.addProperty("sexoPac", pac.getSexo());
-		request.addProperty("nascimentoPac", pac.getDatanascimento());
-		request.addProperty("senhaPac", pac.getSenhaPaciente());
-		if (pac.getId() == null) {
-			request.addProperty("update", "N");
-		} else {
-			request.addProperty("update", "S");
-		}
-		new servicoAsyncTask().execute();
 	}
 
 	class servicoAsyncTask extends AsyncTask<Void, Void, Void> {
@@ -64,7 +70,7 @@ public class CadPacienteWS {
 
 		@Override
 		protected Void doInBackground(Void... params) {
-			mensagem = setPacienteService();
+			mensagens = setPacienteMedicoService();
 			progressDialog.cancel();
 			return null;
 		}
@@ -78,27 +84,24 @@ public class CadPacienteWS {
 
 		@Override
 		protected void onPostExecute(Void result) {
-			if (mensagem != null) {
-				if ("sucess".equals(mensagem)) {
-					salvaPaciente(pac);
+			if (mensagens != null) {
+				if ("sucess".equals(mensagens[0].toString())) {
+					objectToPaciente(mensagens);
 					Utils.criaAlertSalvar(ctx, null);
-				} else if ("internet".equals(mensagem)) {
+				} else if ("internet".equals(mensagens[0].toString())) {
 					Utils.criarAlertaErro(
 							ctx,
 							"Não foi possível se conectar à "
 									+ Utils.URL_WS(ctx));
-				} else if ("duplicado".equals(mensagem)) {
-					Utils.criarAlertaErro(ctx,
-							"O Código de Paciente informado está em uso. Favor selecione outro!");
 				} else {
-					Utils.criarAlertaErro(ctx,
-							"Não foi possível salvar o registro! Verifique a internet!");
+					Utils.criarAlertaErro(ctx, mensagens[0]);
 				}
 			}
 		}
 	}
 
-	private String setPacienteService() {
+	@SuppressWarnings("unchecked")
+	private String[] setPacienteMedicoService() {
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
 				SoapEnvelope.VER11);
 		MarshalDate md = new MarshalDate();
@@ -109,11 +112,23 @@ public class CadPacienteWS {
 		try {
 			HttpTransportSE androidHttpTransport = new HttpTransportSE(url);
 			androidHttpTransport.call(soap_action, envelope);
-			SoapPrimitive result = (SoapPrimitive) envelope.getResponse();
-			return result.toString();
+			Vector<Object> rs = (java.util.Vector<Object>) envelope
+					.getResponse();
+			String[] mensagens = new String[20];
+			if (rs != null) {
+				int i = 0;
+				for (Object cs : rs) {
+					if (cs != null) {
+						mensagens[i] = cs.toString();
+					}
+					i++;
+				}
+			}
+			return mensagens;
 		} catch (SocketTimeoutException e) {
 			e.printStackTrace();
-			return "internet";
+			mensagens[0] = "internet";
+			return mensagens;
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

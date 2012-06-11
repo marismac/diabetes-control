@@ -11,7 +11,7 @@ import android.widget.EditText;
 
 import com.android.diabetescontrol.model.Paciente;
 import com.android.diabetescontrol.util.Utils;
-import com.android.diabetescontrol.webservice.PacienteWS;
+import com.android.diabetescontrol.webservice.AddPacienteWS;
 
 public class CadastroMedicoDoPaciente extends Activity {
 	private Button buttonAdicionar = null;
@@ -55,9 +55,12 @@ public class CadastroMedicoDoPaciente extends Activity {
 		if (Utils
 				.existConnectionInternet((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))
 				&& Utils.isSelectSynchronize(ctx)) {
-			new PacienteWS(new Paciente(null, null, null, null, null,
+			new AddPacienteWS(new Paciente(null, null, null, null, null,
 					editTextCod.getText().toString(), editTextSenha.getText()
 							.toString()), this).sincPacienteDoMedico();
+		} else {
+			Utils.criarAlertaErro(ctx,
+					"Para adicionar pacientes é necessário sincronização!");
 		}
 	}
 }
