@@ -6,11 +6,21 @@
     android:background="@color/transparente"
     android:orientation="vertical" >
 
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@null"
+        android:drawableTop="@drawable/addm" />
+
     <TextView
         android:id="@+id/tvPrinc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_below="@+id/button1"
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -28,8 +38,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/tvSec"
-        android:layout_centerHorizontal="true"
+        android:layout_alignParentRight="true"
         android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="15dp"
+        android:layout_toRightOf="@+id/button1"
+        android:text="@string/notamedica"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>

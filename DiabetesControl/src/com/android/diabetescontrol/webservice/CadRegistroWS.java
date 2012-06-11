@@ -1,9 +1,10 @@
 package com.android.diabetescontrol.webservice;
 
-import java.text.ParseException;
+import java.util.Date;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
+import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
@@ -15,24 +16,34 @@ import com.android.diabetescontrol.database.RegistroDAO;
 import com.android.diabetescontrol.model.Registro;
 import com.android.diabetescontrol.util.Utils;
 
-public class RegistroWS {
+public class CadRegistroWS {
 	private String namespace = "http://servico.diabetes.com/";
 	private String method_name = "";
-	private Registro reg;
+	private Registro registro;
 	private Context ctx;
 	private SoapObject request;
 	private String soap_action = "";
 	private String url = "";
 
-	public RegistroWS(Context ctx) {
+	public CadRegistroWS(Context ctx) {
 		this.ctx = ctx;
 		this.url = Utils.URL_WS(ctx);
 	}
 
-	public void sincRegistrosMedico(String codPaciente) {
-		this.method_name = "getRegistrosPaciente";
+	public void sincRegistro(Registro reg) {
+		Date datahora = new Date(reg.getDataHora().getTime());
+		this.method_name = "addRegistro";
 		this.request = new SoapObject(namespace, method_name);
-		request.addProperty("codPaciente", codPaciente);
+		registro = reg;
+		request.addProperty("tipo", reg.getTipo());
+		request.addProperty("categoria", reg.getCategoria());
+		request.addProperty("valor", reg.getValor());
+		request.addProperty("datahora", datahora);
+		request.addProperty("codpaciente", reg.getCodPaciente());
+		request.addProperty("unidade", reg.getUnidade());
+		request.addProperty("idcelular", reg.getId());
+		request.addProperty("idmedicamento", reg.getMedicamento());
+		request.addProperty("valorpressao", reg.getValorPressao());
 		new servicoAsyncTask().execute();
 	}
 
@@ -41,7 +52,14 @@ public class RegistroWS {
 
 		@Override
 		protected Void doInBackground(Void... params) {
-			getRegistrosService();
+			String resultado = getRegistrosService();
+			if ("sucess".equals(resultado)) {
+				RegistroDAO regDao = new RegistroDAO(ctx);
+				regDao.open();
+				registro.setSincronizado("S");
+				regDao.atualizaRegistro(registro);
+				regDao.close();
+			}
 			return null;
 		}
 
@@ -58,53 +76,22 @@ public class RegistroWS {
 		}
 	}
 
-	private void getRegistrosService() {
+	private String getRegistrosService() {
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
 				SoapEnvelope.VER11);
 		MarshalDate md = new MarshalDate();
+		MarshalFloat mf = new MarshalFloat();
+		mf.register(envelope);
 		md.register(envelope);
 		envelope.setOutputSoapObject(request);
 		try {
 			HttpTransportSE androidHttpTransport = new HttpTransportSE(url);
 			androidHttpTransport.call(soap_action, envelope);
-			SoapObject response = (SoapObject) envelope.bodyIn;
-
-			if (response != null) {
-				Registro registro = null;
-				int qtde = response.getPropertyCount();
-				for (int i = 0; i < qtde; i++) {
-					SoapObject property = (SoapObject) response.getProperty(i);
-					if ("sucess".equals(property.getProperty(0).toString())) {
-						registro = new Registro();
-						registro.setValor(Float.valueOf(property.getProperty(1)
-								.toString()));
-						registro.setCategoria(property.getProperty(2)
-								.toString());
-						registro.setTipo(property.getProperty(3).toString());
-						registro.setCodPaciente(property.getProperty(4)
-								.toString());
-						registro.setUnidade(property.getProperty(5).toString());
-						registro.setCodCelPac(Integer.valueOf(property
-								.getProperty(6).toString()));
-						registro.setDataHora(Utils.stringToTimestamp(property
-								.getProperty(7).toString()));
-						registro.setSincronizado("S");
-						registro.setModoUser(Utils.tipo_modo(ctx));
-						insereRegistro(registro);
-					}
-				}
-			}
-		} catch (ParseException e) {
-			e.printStackTrace();
+			SoapPrimitive result = (SoapPrimitive) envelope.getResponse();
+			return result.toString();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-	}
-
-	private void insereRegistro(Registro reg) {
-		RegistroDAO regDao = new RegistroDAO(ctx);
-		regDao.open();
-		regDao.criarRegistro(reg);
-		regDao.close();
+		return null;
 	}
 }

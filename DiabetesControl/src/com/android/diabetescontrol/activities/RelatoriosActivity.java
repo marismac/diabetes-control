@@ -42,7 +42,7 @@ public class RelatoriosActivity extends Activity {
 		btGlicoseMedias.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				Intent i = new Intent(RelatoriosActivity.this,
-						consultaGlicoseMediasActivity.class);
+						RelatorioGlicoseMediaActivity.class);
 				startActivity(i);
 			}
 		});

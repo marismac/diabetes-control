@@ -31,8 +31,10 @@ import android.widget.TimePicker;
 import com.android.diabetescontrol.database.MedicamentoDAO;
 import com.android.diabetescontrol.database.RegistroDAO;
 import com.android.diabetescontrol.model.Medicamento;
+import com.android.diabetescontrol.model.Paciente;
 import com.android.diabetescontrol.model.Registro;
 import com.android.diabetescontrol.util.Utils;
+import com.android.diabetescontrol.webservice.CadRegistroWS;
 
 public class CadastroRegistroActivity extends Activity {
 
@@ -353,15 +355,17 @@ public class CadastroRegistroActivity extends Activity {
 				reg.setId(codReg);
 				regDao.atualizaRegistro(reg);
 			} else {
-				regDao.criarRegistro(reg);
+				reg.setCodPaciente(Paciente.getCODIGOPACIENTE());
+				reg.setId(regDao.criarRegistro(reg));
 			}
 			regDao.close();
 			Utils.criaAlertSalvar(ctx, null);
 		}
 		if (Utils
 				.existConnectionInternet((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))
-				&& Utils.isSelectSynchronize(ctx)) {
-			// new RegistroWS(reg, this).sincRegistro();
+				&& Utils.isSelectSynchronize(ctx)
+				&& Paciente.getCODIGOPACIENTE() != null) {
+			new CadRegistroWS(this).sincRegistro(reg);
 		}
 	}
 

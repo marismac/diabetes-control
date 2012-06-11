@@ -42,7 +42,7 @@ public class Utils {
 	public static void criarAlertaErro(Context ctx, String msg) {
 		AlertDialog alertDialog = new AlertDialog.Builder(ctx).create();
 		alertDialog.setTitle(msg);
-		alertDialog.setIcon(R.drawable.error);
+		alertDialog.setIcon(R.drawable.error2);
 		alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
 				return;

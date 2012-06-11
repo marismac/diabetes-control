@@ -98,8 +98,8 @@
 	<string name="selecpaciente">Selecionar Paciente</string>
 	<string name="sempac">Sem Pacientes</string>
 	<string name="cadpaciente">Paciente</string>
-	<string name="cadmedico">Cadastrar Medico</string>
-	<string name="addpaciente">Adicionar paciente</string>
+	<string name="cadmedico">Add Medico</string>
+	<string name="addpaciente">Add paciente</string>
 	<string name="preferencias">Preferências</string>
 	<string name="codPaciente">Código Paciente</string>
 	<string name="senha">Senha</string>
@@ -126,4 +126,6 @@
 	<string name="mediasglicosegraficos">Glicose por categoria</string>
 	<string name="ultimosregistro">Últimos registro</string>
 	<string name="MCatUldias">Média por categoria últimos dias</string>
+	<string name="notamedica">Nota Médica</string>
+	<string name="consultarnotas">Consulta Notas</string>
 </resources>

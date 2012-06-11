@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class PacienteAdapter extends BaseAdapter {
@@ -39,20 +40,35 @@ public class PacienteAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		Paciente paciente = lista.get(position);
-		LayoutInflater layout = (LayoutInflater)ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View v = layout.inflate(com.android.diabetescontrol.activities.R.layout.listapaciente, null);
+		LayoutInflater layout = (LayoutInflater) ctx
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		View v = layout.inflate(
+				com.android.diabetescontrol.activities.R.layout.lista_paciente,
+				null);
 		
-		TextView txtID = (TextView)v.findViewById(com.android.diabetescontrol.activities.R.id.tvCod);
+		if (position > 0) {
+			Button btEdit = (Button) v
+					.findViewById(com.android.diabetescontrol.activities.R.id.button1);
+			btEdit.setVisibility(View.GONE);
+			TextView tituloEdit = (TextView) v
+					.findViewById(com.android.diabetescontrol.activities.R.id.textView1);
+			tituloEdit.setVisibility(View.GONE);
+		}
+
+		TextView txtID = (TextView) v
+				.findViewById(com.android.diabetescontrol.activities.R.id.tvCod);
 		txtID.setText(paciente.getId().toString());
-		
-		TextView txtNome = (TextView)v.findViewById(com.android.diabetescontrol.activities.R.id.tvPrinc);
+		txtID.setVisibility(View.GONE);
+
+		TextView txtNome = (TextView) v
+				.findViewById(com.android.diabetescontrol.activities.R.id.tvPrinc);
 		txtNome.setText(paciente.getNome());
-		
-		TextView txtEmail = (TextView)v.findViewById(com.android.diabetescontrol.activities.R.id.tvSec);
+
+		TextView txtEmail = (TextView) v
+				.findViewById(com.android.diabetescontrol.activities.R.id.tvSec);
 		txtEmail.setText(paciente.getEmail());
-		
+
 		return v;
 	}
-	
 
 }

@@ -11,40 +11,105 @@
         android:orientation="vertical" >
 
         <Button
-            android:id="@+id/btRelatoriosPacientes"
+            android:id="@+id/btNada"
             android:layout_width="wrap_content"
-            android:layout_height="68dp"
-            android:text="@string/selecpaciente"
-            android:textSize="24dp" />
-
-        <Button
-            android:id="@+id/btNotasMedicas"
-            android:layout_width="wrap_content"
-            android:layout_height="68dp"
-            android:text="@string/notasmedicas"
-            android:textSize="24dp" />
-
-        <Button
-            android:id="@+id/btGraficosPaciente"
-            android:layout_width="wrap_content"
-            android:layout_height="68dp"
-            android:text="@string/graficosPaciente"
-            android:textSize="24dp" />
+            android:layout_height="40dp"
+            android:background="@null" />
+
+        <RelativeLayout>
+
+            <Button
+                android:id="@+id/btRelatoriosPacientes"
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="50dp"
+                android:background="@null"
+                android:drawableTop="@drawable/addm"
+                android:text="@string/notamedica"
+                android:textSize="12dp" />
+
+            <Button
+                android:id="@+id/btNotasMedicas"
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="50dp"
+                android:background="@null"
+                android:drawableTop="@drawable/reportm"
+                android:text="@string/consultar"
+                android:textSize="12dp" />
+        </RelativeLayout>
 
         <Button
-            android:id="@+id/btAddPaciente"
+            android:id="@+id/btNada"
             android:layout_width="wrap_content"
-            android:layout_height="68dp"
-            android:text="@string/addpaciente"
-            android:textSize="24dp" />
+            android:layout_height="40dp"
+            android:background="@null" />
+
+        <RelativeLayout>
+
+            <Button
+                android:id="@+id/btGraficosPaciente"
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="56dp"
+                android:background="@null"
+                android:drawableTop="@drawable/chart"
+                android:text="@string/graficosPaciente"
+                android:textSize="12dp" />
+
+            <Button
+                android:id="@+id/btConfiguracoes"
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="56dp"
+                android:background="@null"
+                android:drawableTop="@drawable/registrom"
+                android:text="@string/relatorios"
+                android:textSize="12dp" />
+
+        </RelativeLayout>
 
         <Button
-            android:id="@+id/btConfiguracoes"
+            android:id="@+id/btNada"
             android:layout_width="wrap_content"
-            android:layout_height="68dp"
-            android:text="@string/configuracoes"
-            android:textSize="24dp" />
+            android:layout_height="40dp"
+            android:background="@null" />
 
+        <RelativeLayout>
+
+            <Button
+                android:id="@+id/btAddMedico"
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="50dp"
+                android:background="@null"
+                android:drawableTop="@drawable/user_add"
+                android:text="@string/cadmedico"
+                android:textSize="12dp" />
+
+            <Button
+                android:id="@+id/btAddPaciente"
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="40dp"
+                android:background="@null"
+                android:drawableTop="@drawable/addpaciente"
+                android:text="@string/addpaciente"
+                android:textSize="12dp" />
+
+        </RelativeLayout>
     </TableLayout>
 
 </ScrollView>
