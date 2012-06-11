@@ -13,6 +13,7 @@ import android.os.AsyncTask;
 
 import com.android.diabetescontrol.database.RegistroDAO;
 import com.android.diabetescontrol.model.Registro;
+import com.android.diabetescontrol.util.Constante;
 import com.android.diabetescontrol.util.Utils;
 
 public class RegistroWS {
@@ -30,7 +31,7 @@ public class RegistroWS {
 	}
 
 	public void sincRegistrosMedico(String codPaciente) {
-		this.method_name = "getRegistrosPaciente";
+		this.method_name = Constante.METODO_WS_GETREGISTROSPACIENTE;
 		this.request = new SoapObject(namespace, method_name);
 		request.addProperty("codPaciente", codPaciente);
 		new servicoAsyncTask().execute();

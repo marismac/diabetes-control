@@ -2,15 +2,15 @@ package com.android.diabetescontrol.adapters;
 
 import java.util.List;
 
-import com.android.diabetescontrol.model.Paciente;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.android.diabetescontrol.model.Paciente;
 
 public class PacienteAdapter extends BaseAdapter {
 
@@ -45,10 +45,9 @@ public class PacienteAdapter extends BaseAdapter {
 		View v = layout.inflate(
 				com.android.diabetescontrol.activities.R.layout.lista_paciente,
 				null);
-		
+		ImageView btEdit = (ImageView) v
+				.findViewById(com.android.diabetescontrol.activities.R.id.btEdit);
 		if (position > 0) {
-			Button btEdit = (Button) v
-					.findViewById(com.android.diabetescontrol.activities.R.id.button1);
 			btEdit.setVisibility(View.GONE);
 			TextView tituloEdit = (TextView) v
 					.findViewById(com.android.diabetescontrol.activities.R.id.textView1);

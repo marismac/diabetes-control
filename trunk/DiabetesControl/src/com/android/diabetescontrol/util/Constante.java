@@ -14,4 +14,8 @@ public final class Constante {
 	public static final String CAT_D_LANCHE ="Depois do Lanche";
 	public static final String CAT_A_JANTA ="Antes da Janta";
 	public static final String CAT_D_JANTA ="Depois da Janta";
+	public static String METODO_WS_CADPACIENTE = "cadPaciente"; // Metodo para Cadastrar um Paciente
+	public static String METODO_WS_ADDPACIENTEMEDICO = "addPacienteMedico"; // Metodo para Adicionar um Paciente ao Médico
+	public static String METODO_WS_GETREGISTROSPACIENTE = "getRegistrosPaciente"; // Metodo para Buscar informações dos Registros do Paciente
+	
 }

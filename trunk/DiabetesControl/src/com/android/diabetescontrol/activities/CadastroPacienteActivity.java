@@ -4,6 +4,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -54,6 +57,9 @@ public class CadastroPacienteActivity extends Activity {
 		editTextNome.setText(paciente.getNome());
 		editTextEmail.setText(paciente.getEmail());
 		editTextCodPac.setText(paciente.getCodPaciente());
+		if (Paciente.getCODIGOPACIENTE() != null) {
+			editTextCodPac.setEnabled(false);
+		}
 		editTextSenhaPac.setText(paciente.getSenhaPaciente());
 		buttonData.setText(new StringBuilder()
 				.append(paciente.getDatanascimento().getDate()).append("/")
@@ -88,6 +94,12 @@ public class CadastroPacienteActivity extends Activity {
 			public void onClick(View v) {
 				salvar();
 
+			}
+		});
+		buttonData.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				showDialog(DATE_DIALOG_ID);
 			}
 		});
 	}
@@ -163,5 +175,26 @@ public class CadastroPacienteActivity extends Activity {
 		mDay = c.get(Calendar.DAY_OF_MONTH);
 		updateDisplay();
 	}
+
+	@Override
+	protected Dialog onCreateDialog(int id) {
+		switch (id) {
+		case DATE_DIALOG_ID:
+			return new DatePickerDialog(this, mDateSetListener, mYear, mMonth,
+					mDay);
+		}
+		
+		return null;
+	}
+
+	private DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+		public void onDateSet(DatePicker view, int year, int monthOfYear,
+				int dayOfMonth) {
+			mYear = year;
+			mMonth = monthOfYear;
+			mDay = dayOfMonth;
+			updateDisplay();
+		}
+	};
 
 }
