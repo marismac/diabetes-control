@@ -1,9 +1,11 @@
 package com.android.diabetescontrol.database;
 
 import java.sql.Timestamp;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+
 import com.android.diabetescontrol.model.Paciente;
 
 public class PacienteDAO extends BasicoDAO {
@@ -32,6 +34,29 @@ public class PacienteDAO extends BasicoDAO {
 	public void criarPaciente(Paciente paciente) {
 		ContentValues values = dePacienteParaContentValues(paciente);
 		mDb.insert(TABELA_PACIENTES, null, values);
+	}
+
+	public Integer consultarUltimoPaciente() {
+		Cursor mCursor = mDb.rawQuery("SELECT MAX(_id) FROM "
+				+ PacienteDAO.TABELA_PACIENTES, null);
+		mCursor.moveToFirst();
+		if (mCursor.getCount() > 0) {
+			return null;
+		}
+		return mCursor.getInt(mCursor.getColumnIndex(mCursor.getColumnName(0)));
+	}
+
+	public String getCodPac() {
+		Cursor mCursor = mDb.rawQuery("SELECT " + PacienteDAO.COLUNA_CODPAC
+				+ " FROM " + PacienteDAO.TABELA_PACIENTES + " WHERE "
+				+ PacienteDAO.COLUNA_CODPAC + " IS NOT NULL AND "
+				+ PacienteDAO.COLUNA_SENHAPAC + " IS NOT NULL", null);
+		mCursor.moveToFirst();
+		if (mCursor.getCount() <= 0) {
+			return null;
+		}
+		return mCursor.getString(mCursor.getColumnIndex(mCursor
+				.getColumnName(0)));
 	}
 
 	public static ContentValues dePacienteParaContentValues(Paciente paciente) {

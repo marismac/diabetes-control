@@ -55,8 +55,8 @@
             android:name=".consultaRegistroDiaActivity"
             android:theme="@style/MapBackgroundNoTitle" />
         <activity
-            android:name=".consultaGlicoseMediasActivity"
-            android:theme="@style/MapBackgroundNoTitle" />
+            android:name=".RelatorioGlicoseMediaActivity"
+            android:theme="@style/MapBackground" />
         <activity
             android:name=".SelectGraficosActivity"
             android:theme="@style/MapBackground" />

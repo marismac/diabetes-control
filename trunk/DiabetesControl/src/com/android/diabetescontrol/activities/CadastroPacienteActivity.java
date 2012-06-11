@@ -18,7 +18,7 @@ import android.widget.Spinner;
 import com.android.diabetescontrol.database.PacienteDAO;
 import com.android.diabetescontrol.model.Paciente;
 import com.android.diabetescontrol.util.Utils;
-import com.android.diabetescontrol.webservice.PacienteWS;
+import com.android.diabetescontrol.webservice.CadPacienteWS;
 
 public class CadastroPacienteActivity extends Activity {
 	final Calendar c = Calendar.getInstance();
@@ -125,17 +125,13 @@ public class CadastroPacienteActivity extends Activity {
 		PacienteDAO pacDao = new PacienteDAO(this);
 		pacDao.open();
 		if (paciente != null) {
-			if (paciente.getId() == null) {
-				pacDao.criarPaciente(paciente);
-			} else {
-				pacDao.atualizarPaciente(paciente);
-			}
-
-			Utils.criaAlertSalvar(ctx, null);
 			if (Utils
 					.existConnectionInternet((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))
 					&& Utils.isSelectSynchronize(ctx)) {
-				new PacienteWS(paciente, this).sincPaciente();
+				new CadPacienteWS(paciente, this).sincPaciente();
+			} else {
+				Utils.criarAlertaErro(ctx,
+						"Para realizar esse cadastro é necessária sincronização!");
 			}
 		}
 		pacDao.close();

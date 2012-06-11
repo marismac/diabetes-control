@@ -19,7 +19,12 @@ public class DataUtil {
 		long time = cal.getTimeInMillis();
 		long primeiroDiaDaSemana = time
 				- ((diaDaSemana - Calendar.SUNDAY) * millisPorDia);
+		
 		primeiroDiaSemana.setTime(primeiroDiaDaSemana);
+		primeiroDiaSemana.setMinutes(0);
+		primeiroDiaSemana.setHours(0);
+		primeiroDiaSemana.setSeconds(0);
+		
 		return primeiroDiaSemana;
 	}
 

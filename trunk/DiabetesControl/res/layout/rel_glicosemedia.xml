@@ -2,8 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/scrollView1"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/Lavender" >
+    android:layout_height="match_parent" >
 
     <TableLayout
         android:id="@+id/tableLayout1"
@@ -22,7 +21,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/glicomedias"
-                android:textColor="@color/vermelho"
+                android:textColor="@color/back"
                 android:textSize="20dip"
                 android:textStyle="bold" />
 

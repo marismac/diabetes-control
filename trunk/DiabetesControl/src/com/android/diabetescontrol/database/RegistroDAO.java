@@ -46,9 +46,10 @@ public class RegistroDAO extends BasicoDAO {
 			+ " ( " + MedicamentoDAO.COLUNA_ID + ") ," + COLUNA_VALOR_PRESSAO
 			+ " TEXT );";
 
-	public void criarRegistro(Registro registro) {
+	public Integer criarRegistro(Registro registro) {
 		ContentValues values = deRegistroParaContentValues(registro);
 		mDb.insert(TABELA_REGISTRO, null, values);
+		return consultarUltimoRegistro();
 	}
 
 	public void atualizaRegistro(Registro registro) {
@@ -79,12 +80,6 @@ public class RegistroDAO extends BasicoDAO {
 
 		return values;
 	}
-
-	// public boolean atualizarRegistro(Registro regis) {
-	// ContentValues values = new ContentValues();
-	// return mDb.update(TABELA_REGISTRO, values, COLUNA_ID + "=?",
-	// new String[] { String.valueOf(regis.getId()) }) > 0;
-	// }
 
 	public Registro getRegistro(long idRegistro) {
 
@@ -131,6 +126,13 @@ public class RegistroDAO extends BasicoDAO {
 		return new Date(mili);
 	}
 
+	public Integer consultarUltimoRegistro() {
+		Cursor mCursor = mDb.rawQuery("SELECT MAX(_Id) FROM "
+				+ RegistroDAO.TABELA_REGISTRO, null);
+		mCursor.moveToFirst();
+		return mCursor.getInt(mCursor.getColumnIndex(mCursor.getColumnName(0)));
+	}
+
 	/**
 	 * 
 	 * Permite realizar uma consulta de registros, selecionados apeneas
@@ -170,7 +172,7 @@ public class RegistroDAO extends BasicoDAO {
 				COLUNA_DATAHORA, COLUNA_VALOR, COLUNA_TIPO, COLUNA_CATEGORIA },
 				null, null, null, null, null);
 	}
-	
+
 	public Cursor consultar(String sql) {
 		return mDb.rawQuery(sql, null);
 	}

@@ -1,6 +1,10 @@
 package com.android.diabetescontrol.principal;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -24,8 +28,11 @@ import com.android.diabetescontrol.activities.RelatoriosActivity;
 import com.android.diabetescontrol.activities.SelectGraficosActivity;
 import com.android.diabetescontrol.business.GlicoseMediaBusiness;
 import com.android.diabetescontrol.database.ContextoDados;
+import com.android.diabetescontrol.database.PacienteDAO;
 import com.android.diabetescontrol.database.RegistroDAO;
 import com.android.diabetescontrol.model.Medicamento;
+import com.android.diabetescontrol.model.Paciente;
+import com.android.diabetescontrol.model.Registro;
 import com.android.diabetescontrol.util.Utils;
 
 public class PrincipalActivity extends Activity {
@@ -47,17 +54,58 @@ public class PrincipalActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		new ContextoDados(this);
+		// insereTestes(this);
 		Medicamento.preencheListaMedicamento(this);
 		if (Utils.isPaciente(this)) {
 			setContentView(R.layout.main_paciente);
 			inicializaObjetosPaciente();
 			carregaListenersPaciente();
 			carregaResumo();
+			carregaCodPaciente();
 		} else {
 			setContentView(R.layout.main_medico);
 			inicializaObjetosMedico();
 			carregaListenersMedico();
 		}
+	}
+
+	private void carregaCodPaciente() {
+		PacienteDAO pacDao = new PacienteDAO(this);
+		pacDao.open();
+		Paciente.setCODIGOPACIENTE(pacDao.getCodPac());
+		pacDao.close();
+	}
+
+	private void insereTestes(Context ctx) {
+		PacienteDAO pacDao = new PacienteDAO(ctx);
+		pacDao.open();
+		pacDao.criarPaciente(new Paciente(null, "Leonardo Alves",
+				"leo.alvesneuwald@gmail.com", null, "M", "leoneuwald", null));
+		pacDao.criarPaciente(new Paciente(null, "João Silva",
+				"joao.silva@gmail.com", null, "M", "joaosilva", null));
+		pacDao.criarPaciente(new Paciente(null, "Marcos Antonio",
+				"marcos.antonio@bol.com", null, "M", "marcos", null));
+		pacDao.criarPaciente(new Paciente(null, "Maria Silva",
+				"maria.silva@gmail.com", null, "F", "maria", null));
+		pacDao.close();
+		RegistroDAO regDao = new RegistroDAO(ctx);
+		regDao.open();
+		regDao.criarRegistro(new Registro(null, "Glicose", "Antes do Café",
+				12.2f, new Timestamp(new Date().getTime()), "S", "leoneuwald",
+				"mmol/l", 1, "M", null, null));
+		regDao.criarRegistro(new Registro(null, "Glicose", "Depois do Café",
+				14.2f, new Timestamp(new Date().getTime()), "S", "leoneuwald",
+				"mmol/l", 1, "M", null, null));
+		regDao.criarRegistro(new Registro(null, "HbA1c", "Antes do Café",
+				10.2f, new Timestamp(new Date().getTime()), "S", "leoneuwald",
+				"%", 1, "M", null, null));
+		regDao.criarRegistro(new Registro(null, "HbA1c", "Antes do Café",
+				10.2f, new Timestamp(new Date().getTime()), "S", "leoneuwald",
+				"%", 1, "M", null, null));
+		regDao.criarRegistro(new Registro(null, "Peso", "Antes do Café", 80.2f,
+				new Timestamp(new Date().getTime()), "S", "leoneuwald", "kg",
+				1, "M", null, null));
+		regDao.close();
 	}
 
 	@Override

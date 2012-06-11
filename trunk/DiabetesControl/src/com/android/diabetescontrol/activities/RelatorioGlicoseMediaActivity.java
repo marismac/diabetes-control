@@ -7,7 +7,7 @@ import android.widget.TextView;
 import com.android.diabetescontrol.business.GlicoseMediaBusiness;
 import com.android.diabetescontrol.database.RegistroDAO;
 
-public class consultaGlicoseMediasActivity extends Activity {
+public class RelatorioGlicoseMediaActivity extends Activity {
 	private TextView tvValorHoje;
 	private TextView tvValorOntem;
 	private TextView tvValorSemana;
@@ -19,7 +19,7 @@ public class consultaGlicoseMediasActivity extends Activity {
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.consultaglicosemedia);
+		setContentView(R.layout.rel_glicosemedia);
 		inicializaObjetos();
 		carregaValores();
 	}
