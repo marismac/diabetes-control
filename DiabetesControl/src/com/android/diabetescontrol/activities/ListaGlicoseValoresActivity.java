@@ -20,7 +20,7 @@ public class ListaGlicoseValoresActivity extends ListActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.consultaultimosregistros);
+		setContentView(R.layout.lista_registros);
 		if (getIntent().getExtras().get("valorMax") != null
 				&& !"".equals(getIntent().getExtras().get("valorMax")
 						.toString())) {

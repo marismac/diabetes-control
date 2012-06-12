@@ -24,7 +24,7 @@ public class ListaRegistroActivity extends ListActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.consultaultimosregistros);
+		setContentView(R.layout.lista_registros);
 		String dataFiltro = "01/01/1900";
 		String tipoCategoria = "%";
 		if (getIntent().getExtras().get("dataFiltro") != null
