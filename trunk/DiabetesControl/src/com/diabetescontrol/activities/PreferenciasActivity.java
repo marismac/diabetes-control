@@ -1,7 +1,5 @@
 package com.diabetescontrol.activities;
 
-import com.android.diabetescontrol.activities.R;
-
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 

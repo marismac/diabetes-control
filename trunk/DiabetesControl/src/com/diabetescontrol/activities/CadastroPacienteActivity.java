@@ -19,7 +19,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.android.diabetescontrol.activities.R;
 import com.diabetescontrol.database.PacienteDAO;
 import com.diabetescontrol.model.Paciente;
 import com.diabetescontrol.util.Utils;

@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import com.android.diabetescontrol.activities.R;
 import com.diabetescontrol.adapters.RegistroAdapter;
 import com.diabetescontrol.business.RegistrosMedicosBusiness;
 import com.diabetescontrol.database.NotaRegistroMedicoDAO;

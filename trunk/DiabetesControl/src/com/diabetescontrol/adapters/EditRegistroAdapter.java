@@ -46,24 +46,24 @@ public class EditRegistroAdapter extends BaseAdapter {
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View v = layout
 				.inflate(
-						com.android.diabetescontrol.activities.R.layout.lista_editregistro,
+						com.diabetescontrol.activities.R.layout.lista_editregistro,
 						null);
 		if (position > 0) {
 			Button btEdit = (Button) v
-					.findViewById(com.android.diabetescontrol.activities.R.id.button1);
+					.findViewById(com.diabetescontrol.activities.R.id.button1);
 			btEdit.setVisibility(View.GONE);
 			TextView tituloEdit = (TextView) v
-					.findViewById(com.android.diabetescontrol.activities.R.id.textView1);
+					.findViewById(com.diabetescontrol.activities.R.id.textView1);
 			tituloEdit.setVisibility(View.GONE);
 		}
 
 		TextView txtID = (TextView) v
-				.findViewById(com.android.diabetescontrol.activities.R.id.tvId);
+				.findViewById(com.diabetescontrol.activities.R.id.tvId);
 		txtID.setText(registro.getId().toString());
 		txtID.setVisibility(View.INVISIBLE);
 
 		TextView txtNome = (TextView) v
-				.findViewById(com.android.diabetescontrol.activities.R.id.tvPrinc);
+				.findViewById(com.diabetescontrol.activities.R.id.tvPrinc);
 		if ("Pressão".equals(registro.getTipo())
 				&& registro.getValorPressao() != null) {
 			txtNome.setText(registro.getValorPressao().toString() + " "
@@ -73,7 +73,7 @@ public class EditRegistroAdapter extends BaseAdapter {
 					+ registro.getUnidade());
 		}
 		TextView txtSmallMed = (TextView) v
-				.findViewById(com.android.diabetescontrol.activities.R.id.tvSmallMed);
+				.findViewById(com.diabetescontrol.activities.R.id.tvSmallMed);
 		if ("Medicamento".equals(registro.getTipo())
 				&& registro.getMedicamento() != null) {
 			for (Medicamento med : Medicamento.LIST_MEDICAMENTOS) {
@@ -86,17 +86,17 @@ public class EditRegistroAdapter extends BaseAdapter {
 			txtSmallMed.setText("");
 		}
 		TextView txtCod = (TextView) v
-				.findViewById(com.android.diabetescontrol.activities.R.id.tvCod);
+				.findViewById(com.diabetescontrol.activities.R.id.tvCod);
 		txtCod.setText(registro.getTipo());
 
 		TextView txtMed = (TextView) v
-				.findViewById(com.android.diabetescontrol.activities.R.id.tvMed);
+				.findViewById(com.diabetescontrol.activities.R.id.tvMed);
 		SimpleDateFormat sdhf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		String formattedDateHour = sdhf.format(registro.getDataHora());
 		txtMed.setText(formattedDateHour);
 
 		TextView txtCat = (TextView) v
-				.findViewById(com.android.diabetescontrol.activities.R.id.tvSmall);
+				.findViewById(com.diabetescontrol.activities.R.id.tvSmall);
 		txtCat.setText(registro.getCategoria());
 
 		return v;

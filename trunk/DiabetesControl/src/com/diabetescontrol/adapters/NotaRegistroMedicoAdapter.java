@@ -44,37 +44,37 @@ public class NotaRegistroMedicoAdapter extends BaseAdapter {
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View v = layout
 				.inflate(
-						com.android.diabetescontrol.activities.R.layout.lista_notamedica,
+						com.diabetescontrol.activities.R.layout.lista_notamedica,
 						null);
 
 		ImageView btEdit = (ImageView) v
-				.findViewById(com.android.diabetescontrol.activities.R.id.btEdit);
+				.findViewById(com.diabetescontrol.activities.R.id.btEdit);
 		if (position > 0) {
 			btEdit.setVisibility(View.GONE);
 			TextView tituloEdit = (TextView) v
-					.findViewById(com.android.diabetescontrol.activities.R.id.textView1);
+					.findViewById(com.diabetescontrol.activities.R.id.textView1);
 			tituloEdit.setVisibility(View.GONE);
 		}
 
 		TextView txtNome = (TextView) v
-				.findViewById(com.android.diabetescontrol.activities.R.id.tvId);
+				.findViewById(com.diabetescontrol.activities.R.id.tvId);
 		txtNome.setText(nrm.getCodPaciente());
 
 		TextView txtMed = (TextView) v
-				.findViewById(com.android.diabetescontrol.activities.R.id.tvMed);
+				.findViewById(com.diabetescontrol.activities.R.id.tvMed);
 		txtMed.setText(nrm.getInfoRegistro());
 
 		TextView txtID = (TextView) v
-				.findViewById(com.android.diabetescontrol.activities.R.id.tvPrinc);
+				.findViewById(com.diabetescontrol.activities.R.id.tvPrinc);
 		txtID.setText(nrm.getDescricao());
 
 		TextView txtCod = (TextView) v
-				.findViewById(com.android.diabetescontrol.activities.R.id.tvCod);
+				.findViewById(com.diabetescontrol.activities.R.id.tvCod);
 		txtCod.setText(nrm.getId().toString());
 		txtCod.setVisibility(View.INVISIBLE);
 
 		TextView txtCat = (TextView) v
-				.findViewById(com.android.diabetescontrol.activities.R.id.tvSmall);
+				.findViewById(com.diabetescontrol.activities.R.id.tvSmall);
 		txtCat.setText(nrm.getIdRegistro().toString());
 		txtCat.setVisibility(View.INVISIBLE);
 

@@ -29,7 +29,6 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import com.android.diabetescontrol.activities.R;
 import com.diabetescontrol.database.MedicamentoDAO;
 import com.diabetescontrol.database.RegistroDAO;
 import com.diabetescontrol.model.Medicamento;

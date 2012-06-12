@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-import com.android.diabetescontrol.activities.R;
 import com.diabetescontrol.util.Utils;
 
 public class ConfiguracoesActivity extends Activity {

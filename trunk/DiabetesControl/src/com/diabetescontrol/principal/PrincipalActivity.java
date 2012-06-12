@@ -11,7 +11,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.android.diabetescontrol.activities.R;
+import com.diabetescontrol.activities.R;
 import com.diabetescontrol.activities.CadastroMedicoDoPaciente;
 import com.diabetescontrol.activities.CadastroPacienteActivity;
 import com.diabetescontrol.activities.CadastroRegistroActivity;
