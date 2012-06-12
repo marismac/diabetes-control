@@ -48,7 +48,7 @@ public class NotaRegistroMedicoAdapter extends BaseAdapter {
 
 		TextView txtNome = (TextView) v
 				.findViewById(com.android.diabetescontrol.activities.R.id.tvPrinc);
-		txtNome.setText(nrm.getNomePaciente());
+		txtNome.setText(nrm.getCodPaciente());
 
 		TextView txtMed = (TextView) v
 				.findViewById(com.android.diabetescontrol.activities.R.id.tvMed);

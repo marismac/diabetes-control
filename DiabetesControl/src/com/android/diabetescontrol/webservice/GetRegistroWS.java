@@ -1,5 +1,6 @@
 package com.android.diabetescontrol.webservice;
 
+import java.net.SocketTimeoutException;
 import java.text.ParseException;
 
 import org.ksoap2.SoapEnvelope;
@@ -16,16 +17,15 @@ import com.android.diabetescontrol.model.Registro;
 import com.android.diabetescontrol.util.Constante;
 import com.android.diabetescontrol.util.Utils;
 
-public class RegistroWS {
+public class GetRegistroWS {
 	private String namespace = "http://servico.diabetes.com/";
 	private String method_name = "";
-	private Registro reg;
 	private Context ctx;
 	private SoapObject request;
 	private String soap_action = "";
 	private String url = "";
 
-	public RegistroWS(Context ctx) {
+	public GetRegistroWS(Context ctx) {
 		this.ctx = ctx;
 		this.url = Utils.URL_WS(ctx);
 	}
@@ -39,10 +39,12 @@ public class RegistroWS {
 
 	class servicoAsyncTask extends AsyncTask<Void, Void, Void> {
 		private ProgressDialog progressDialog;
+		private String mensagem = "";
 
 		@Override
 		protected Void doInBackground(Void... params) {
-			getRegistrosService();
+			mensagem = getRegistrosService();
+			progressDialog.cancel();
 			return null;
 		}
 
@@ -55,11 +57,15 @@ public class RegistroWS {
 
 		@Override
 		protected void onPostExecute(Void result) {
-			progressDialog.cancel();
+			if (!"sucess".equals(mensagem)) {
+				Utils.criarAlertaErro(ctx, "Não foi possível se conectar à "
+						+ Utils.URL_WS(ctx));
+			}
 		}
 	}
 
-	private void getRegistrosService() {
+	private String getRegistrosService() {
+		String resultado = "sucess";
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
 				SoapEnvelope.VER11);
 		MarshalDate md = new MarshalDate();
@@ -96,10 +102,16 @@ public class RegistroWS {
 				}
 			}
 		} catch (ParseException e) {
+			resultado = "error";
+			e.printStackTrace();
+		} catch (SocketTimeoutException e) {
+			resultado = "error";
 			e.printStackTrace();
 		} catch (Exception ex) {
+			resultado = "error";
 			ex.printStackTrace();
 		}
+		return resultado;
 	}
 
 	private void insereRegistro(Registro reg) {

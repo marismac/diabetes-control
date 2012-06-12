@@ -18,7 +18,8 @@ import com.android.diabetescontrol.database.NotaRegistroMedicoDAO;
 import com.android.diabetescontrol.model.NotaRegistroMedico;
 import com.android.diabetescontrol.model.Registro;
 import com.android.diabetescontrol.util.Utils;
-import com.android.diabetescontrol.webservice.RegistroWS;
+import com.android.diabetescontrol.webservice.CadNotaWS;
+import com.android.diabetescontrol.webservice.GetRegistroWS;
 
 public class ListaRegistrosMedicosActivity extends ListActivity {
 	String codPaciente;
@@ -35,7 +36,7 @@ public class ListaRegistrosMedicosActivity extends ListActivity {
 			if (Utils
 					.existConnectionInternet((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))
 					&& Utils.isSelectSynchronize(ctx)) {
-				new RegistroWS(this).sincRegistrosMedico(codPaciente);
+				new GetRegistroWS(this).sincRegistrosMedico(codPaciente);
 			}
 			setListAdapter(new RegistroAdapter(this,
 					new RegistrosMedicosBusiness().getRegistrosPaciente(this,
@@ -55,9 +56,9 @@ public class ListaRegistrosMedicosActivity extends ListActivity {
 		// Inicia criação da AlertDialog
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle("Nota sobre o Registro");
-		builder.setMessage(registro.getTipo() + "( "
+		builder.setMessage(registro.getTipo() + " ( "
 				+ registro.getValor().toString() + " " + registro.getUnidade()
-				+ " )");
+				+ " ) ");
 		builder.setCancelable(true);
 		final EditText notaRegistro = new EditText(this);
 		builder.setView(notaRegistro);
@@ -90,8 +91,9 @@ public class ListaRegistrosMedicosActivity extends ListActivity {
 		// Fecha criação da AlertDialog
 		if (salvar) {
 			if (Utils
-					.existConnectionInternet((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))) {
-				System.out.println(nrm.getDescricao());
+					.existConnectionInternet((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))
+					&& Utils.isSelectSynchronize(ctx)) {
+				new CadNotaWS(nrm, ctx).sincNota();
 			}
 		}
 		super.onListItemClick(l, v, position, id);
