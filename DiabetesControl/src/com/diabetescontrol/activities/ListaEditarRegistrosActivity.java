@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
-import com.android.diabetescontrol.activities.R;
 import com.diabetescontrol.adapters.EditRegistroAdapter;
 import com.diabetescontrol.model.Registro;
 

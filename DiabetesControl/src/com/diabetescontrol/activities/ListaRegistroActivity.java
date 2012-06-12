@@ -14,7 +14,6 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
-import com.android.diabetescontrol.activities.R;
 import com.diabetescontrol.database.RegistroDAO;
 import com.diabetescontrol.model.Registro;
 import com.diabetescontrol.util.Constante;

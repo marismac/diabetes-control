@@ -12,7 +12,7 @@ import android.net.ConnectivityManager;
 import android.preference.PreferenceManager;
 import android.widget.EditText;
 
-import com.android.diabetescontrol.activities.R;
+import com.diabetescontrol.activities.R;
 
 public class Utils {
 	public static void criaAlertSalvar(Context ctx, String msg) {

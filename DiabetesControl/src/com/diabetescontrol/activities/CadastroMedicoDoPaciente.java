@@ -9,7 +9,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.android.diabetescontrol.activities.R;
 import com.diabetescontrol.model.Paciente;
 import com.diabetescontrol.util.Utils;
 import com.diabetescontrol.webservice.AddPacienteWS;

@@ -10,7 +10,6 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
-import com.android.diabetescontrol.activities.R;
 import com.diabetescontrol.business.GlicoseValorMinMaxBusiness;
 
 public class ListaGlicoseValoresActivity extends ListActivity {

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.android.diabetescontrol.activities.R;
 import com.diabetescontrol.business.GlicoseMediaBusiness;
 import com.diabetescontrol.database.RegistroDAO;
 

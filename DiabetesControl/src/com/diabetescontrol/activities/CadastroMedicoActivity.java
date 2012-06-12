@@ -10,7 +10,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.android.diabetescontrol.activities.R;
 import com.diabetescontrol.database.MedicoDAO;
 import com.diabetescontrol.model.Medico;
 import com.diabetescontrol.util.Utils;

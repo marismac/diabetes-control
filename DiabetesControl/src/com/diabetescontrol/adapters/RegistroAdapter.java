@@ -43,18 +43,17 @@ public class RegistroAdapter extends BaseAdapter {
 		Registro registro = lista.get(position);
 		LayoutInflater layout = (LayoutInflater) ctx
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View v = layout
-				.inflate(
-						com.android.diabetescontrol.activities.R.layout.lista_registromedico,
-						null);
+		View v = layout.inflate(
+				com.diabetescontrol.activities.R.layout.lista_registromedico,
+				null);
 
 		TextView txtID = (TextView) v
-				.findViewById(com.android.diabetescontrol.activities.R.id.tvId);
+				.findViewById(com.diabetescontrol.activities.R.id.tvId);
 		txtID.setText(registro.getId().toString());
 		txtID.setVisibility(View.INVISIBLE);
 
 		TextView txtNome = (TextView) v
-				.findViewById(com.android.diabetescontrol.activities.R.id.tvPrinc);
+				.findViewById(com.diabetescontrol.activities.R.id.tvPrinc);
 		if (Constante.TIPO_PRESSAO.equals(registro.getTipo())) {
 			txtNome.setText(registro.getValorPressao() + " "
 					+ registro.getUnidade());
@@ -64,17 +63,17 @@ public class RegistroAdapter extends BaseAdapter {
 		}
 
 		TextView txtCod = (TextView) v
-				.findViewById(com.android.diabetescontrol.activities.R.id.tvCod);
+				.findViewById(com.diabetescontrol.activities.R.id.tvCod);
 		txtCod.setText(registro.getTipo());
 
 		TextView txtMed = (TextView) v
-				.findViewById(com.android.diabetescontrol.activities.R.id.tvMed);
+				.findViewById(com.diabetescontrol.activities.R.id.tvMed);
 		SimpleDateFormat sdhf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		String formattedDateHour = sdhf.format(registro.getDataHora());
 		txtMed.setText(formattedDateHour);
 
 		TextView txtCat = (TextView) v
-				.findViewById(com.android.diabetescontrol.activities.R.id.tvSmall);
+				.findViewById(com.diabetescontrol.activities.R.id.tvSmall);
 		txtCat.setText(registro.getCategoria());
 
 		return v;

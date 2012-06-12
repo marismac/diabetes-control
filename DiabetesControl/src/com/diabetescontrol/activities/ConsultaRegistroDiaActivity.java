@@ -2,8 +2,6 @@ package com.diabetescontrol.activities;
 
 import java.util.Calendar;
 
-import com.android.diabetescontrol.activities.R;
-
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
