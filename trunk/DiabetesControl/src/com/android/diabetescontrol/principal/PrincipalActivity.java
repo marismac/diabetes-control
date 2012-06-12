@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.android.diabetescontrol.activities.CadastroMedicoDoPaciente;
 import com.android.diabetescontrol.activities.CadastroPacienteActivity;
 import com.android.diabetescontrol.activities.CadastroRegistroActivity;
-import com.android.diabetescontrol.activities.ConfiguracoesActivity;
 import com.android.diabetescontrol.activities.ListaEditarRegistrosActivity;
 import com.android.diabetescontrol.activities.ListaNotasRegistrosMedicosActivity;
 import com.android.diabetescontrol.activities.ListaPacientesActivity;
@@ -192,7 +191,7 @@ public class PrincipalActivity extends Activity {
 		btConfiguracoes.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				Intent i = new Intent(PrincipalActivity.this,
-						ConfiguracoesActivity.class);
+						PreferenciasActivity.class);
 				startActivity(i);
 
 			}

@@ -62,6 +62,7 @@ public class SelectGraficosActivity extends Activity {
 	private void inicializaObjetos() {
 		btGraficoCategoria = (Button) findViewById(R.id.btGraficoMaiores);
 		btMaioresTipo = (Button) findViewById(R.id.btGraficoTipo);
+		btMaioresTipo.setVisibility(View.GONE);
 		btUltimosRegistros = (Button) findViewById(R.id.btGraficoUltimos);
 		btUltimosGeraisMedia = (Button) findViewById(R.id.btUltimasGeralMedias);
 	}

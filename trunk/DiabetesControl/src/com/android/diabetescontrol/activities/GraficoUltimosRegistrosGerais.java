@@ -16,6 +16,7 @@ import android.database.Cursor;
 import android.graphics.Color;
 
 import com.android.diabetescontrol.database.RegistroDAO;
+import com.android.diabetescontrol.model.Paciente;
 import com.android.diabetescontrol.util.Constante;
 
 public class GraficoUltimosRegistrosGerais {
@@ -195,12 +196,26 @@ public class GraficoUltimosRegistrosGerais {
 		return valores;
 	}
 
+	@SuppressWarnings("static-access")
 	private String getSql(RegistroDAO regDao, String tipo) {
-		@SuppressWarnings("static-access")
-		String sql = "SELECT " + regDao.COLUNA_VALOR + ", "
-				+ regDao.COLUNA_DATAHORA + " FROM " + regDao.TABELA_REGISTRO
-				+ " WHERE " + regDao.COLUNA_TIPO + " = '" + tipo
-				+ "' ORDER BY " + regDao.COLUNA_DATAHORA + " ASC LIMIT 0, 100";
+		String sql = "";
+		if (Constante.TIPO_MODO_MEDICO.equals(Constante.TIPO_MODO)) {
+			sql = "SELECT " + regDao.COLUNA_VALOR + ", "
+					+ regDao.COLUNA_DATAHORA + " FROM "
+					+ regDao.TABELA_REGISTRO + " WHERE " + regDao.COLUNA_TIPO
+					+ " = '" + tipo + "' AND " + regDao.COLUNA_TIPO_USER
+					+ " = '" + Constante.TIPO_MODO + "' " + " AND "
+					+ regDao.COLUNA_CODPAC + " = '"
+					+ Paciente.getCODIGOPACIENTE() + "' " + " ORDER BY "
+					+ regDao.COLUNA_DATAHORA + " ASC LIMIT 0, 100";
+		} else {
+			sql = "SELECT " + regDao.COLUNA_VALOR + ", "
+					+ regDao.COLUNA_DATAHORA + " FROM "
+					+ regDao.TABELA_REGISTRO + " WHERE " + regDao.COLUNA_TIPO
+					+ " = '" + tipo + "' AND " + regDao.COLUNA_TIPO_USER
+					+ " = '" + Constante.TIPO_MODO + "' " + " ORDER BY "
+					+ regDao.COLUNA_DATAHORA + " ASC LIMIT 0, 100";
+		}
 		return sql;
 	}
 }

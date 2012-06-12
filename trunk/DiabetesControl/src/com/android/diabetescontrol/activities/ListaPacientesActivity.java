@@ -27,8 +27,8 @@ public class ListaPacientesActivity extends ListActivity {
 				&& "G".equals(getIntent().getExtras().get("origem"))) {
 			// Entra aqui se for para selecionar o paciente para os GRÁFICOS
 			Intent i = new Intent(ListaPacientesActivity.this,
-					GraficosPacienteActivity.class);
-			i.putExtra("codPaciente", paciente.getCodPaciente());
+					SelectGraficosActivity.class);
+			Paciente.setCODIGOPACIENTE(paciente.getCodPaciente());
 			startActivity(i);
 		} else if (getIntent().getExtras() != null
 				&& getIntent().getExtras().get("origem") != null
@@ -39,11 +39,6 @@ public class ListaPacientesActivity extends ListActivity {
 			Paciente.setCODIGOPACIENTE(paciente.getCodPaciente());
 			startActivity(i);
 
-		} else {
-			Intent i = new Intent(ListaPacientesActivity.this,
-					ListaRegistrosMedicosActivity.class);
-			i.putExtra("codPaciente", paciente.getCodPaciente());
-			startActivity(i);
 		}
 		super.onListItemClick(l, v, position, id);
 	}
