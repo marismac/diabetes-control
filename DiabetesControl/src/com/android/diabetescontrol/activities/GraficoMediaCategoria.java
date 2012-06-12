@@ -17,12 +17,13 @@ import android.database.Cursor;
 import android.graphics.Color;
 
 import com.android.diabetescontrol.database.RegistroDAO;
+import com.android.diabetescontrol.model.Paciente;
 import com.android.diabetescontrol.util.Constante;
 import com.android.diabetescontrol.util.DataUtil;
 
 public class GraficoMediaCategoria {
 	public Intent getIntent(Context context) {
-		
+
 		int[] x1 = getMediasCategoriasSemana(context);
 		CategorySeries series = new CategorySeries("Semana");
 		for (int i = 0; i < x1.length; i++) {
@@ -43,7 +44,7 @@ public class GraficoMediaCategoria {
 		renderer.setDisplayChartValues(true);
 		renderer.setChartValuesSpacing((float) 3.0);
 		renderer.setColor(Color.BLUE);
-		
+
 		XYSeriesRenderer renderer2 = new XYSeriesRenderer();
 		renderer2.setDisplayChartValues(true);
 		renderer2.setChartValuesSpacing((float) 3.0);
@@ -52,7 +53,7 @@ public class GraficoMediaCategoria {
 		XYMultipleSeriesRenderer mRenderer = new XYMultipleSeriesRenderer();
 		mRenderer.addSeriesRenderer(renderer);
 		mRenderer.addSeriesRenderer(renderer2);
-		
+
 		mRenderer.setChartTitle("Média por Categoria");
 		mRenderer.setXTitle("Categorias");
 		mRenderer.setYTitle("Valor");
@@ -60,10 +61,10 @@ public class GraficoMediaCategoria {
 		mRenderer.setZoomButtonsVisible(true);
 		mRenderer.setApplyBackgroundColor(true);
 		mRenderer.setBackgroundColor(Color.parseColor("#F5F5F5"));
-	    mRenderer.setMarginsColor(Color.parseColor("#F5F5F5"));
-	    mRenderer.setLabelsColor(Color.BLACK);
-	    mRenderer.setXLabelsColor(Color.BLACK);
-	    mRenderer.setXLabels(1);
+		mRenderer.setMarginsColor(Color.parseColor("#F5F5F5"));
+		mRenderer.setLabelsColor(Color.BLACK);
+		mRenderer.setXLabelsColor(Color.BLACK);
+		mRenderer.setXLabels(1);
 		mRenderer.addXTextLabel(1, "Café Antes");
 		mRenderer.addXTextLabel(2, "Café Depois");
 		mRenderer.addXTextLabel(3, "Lanche Antes");
@@ -73,54 +74,9 @@ public class GraficoMediaCategoria {
 		mRenderer.addXTextLabel(7, "Janta Antes");
 		mRenderer.addXTextLabel(8, "Janta Depois");
 
-
 		Intent intent = ChartFactory.getBarChartIntent(context, dataset,
 				mRenderer, Type.DEFAULT);
 		return intent;
-		// int[] x = { 1, 2, 3, 4, 5, 6, 7, 8 };
-		// int[] y = getMediasCategorias(context);
-		//
-		// TimeSeries series = new TimeSeries("Média Geral");
-		// for (int i = 0; i < x.length; i++) {
-		// series.add(x[i], y[i]);
-		// }
-		//
-		// int[] x2 = { 1, 2, 3, 4, 5, 6, 7, 8 };
-		// int[] y2 = getMediasCategoriasSemana(context);
-		//
-		// TimeSeries series2 = new TimeSeries("Média Semanal");
-		// for (int i = 0; i < x2.length; i++) {
-		// series2.add(x2[i], y2[i]);
-		// }
-		//
-		// XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
-		// dataset.addSeries(series);
-		// dataset.addSeries(series2);
-		//
-		// XYSeriesRenderer renderer = new XYSeriesRenderer();
-		// renderer.setColor(Color.BLUE);
-		// renderer.setPointStyle(PointStyle.SQUARE);
-		// renderer.setFillPoints(true);
-		// renderer.setDisplayChartValues(true);
-		//
-		// XYSeriesRenderer renderer2 = new XYSeriesRenderer();
-		// renderer2.setColor(Color.CYAN);
-		// renderer2.setPointStyle(PointStyle.DIAMOND);
-		// renderer2.setFillPoints(true);
-		// renderer2.setDisplayChartValues(true);
-		//
-		// XYMultipleSeriesRenderer mRenderer = new XYMultipleSeriesRenderer();
-		// mRenderer.addSeriesRenderer(renderer);
-		// mRenderer.addSeriesRenderer(renderer2);
-		// mRenderer.setChartTitle("Média por Categoria");
-		//
-		// // mRenderer.setBackgroundColor(Color.WHITE);
-		// mRenderer.setZoomButtonsVisible(true);
-		// // mRenderer.setApplyBackgroundColor(true);
-		//
-		// Intent intent = ChartFactory.getLineChartIntent(context, dataset,
-		// mRenderer, "Gráficos");
-		// return intent;
 	}
 
 	public int[] getMediasCategorias(Context ctx) {
@@ -143,6 +99,20 @@ public class GraficoMediaCategoria {
 		return valores;
 	}
 
+	private String getAddSQLPermissao() {
+		String sqlAddPaciente = "";
+		if (Constante.TIPO_MODO_MEDICO.equals(Constante.TIPO_MODO)) {
+			sqlAddPaciente = " AND " + RegistroDAO.COLUNA_TIPO_USER + " = '"
+					+ Constante.TIPO_MODO + "' " + " AND "
+					+ RegistroDAO.COLUNA_CODPAC + " = '"
+					+ Paciente.getCODIGOPACIENTE() + "' ";
+		} else {
+			sqlAddPaciente = " AND " + RegistroDAO.COLUNA_TIPO_USER + " = '"
+					+ Constante.TIPO_MODO + "' ";
+		}
+		return sqlAddPaciente;
+	}
+
 	@SuppressWarnings("static-access")
 	private List<String> getSqlList(RegistroDAO regDao) {
 		List<String> sqlList = new ArrayList<String>();
@@ -150,42 +120,50 @@ public class GraficoMediaCategoria {
 				+ regDao.TABELA_REGISTRO + " WHERE " + regDao.COLUNA_TIPO
 				+ " = '" + Constante.TIPO_GLICOSE + "' AND "
 				+ regDao.COLUNA_CATEGORIA + " = '" + Constante.CAT_A_CAFE
-				+ "' GROUP BY " + regDao.COLUNA_CATEGORIA);
+				+ "' " + getAddSQLPermissao() + " GROUP BY "
+				+ regDao.COLUNA_CATEGORIA);
 		sqlList.add("SELECT AVG(" + regDao.COLUNA_VALOR + ") FROM "
 				+ regDao.TABELA_REGISTRO + " WHERE " + regDao.COLUNA_TIPO
 				+ " = '" + Constante.TIPO_GLICOSE + "' AND "
 				+ regDao.COLUNA_CATEGORIA + " = '" + Constante.CAT_D_CAFE
-				+ "' GROUP BY " + regDao.COLUNA_CATEGORIA);
+				+ "' " + getAddSQLPermissao() + " GROUP BY "
+				+ regDao.COLUNA_CATEGORIA);
 		sqlList.add("SELECT AVG(" + regDao.COLUNA_VALOR + ") FROM "
 				+ regDao.TABELA_REGISTRO + " WHERE " + regDao.COLUNA_TIPO
 				+ " = '" + Constante.TIPO_GLICOSE + "' AND "
 				+ regDao.COLUNA_CATEGORIA + " = '" + Constante.CAT_A_LANCHE
-				+ "' GROUP BY " + regDao.COLUNA_CATEGORIA);
+				+ "' " + getAddSQLPermissao() + " GROUP BY "
+				+ regDao.COLUNA_CATEGORIA);
 		sqlList.add("SELECT AVG(" + regDao.COLUNA_VALOR + ") FROM "
 				+ regDao.TABELA_REGISTRO + " WHERE " + regDao.COLUNA_TIPO
 				+ " = '" + Constante.TIPO_GLICOSE + "' AND "
 				+ regDao.COLUNA_CATEGORIA + " = '" + Constante.CAT_D_LANCHE
-				+ "' GROUP BY " + regDao.COLUNA_CATEGORIA);
+				+ "' " + getAddSQLPermissao() + " GROUP BY "
+				+ regDao.COLUNA_CATEGORIA);
 		sqlList.add("SELECT AVG(" + regDao.COLUNA_VALOR + ") FROM "
 				+ regDao.TABELA_REGISTRO + " WHERE " + regDao.COLUNA_TIPO
 				+ " = '" + Constante.TIPO_GLICOSE + "' AND "
 				+ regDao.COLUNA_CATEGORIA + " = '" + Constante.CAT_A_ALMOCO
-				+ "' GROUP BY " + regDao.COLUNA_CATEGORIA);
+				+ "' " + getAddSQLPermissao() + " GROUP BY "
+				+ regDao.COLUNA_CATEGORIA);
 		sqlList.add("SELECT AVG(" + regDao.COLUNA_VALOR + ") FROM "
 				+ regDao.TABELA_REGISTRO + " WHERE " + regDao.COLUNA_TIPO
 				+ " = '" + Constante.TIPO_GLICOSE + "' AND "
 				+ regDao.COLUNA_CATEGORIA + " = '" + Constante.CAT_D_ALMOCO
-				+ "' GROUP BY " + regDao.COLUNA_CATEGORIA);
+				+ "' " + getAddSQLPermissao() + " GROUP BY "
+				+ regDao.COLUNA_CATEGORIA);
 		sqlList.add("SELECT AVG(" + regDao.COLUNA_VALOR + ") FROM "
 				+ regDao.TABELA_REGISTRO + " WHERE " + regDao.COLUNA_TIPO
 				+ " = '" + Constante.TIPO_GLICOSE + "' AND "
 				+ regDao.COLUNA_CATEGORIA + " = '" + Constante.CAT_A_JANTA
-				+ "' GROUP BY " + regDao.COLUNA_CATEGORIA);
+				+ "' " + getAddSQLPermissao() + " GROUP BY "
+				+ regDao.COLUNA_CATEGORIA);
 		sqlList.add("SELECT AVG(" + regDao.COLUNA_VALOR + ") FROM "
 				+ regDao.TABELA_REGISTRO + " WHERE " + regDao.COLUNA_TIPO
 				+ " = '" + Constante.TIPO_GLICOSE + "' AND "
 				+ regDao.COLUNA_CATEGORIA + " = '" + Constante.CAT_D_JANTA
-				+ "' GROUP BY " + regDao.COLUNA_CATEGORIA);
+				+ "' " + getAddSQLPermissao() + " GROUP BY "
+				+ regDao.COLUNA_CATEGORIA);
 		return sqlList;
 	}
 
@@ -196,50 +174,50 @@ public class GraficoMediaCategoria {
 				+ regDao.COLUNA_DATAHORA + " FROM " + regDao.TABELA_REGISTRO
 				+ " WHERE " + regDao.COLUNA_TIPO + " = '"
 				+ Constante.TIPO_GLICOSE + "' AND " + regDao.COLUNA_CATEGORIA
-				+ " = '" + Constante.CAT_A_CAFE + "' GROUP BY "
-				+ regDao.COLUNA_CATEGORIA);
+				+ " = '" + Constante.CAT_A_CAFE + "' " + getAddSQLPermissao()
+				+ " GROUP BY " + regDao.COLUNA_CATEGORIA);
 		sqlList.add("SELECT " + regDao.COLUNA_VALOR + ", "
 				+ regDao.COLUNA_DATAHORA + " FROM " + regDao.TABELA_REGISTRO
 				+ " WHERE " + regDao.COLUNA_TIPO + " = '"
 				+ Constante.TIPO_GLICOSE + "' AND " + regDao.COLUNA_CATEGORIA
-				+ " = '" + Constante.CAT_D_CAFE + "' GROUP BY "
-				+ regDao.COLUNA_CATEGORIA);
+				+ " = '" + Constante.CAT_D_CAFE + "' " + getAddSQLPermissao()
+				+ " GROUP BY " + regDao.COLUNA_CATEGORIA);
 		sqlList.add("SELECT " + regDao.COLUNA_VALOR + ", "
 				+ regDao.COLUNA_DATAHORA + " FROM " + regDao.TABELA_REGISTRO
 				+ " WHERE " + regDao.COLUNA_TIPO + " = '"
 				+ Constante.TIPO_GLICOSE + "' AND " + regDao.COLUNA_CATEGORIA
-				+ " = '" + Constante.CAT_A_LANCHE + "' GROUP BY "
-				+ regDao.COLUNA_CATEGORIA);
+				+ " = '" + Constante.CAT_A_LANCHE + "' " + getAddSQLPermissao()
+				+ " GROUP BY " + regDao.COLUNA_CATEGORIA);
 		sqlList.add("SELECT " + regDao.COLUNA_VALOR + ", "
 				+ regDao.COLUNA_DATAHORA + " FROM " + regDao.TABELA_REGISTRO
 				+ " WHERE " + regDao.COLUNA_TIPO + " = '"
 				+ Constante.TIPO_GLICOSE + "' AND " + regDao.COLUNA_CATEGORIA
-				+ " = '" + Constante.CAT_D_LANCHE + "' GROUP BY "
-				+ regDao.COLUNA_CATEGORIA);
+				+ " = '" + Constante.CAT_D_LANCHE + "' " + getAddSQLPermissao()
+				+ " GROUP BY " + regDao.COLUNA_CATEGORIA);
 		sqlList.add("SELECT " + regDao.COLUNA_VALOR + ", "
 				+ regDao.COLUNA_DATAHORA + " FROM " + regDao.TABELA_REGISTRO
 				+ " WHERE " + regDao.COLUNA_TIPO + " = '"
 				+ Constante.TIPO_GLICOSE + "' AND " + regDao.COLUNA_CATEGORIA
-				+ " = '" + Constante.CAT_A_ALMOCO + "' GROUP BY "
-				+ regDao.COLUNA_CATEGORIA);
+				+ " = '" + Constante.CAT_A_ALMOCO + "' " + getAddSQLPermissao()
+				+ " GROUP BY " + regDao.COLUNA_CATEGORIA);
 		sqlList.add("SELECT " + regDao.COLUNA_VALOR + ", "
 				+ regDao.COLUNA_DATAHORA + " FROM " + regDao.TABELA_REGISTRO
 				+ " WHERE " + regDao.COLUNA_TIPO + " = '"
 				+ Constante.TIPO_GLICOSE + "' AND " + regDao.COLUNA_CATEGORIA
-				+ " = '" + Constante.CAT_D_ALMOCO + "' GROUP BY "
-				+ regDao.COLUNA_CATEGORIA);
+				+ " = '" + Constante.CAT_D_ALMOCO + "' " + getAddSQLPermissao()
+				+ " GROUP BY " + regDao.COLUNA_CATEGORIA);
 		sqlList.add("SELECT " + regDao.COLUNA_VALOR + ", "
 				+ regDao.COLUNA_DATAHORA + " FROM " + regDao.TABELA_REGISTRO
 				+ " WHERE " + regDao.COLUNA_TIPO + " = '"
 				+ Constante.TIPO_GLICOSE + "' AND " + regDao.COLUNA_CATEGORIA
-				+ " = '" + Constante.CAT_A_JANTA + "' GROUP BY "
-				+ regDao.COLUNA_CATEGORIA);
+				+ " = '" + Constante.CAT_A_JANTA + "' " + getAddSQLPermissao()
+				+ " GROUP BY " + regDao.COLUNA_CATEGORIA);
 		sqlList.add("SELECT " + regDao.COLUNA_VALOR + ", "
 				+ regDao.COLUNA_DATAHORA + " FROM " + regDao.TABELA_REGISTRO
 				+ " WHERE " + regDao.COLUNA_TIPO + " = '"
 				+ Constante.TIPO_GLICOSE + "' AND " + regDao.COLUNA_CATEGORIA
-				+ " = '" + Constante.CAT_D_JANTA + "' GROUP BY "
-				+ regDao.COLUNA_CATEGORIA);
+				+ " = '" + Constante.CAT_D_JANTA + "' " + getAddSQLPermissao()
+				+ " GROUP BY " + regDao.COLUNA_CATEGORIA);
 		return sqlList;
 	}
 

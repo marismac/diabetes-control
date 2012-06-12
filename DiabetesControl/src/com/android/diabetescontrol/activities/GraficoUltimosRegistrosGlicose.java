@@ -13,6 +13,7 @@ import android.database.Cursor;
 import android.graphics.Color;
 
 import com.android.diabetescontrol.database.RegistroDAO;
+import com.android.diabetescontrol.model.Paciente;
 import com.android.diabetescontrol.util.Constante;
 
 public class GraficoUltimosRegistrosGlicose {
@@ -72,8 +73,22 @@ public class GraficoUltimosRegistrosGlicose {
 		String sql = "SELECT " + regDao.COLUNA_VALOR + ", "
 				+ regDao.COLUNA_TIPO + ", " + regDao.COLUNA_UNIDADE + " FROM "
 				+ regDao.TABELA_REGISTRO + " WHERE " + regDao.COLUNA_TIPO
-				+ " = '" + Constante.TIPO_GLICOSE + "' ORDER BY "
-				+ regDao.COLUNA_DATAHORA + " ASC";
+				+ " = '" + Constante.TIPO_GLICOSE + "' " + getAddSQLPermissao()
+				+ " ORDER BY " + regDao.COLUNA_DATAHORA + " ASC";
 		return sql;
+	}
+
+	private String getAddSQLPermissao() {
+		String sqlAddPaciente = "";
+		if (Constante.TIPO_MODO_MEDICO.equals(Constante.TIPO_MODO)) {
+			sqlAddPaciente = " AND " + RegistroDAO.COLUNA_TIPO_USER + " = '"
+					+ Constante.TIPO_MODO + "' " + " AND "
+					+ RegistroDAO.COLUNA_CODPAC + " = '"
+					+ Paciente.getCODIGOPACIENTE() + "' ";
+		} else {
+			sqlAddPaciente = " AND " + RegistroDAO.COLUNA_TIPO_USER + " = '"
+					+ Constante.TIPO_MODO + "' ";
+		}
+		return sqlAddPaciente;
 	}
 }
