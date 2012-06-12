@@ -82,7 +82,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.android.diabetescontrol.principal.PrincipalActivity"
+            android:name="com.diabetescontrol.principal.PrincipalActivity"
             android:label="@string/app_name"
             android:theme="@style/MapBackground" >
             <intent-filter>
