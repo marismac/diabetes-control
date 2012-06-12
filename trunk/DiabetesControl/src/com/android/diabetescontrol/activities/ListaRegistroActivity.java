@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.android.diabetescontrol.database.RegistroDAO;
 import com.android.diabetescontrol.model.Registro;
+import com.android.diabetescontrol.util.Constante;
 import com.android.diabetescontrol.util.Utils;
 
 public class ListaRegistroActivity extends ListActivity {
@@ -69,11 +70,24 @@ public class ListaRegistroActivity extends ListActivity {
 			if (dataFiltro.equals(formattedDate)
 					&& reg.getModoUser().equals(Utils.tipo_modo(this))) {
 				textSem.setVisibility(View.INVISIBLE);
-				m.put("Master", reg.getTipo().toString() + ": "
-						+ reg.getValor().toString());
+				if (Constante.TIPO_PRESSAO.equals(reg.getTipo())) {
+					m.put("Master",
+							reg.getValorPressao() + " " + reg.getUnidade()
+									+ " de " + reg.getTipo());
+				} else {
+					m.put("Master",
+							reg.getValor().toString() + " " + reg.getUnidade()
+									+ " de " + reg.getTipo());
+				}
 				String formattedDateHour = sdhf.format(reg.getDataHora());
-				m.put("Detail", formattedDateHour + " - "
-						+ reg.getCategoria().toString());
+				if (Constante.TIPO_MEDICAMENTO.equals(reg.getTipo())) {
+					m.put("Detail", reg.getMedicamento() + " - "
+							+ formattedDateHour + " - "
+							+ reg.getCategoria().toString());
+				} else {
+					m.put("Detail", formattedDateHour + " - "
+							+ reg.getCategoria().toString());
+				}
 				l.add(m);
 			}
 			c.moveToNext();

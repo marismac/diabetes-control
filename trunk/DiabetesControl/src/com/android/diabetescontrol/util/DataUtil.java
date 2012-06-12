@@ -19,12 +19,12 @@ public class DataUtil {
 		long time = cal.getTimeInMillis();
 		long primeiroDiaDaSemana = time
 				- ((diaDaSemana - Calendar.SUNDAY) * millisPorDia);
-		
+
 		primeiroDiaSemana.setTime(primeiroDiaDaSemana);
 		primeiroDiaSemana.setMinutes(0);
 		primeiroDiaSemana.setHours(0);
 		primeiroDiaSemana.setSeconds(0);
-		
+
 		return primeiroDiaSemana;
 	}
 
@@ -48,6 +48,9 @@ public class DataUtil {
 	public final Date getPrimeiroDiaMes() {
 		Date date = new Date();
 		date.setDate(1);
+		date.setMinutes(0);
+		date.setHours(0);
+		date.setSeconds(0);
 		return date;
 	}
 
@@ -60,6 +63,9 @@ public class DataUtil {
 		} else {
 			date.setMonth(date.getMonth() - 1);
 		}
+		date.setMinutes(0);
+		date.setHours(0);
+		date.setSeconds(0);
 		return date;
 	}
 
@@ -67,6 +73,9 @@ public class DataUtil {
 		Date date = new Date();
 		date.setDate(1);
 		date.setMonth(Calendar.JANUARY);
+		date.setMinutes(0);
+		date.setHours(0);
+		date.setSeconds(0);
 		return date;
 	}
 

@@ -43,11 +43,6 @@ public class GlicoseMediaBusiness {
 		Date dataPrimeiroDiaMesPassado = new DataUtil()
 				.getPrimeiroDiaMesPassado();
 		Date dataPrimeiroDiaAno = new DataUtil().getPrimeiroDiaAno();
-		// Date dataUltimoDiaSemanaPassada = new
-		// DataUtil().getUltimoDiaSemanaPassada();
-		// Date dataUltimoDiaMesPassado = new
-		// DataUtil().getUltimoDiaMesPassado();
-
 		String dataHoje = new SimpleDateFormat("dd/MM/yyyy")
 				.format(dataHojeDate);
 		String dataOntem = new SimpleDateFormat("dd/MM/yyyy")
@@ -85,8 +80,6 @@ public class GlicoseMediaBusiness {
 			}
 			++contMedioTotal;
 			valorMedioTotal += reg.getValor();
-			System.out.println(reg.getValor() + " - " + reg.getDataHora());
-
 			c.moveToNext();
 		}
 		valorMedioOntem = valorMedioOntem / contMedioOntem;

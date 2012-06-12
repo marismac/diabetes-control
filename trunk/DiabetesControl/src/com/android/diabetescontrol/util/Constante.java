@@ -18,7 +18,9 @@ public final class Constante {
 	public static String METODO_WS_CADPACIENTE = "cadPaciente"; // Metodo para Cadastrar um Paciente
 	public static String METODO_WS_ADDPACIENTEMEDICO = "addPacienteMedico"; // Metodo para Adicionar um Paciente ao Médico
 	public static String METODO_WS_GETREGISTROSPACIENTE = "getRegistrosPaciente"; // Metodo para Buscar informações dos Registros do Paciente
-	public static String METODO_WS_CADNOTAMEDICO= "cadNotaMedico"; // Metodo para Cadastrar informações das Notas do Médico
-	public static String METODO_WS_GETNOTAMEDICO= "getNotasMedicas"; // Metodo para Cadastrar informações das Notas do Médico
+	public static String METODO_WS_CADNOTAMEDICO = "cadNotaMedico"; // Metodo para Cadastrar informações das Notas do Médico
+	public static String METODO_WS_GETNOTAMEDICO = "getNotasMedicas"; // Metodo para Cadastrar informações das Notas do Médico
+	public static String TIPO_MODO = "";
+	public static String TIPO_MODO_MEDICO = "M";
 	
 }

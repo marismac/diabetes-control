@@ -68,7 +68,7 @@
             android:theme="@style/MapBackgroundNoTitle" />
         <activity
             android:name=".ListaRegistroActivity"
-            android:theme="@style/MapBackgroundNoTitle" />
+            android:theme="@style/MapBackground" />
         <activity
             android:name=".ListaPacientesActivity"
             android:theme="@style/MapBackground" />

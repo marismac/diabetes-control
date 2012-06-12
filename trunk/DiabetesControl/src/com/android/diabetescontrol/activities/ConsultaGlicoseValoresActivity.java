@@ -16,7 +16,7 @@ public class ConsultaGlicoseValoresActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.filtrosconsultaglicosevalor);
+		setContentView(R.layout.filtros_consultaglicosvalor);
 		setCampos();
 		runListeners();
 	}
@@ -24,11 +24,21 @@ public class ConsultaGlicoseValoresActivity extends Activity {
 	private void runListeners() {
 		buttonConsultar.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				Intent i = new Intent(ConsultaGlicoseValoresActivity.this,
-						ListaGlicoseValoresActivity.class);
-				i.putExtra("valorMin", editTextValorMin.getText());
-				i.putExtra("valorMax", editTextValorMax.getText());
-				startActivity(i);
+				if (editTextValorMin.getText() == null
+						|| "".equals(editTextValorMin.getText().toString())) {
+					editTextValorMin.setFocusable(true);
+					editTextValorMin.setError("Obrigatório");
+				} else if (editTextValorMax.getText() == null
+						|| "".equals(editTextValorMax.getText().toString())) {
+					editTextValorMax.setFocusable(true);
+					editTextValorMax.setError("Obrigatório");
+				} else {
+					Intent i = new Intent(ConsultaGlicoseValoresActivity.this,
+							ListaGlicoseValoresActivity.class);
+					i.putExtra("valorMin", editTextValorMin.getText());
+					i.putExtra("valorMax", editTextValorMax.getText());
+					startActivity(i);
+				}
 			}
 		});
 	}
