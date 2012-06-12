@@ -18,7 +18,7 @@ public class ListaGlicoseUltimosRegistrosActivity extends ListActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.consultaultimosregistros);
+		setContentView(R.layout.lista_registros);
 		List<Map<String, String>> regs = new GlicoseUltimosRegistrosBusiness()
 				.getUltimosRegistrosList(this);
 		if (regs != null && !regs.isEmpty()) {
