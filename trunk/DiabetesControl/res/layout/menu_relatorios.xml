@@ -35,7 +35,15 @@
                 android:textSize="25dp" />
 
         </RelativeLayout>
-
+
+        <Button
+            android:id="@+id/btNotasMedicas"
+            android:layout_width="wrap_content"
+            android:layout_height="58dp"
+            android:gravity="left|center"
+            android:text="@string/notasmedicas"
+            android:textSize="24dp" />
+        
         <Button
             android:id="@+id/btRegdia"
             android:layout_width="wrap_content"

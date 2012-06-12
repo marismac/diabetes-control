@@ -4,7 +4,6 @@ import java.net.SocketTimeoutException;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
-import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
@@ -17,47 +16,33 @@ import com.android.diabetescontrol.model.NotaRegistroMedico;
 import com.android.diabetescontrol.util.Constante;
 import com.android.diabetescontrol.util.Utils;
 
-public class CadNotaWS {
+public class GetNotaWS {
 	private String namespace = "http://servico.diabetes.com/";
-	private NotaRegistroMedico nrm;
-	private String soap_action = "";
-	private String url = "";
+	private String method_name = "";
 	private Context ctx;
 	private SoapObject request;
-	String mensagem = "";
+	private String soap_action = "";
+	private String url = "";
 
-	public CadNotaWS(NotaRegistroMedico nrm, Context ctx) {
-		this.nrm = nrm;
+	public GetNotaWS(Context ctx) {
 		this.ctx = ctx;
 		this.url = Utils.URL_WS(ctx);
 	}
 
-	public void sincNota() {
-		this.request = new SoapObject(namespace,
-				Constante.METODO_WS_CADNOTAMEDICO);
-		request.addProperty("descricao", nrm.getDescricao());
-		request.addProperty("infoRegistro", nrm.getInfoRegistro());
-		request.addProperty("codPaciente", nrm.getCodPaciente());
-		request.addProperty("idCelular", nrm.getIdRegistro());
+	public void sincNotasMedico(String codPaciente) {
+		this.method_name = Constante.METODO_WS_GETNOTAMEDICO;
+		this.request = new SoapObject(namespace, method_name);
+		request.addProperty("codPaciente", codPaciente);
 		new servicoAsyncTask().execute();
-
-	}
-
-	// Método utilizado para marcar as notas como Sincronizadas
-	private void salvaNota(NotaRegistroMedico nrm) {
-		NotaRegistroMedicoDAO nrmDao = new NotaRegistroMedicoDAO(ctx);
-		nrm.setSincronizado("S");
-		nrmDao.open();
-		nrmDao.atualizaNota(nrm);
-		nrmDao.close();
 	}
 
 	class servicoAsyncTask extends AsyncTask<Void, Void, Void> {
 		private ProgressDialog progressDialog;
+		private String mensagem = "";
 
 		@Override
 		protected Void doInBackground(Void... params) {
-			mensagem = cadNotaService();
+			mensagem = getRegistrosService();
 			progressDialog.cancel();
 			return null;
 		}
@@ -71,41 +56,57 @@ public class CadNotaWS {
 
 		@Override
 		protected void onPostExecute(Void result) {
-			if (mensagem != null) {
-				if ("sucess".equals(mensagem)) {
-					salvaNota(nrm);
-				} else if ("internet".equals(mensagem)) {
-					Utils.criarAlertaErro(
-							ctx,
-							"Não foi possível se conectar à "
-									+ Utils.URL_WS(ctx));
-				} else {
-					Utils.criarAlertaErro(ctx,
-							"Não foi possível salvar a nota!");
-				}
+			if (!"sucess".equals(mensagem)) {
+				Utils.criarAlertaErro(ctx, "Não foi possível se conectar à "
+						+ Utils.URL_WS(ctx));
 			}
 		}
 	}
 
-	private String cadNotaService() {
+	private String getRegistrosService() {
+		String resultado = "sucess";
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
 				SoapEnvelope.VER11);
 		MarshalDate md = new MarshalDate();
-		MarshalFloat mf = new MarshalFloat();
-		mf.register(envelope);
 		md.register(envelope);
 		envelope.setOutputSoapObject(request);
 		try {
 			HttpTransportSE androidHttpTransport = new HttpTransportSE(url);
 			androidHttpTransport.call(soap_action, envelope);
-			SoapPrimitive result = (SoapPrimitive) envelope.getResponse();
-			return result.toString();
+			SoapObject response = (SoapObject) envelope.bodyIn;
+
+			if (response != null) {
+				NotaRegistroMedico nrm = null;
+				int qtde = response.getPropertyCount();
+				for (int i = 0; i < qtde; i++) {
+					SoapObject property = (SoapObject) response.getProperty(i);
+					if ("sucess".equals(property.getProperty(0).toString())) {
+						nrm = new NotaRegistroMedico();
+						nrm.setDescricao(property.getProperty(1).toString());
+						nrm.setInfoRegistro(property.getProperty(2).toString());
+						nrm.setCodPaciente(property.getProperty(3).toString());
+						nrm.setIdRegistro(Integer.valueOf(property.getProperty(
+								4).toString()));
+						nrm.setTipoUser(Utils.tipo_modo(ctx));
+						nrm.setSincronizado("S");
+						insereNota(nrm);
+					}
+				}
+			}
 		} catch (SocketTimeoutException e) {
+			resultado = "error";
 			e.printStackTrace();
-			return "internet";
 		} catch (Exception ex) {
+			resultado = "error";
 			ex.printStackTrace();
 		}
-		return null;
+		return resultado;
+	}
+
+	private void insereNota(NotaRegistroMedico nrm) {
+		NotaRegistroMedicoDAO nrmDao = new NotaRegistroMedicoDAO(ctx);
+		nrmDao.open();
+		nrmDao.criarNotaRegistroMedico(nrm);
+		nrmDao.close();
 	}
 }

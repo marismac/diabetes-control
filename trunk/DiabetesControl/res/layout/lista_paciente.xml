@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:src="@drawable/addm" />
+        android:src="@drawable/addpaciente" />
 
     <TextView
         android:id="@+id/tvPrinc"
@@ -41,14 +41,14 @@
         android:layout_below="@+id/tvPrinc"
         android:text="Small Text"
         android:textAppearance="?android:attr/textAppearanceSmall" />
-
+
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/btEdit"
         android:layout_toRightOf="@+id/btEdit"
-        android:text="@string/notamedica"
+        android:text="@string/pacientes"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>

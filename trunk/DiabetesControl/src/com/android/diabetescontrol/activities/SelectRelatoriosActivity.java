@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class RelatoriosActivity extends Activity {
+public class SelectRelatoriosActivity extends Activity {
 	private Button btRegistroDia;
 	private Button btGlicoseUltimosRegs;
 	private Button btGlicoseMedias;
@@ -15,6 +15,7 @@ public class RelatoriosActivity extends Activity {
 	private Button btPesoMedio;
 	private Button btInsulinaAplica;
 	private Button btGeralTipo;
+	private Button btNotasMedicas;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,30 +26,39 @@ public class RelatoriosActivity extends Activity {
 	}
 
 	private void carregaListeners() {
+		btNotasMedicas.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(SelectRelatoriosActivity.this,
+						ListaNotasMedicasActivity.class);
+				startActivity(i);
+			}
+		});
+
 		btRegistroDia.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				Intent i = new Intent(RelatoriosActivity.this,
-						consultaRegistroDiaActivity.class);
+				Intent i = new Intent(SelectRelatoriosActivity.this,
+						ConsultaRegistroDiaActivity.class);
 				startActivity(i);
 			}
 		});
 		btGlicoseUltimosRegs.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				Intent i = new Intent(RelatoriosActivity.this,
+				Intent i = new Intent(SelectRelatoriosActivity.this,
 						ListaGlicoseUltimosRegistrosActivity.class);
 				startActivity(i);
 			}
 		});
 		btGlicoseMedias.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				Intent i = new Intent(RelatoriosActivity.this,
+				Intent i = new Intent(SelectRelatoriosActivity.this,
 						RelatorioGlicoseMediaActivity.class);
 				startActivity(i);
 			}
 		});
 		btGlicoseValor.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				Intent i = new Intent(RelatoriosActivity.this,
+				Intent i = new Intent(SelectRelatoriosActivity.this,
 						ConsultaGlicoseValoresActivity.class);
 				startActivity(i);
 			}
@@ -79,5 +89,6 @@ public class RelatoriosActivity extends Activity {
 		btPesoMedio = (Button) findViewById(R.id.btPesomed);
 		btInsulinaAplica = (Button) findViewById(R.id.btInsulaplic);
 		btGeralTipo = (Button) findViewById(R.id.btGeraltipo);
+		btNotasMedicas = (Button) findViewById(R.id.btNotasMedicas);
 	}
 }

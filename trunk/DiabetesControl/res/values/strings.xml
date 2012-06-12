@@ -128,4 +128,5 @@
 	<string name="MCatUldias">Média por categoria últimos dias</string>
 	<string name="notamedica">Nota Médica</string>
 	<string name="consultarnotas">Consulta Notas</string>
+	<string name="pacientes">Lista Pacientes</string>
 </resources>

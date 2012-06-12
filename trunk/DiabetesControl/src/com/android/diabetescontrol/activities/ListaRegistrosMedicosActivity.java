@@ -17,6 +17,7 @@ import com.android.diabetescontrol.business.RegistrosMedicosBusiness;
 import com.android.diabetescontrol.database.NotaRegistroMedicoDAO;
 import com.android.diabetescontrol.model.NotaRegistroMedico;
 import com.android.diabetescontrol.model.Registro;
+import com.android.diabetescontrol.util.Constante;
 import com.android.diabetescontrol.util.Utils;
 import com.android.diabetescontrol.webservice.CadNotaWS;
 import com.android.diabetescontrol.webservice.GetRegistroWS;
@@ -52,13 +53,18 @@ public class ListaRegistrosMedicosActivity extends ListActivity {
 		nrm.setCodPaciente(registro.getCodPaciente());
 		nrm.setSincronizado("N");
 		nrm.setTipoUser(Utils.tipo_modo(this));
+		if (Constante.TIPO_PRESSAO.equals(registro.getTipo())) {
+			nrm.setInfoRegistro(registro.getValorPressao() + " "
+					+ registro.getUnidade() + " de " + registro.getTipo());
+		} else {
+			nrm.setInfoRegistro(registro.getValor().toString() + " "
+					+ registro.getUnidade() + " de " + registro.getTipo());
+		}
 
 		// Inicia criação da AlertDialog
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle("Nota sobre o Registro");
-		builder.setMessage(registro.getTipo() + " ( "
-				+ registro.getValor().toString() + " " + registro.getUnidade()
-				+ " ) ");
+		builder.setMessage(nrm.getInfoRegistro());
 		builder.setCancelable(true);
 		final EditText notaRegistro = new EditText(this);
 		builder.setView(notaRegistro);

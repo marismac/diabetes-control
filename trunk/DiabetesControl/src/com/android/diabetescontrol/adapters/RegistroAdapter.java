@@ -11,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.android.diabetescontrol.model.Registro;
+import com.android.diabetescontrol.util.Constante;
 
 public class RegistroAdapter extends BaseAdapter {
 
@@ -54,8 +55,13 @@ public class RegistroAdapter extends BaseAdapter {
 
 		TextView txtNome = (TextView) v
 				.findViewById(com.android.diabetescontrol.activities.R.id.tvPrinc);
-		txtNome.setText(registro.getValor().toString() + " "
-				+ registro.getUnidade());
+		if (Constante.TIPO_PRESSAO.equals(registro.getTipo())) {
+			txtNome.setText(registro.getValorPressao() + " "
+					+ registro.getUnidade());
+		} else {
+			txtNome.setText(registro.getValor().toString() + " "
+					+ registro.getUnidade());
+		}
 
 		TextView txtCod = (TextView) v
 				.findViewById(com.android.diabetescontrol.activities.R.id.tvCod);

@@ -18,7 +18,9 @@ public class NotaRegistroMedicoDAO extends BasicoDAO {
 	public static final String COLUNA_ID_REGISTRO_MEDICO = "REGISTRO_MEDICO_ID";
 	public static final String COLUNA_DESCRICAO = "DESCRICAO";
 	public static final String COLUNA_SINCRONIZADO = "SINCRONIZADO";
+	public static final String COLUNA_INFO_REGISTRO = "INFO_REGISTRO";
 	public static final String COLUNA_TIPO_USER = "TIPO_USER";
+	public static final String COLUNA_CODPAC = "CODIGO_PACIENTE";
 
 	public static final String NOTA_REGISTRO_MEDICO_CREATE_TABLE = "CREATE TABLE "
 			+ TABELA_NOTA_REGISTRO_MEDICO
@@ -36,7 +38,10 @@ public class NotaRegistroMedicoDAO extends BasicoDAO {
 			+ COLUNA_DESCRICAO
 			+ " TEXT NOT NULL, "
 			+ COLUNA_TIPO_USER
-			+ " TEXT NOT NULL);";
+			+ " TEXT NOT NULL, "
+			+ COLUNA_INFO_REGISTRO
+			+ " TEXT NOT NULL, "
+			+ COLUNA_CODPAC + " TEXT NOT NULL );";
 
 	public void criarNotaRegistroMedico(NotaRegistroMedico notaregMed) {
 		ContentValues values = deNotaRegistroMedicoParaContentValues(notaregMed);
@@ -58,6 +63,8 @@ public class NotaRegistroMedicoDAO extends BasicoDAO {
 		values.put(COLUNA_ID_REGISTRO_MEDICO, notaregMed.getIdRegistro());
 		values.put(COLUNA_TIPO_USER, notaregMed.getTipoUser());
 		values.put(COLUNA_DESCRICAO, notaregMed.getDescricao());
+		values.put(COLUNA_INFO_REGISTRO, notaregMed.getInfoRegistro());
+		values.put(COLUNA_CODPAC, notaregMed.getCodPaciente());
 
 		return values;
 	}
@@ -75,29 +82,11 @@ public class NotaRegistroMedicoDAO extends BasicoDAO {
 		notaregMed.setSincronizado(c.getString(c
 				.getColumnIndex(COLUNA_SINCRONIZADO)));
 		notaregMed.setTipoUser(c.getString(c.getColumnIndex(COLUNA_TIPO_USER)));
-		notaregMed.setInfoRegistro(infoRegistros(notaregMed.getId()));
-		notaregMed.setCodPaciente(codPaciente(notaregMed.getId()));
+		notaregMed.setInfoRegistro(c.getString(c
+				.getColumnIndex(COLUNA_INFO_REGISTRO)));
+		notaregMed.setCodPaciente(c.getString(c.getColumnIndex(COLUNA_CODPAC)));
 
 		return notaregMed;
-	}
-
-	private String codPaciente(Integer idRegistro) {
-		Cursor c = mDb.query("REGISTROS", null, "_id = " + idRegistro, null,
-				null, null, null);
-		c.moveToFirst();
-		return c.getString(c.getColumnIndex("CODIGO_PACIENTE"));
-	}
-
-	private String infoRegistros(Integer idRegistro) {
-		Cursor c = mDb.query("REGISTROS", null, "_id = " + idRegistro, null,
-				null, null, null);
-		if (c == null || c.getCount() < 1) {
-			return null;
-		}
-		c.moveToFirst();
-		String valor = String.valueOf(c.getFloat(c.getColumnIndex("VALOR")));
-		return valor + " " + c.getString(c.getColumnIndex("UNIDADE")) + " de "
-				+ c.getString(c.getColumnIndex("TIPO"));
 	}
 
 	public Cursor consultarNotaMedicoWhereOrderLimit(String where,

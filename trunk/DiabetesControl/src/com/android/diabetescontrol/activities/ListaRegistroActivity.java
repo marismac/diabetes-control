@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.android.diabetescontrol.database.RegistroDAO;
 import com.android.diabetescontrol.model.Registro;
+import com.android.diabetescontrol.util.Utils;
 
 public class ListaRegistroActivity extends ListActivity {
 	private TextView textSem;
@@ -23,7 +24,7 @@ public class ListaRegistroActivity extends ListActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.consultaregistros);
+		setContentView(R.layout.consultaultimosregistros);
 		String dataFiltro = "01/01/1900";
 		String tipoCategoria = "%";
 		if (getIntent().getExtras().get("dataFiltro") != null
@@ -65,7 +66,8 @@ public class ListaRegistroActivity extends ListActivity {
 			String formattedDate = sdf.format(reg.getDataHora());
 			System.out.println(dataFiltro + " - " + formattedDate + " - "
 					+ reg.getDataHora());
-			if (dataFiltro.equals(formattedDate)) {
+			if (dataFiltro.equals(formattedDate)
+					&& reg.getModoUser().equals(Utils.tipo_modo(this))) {
 				textSem.setVisibility(View.INVISIBLE);
 				m.put("Master", reg.getTipo().toString() + ": "
 						+ reg.getValor().toString());

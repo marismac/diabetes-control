@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.SQLException;
 
+import com.android.diabetescontrol.model.Paciente;
 import com.android.diabetescontrol.model.Registro;
 import com.android.diabetescontrol.util.Constante;
 
@@ -145,7 +146,14 @@ public class RegistroDAO extends BasicoDAO {
 	 * @return Cursor com os registros filtrados
 	 */
 	public Cursor consultarRegistrosPorTipo(String tipoCategoria) {
-		String selection = COLUNA_TIPO + " LIKE '" + tipoCategoria + "'";
+		String selection = "";
+		if (Paciente.getCODIGOPACIENTE() != null) {
+			selection = COLUNA_TIPO + " LIKE '" + tipoCategoria + "' AND "
+					+ COLUNA_CODPAC + " = '" + Paciente.getCODIGOPACIENTE()
+					+ "' ";
+		} else {
+			selection = COLUNA_TIPO + " LIKE '" + tipoCategoria + "'";
+		}
 		Cursor mCursor = mDb.query(TABELA_REGISTRO, null, selection, null,
 				null, null, null);
 		return mCursor;

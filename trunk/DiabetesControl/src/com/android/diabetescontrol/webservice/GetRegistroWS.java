@@ -83,11 +83,18 @@ public class GetRegistroWS {
 					SoapObject property = (SoapObject) response.getProperty(i);
 					if ("sucess".equals(property.getProperty(0).toString())) {
 						registro = new Registro();
-						registro.setValor(Float.valueOf(property.getProperty(1)
-								.toString()));
+						// É pego primeiro para realizar as validações
+						// porteriores.
+						registro.setTipo(property.getProperty(3).toString());
+						if (Constante.TIPO_PRESSAO.equals(registro.getTipo())) {
+							registro.setValorPressao(property.getProperty(1)
+									.toString());
+						} else {
+							registro.setValor(Float.valueOf(property
+									.getProperty(1).toString()));
+						}
 						registro.setCategoria(property.getProperty(2)
 								.toString());
-						registro.setTipo(property.getProperty(3).toString());
 						registro.setCodPaciente(property.getProperty(4)
 								.toString());
 						registro.setUnidade(property.getProperty(5).toString());
@@ -95,6 +102,13 @@ public class GetRegistroWS {
 								.getProperty(6).toString()));
 						registro.setDataHora(Utils.stringToTimestamp(property
 								.getProperty(7).toString()));
+						if (Constante.TIPO_MEDICAMENTO.equals(registro
+								.getTipo())) {
+							registro.setMedicamento(Integer.valueOf(property
+									.getProperty(8).toString()));
+						} else {
+							registro.setMedicamento(null);
+						}
 						registro.setSincronizado("S");
 						registro.setModoUser(Utils.tipo_modo(ctx));
 						insereRegistro(registro);
