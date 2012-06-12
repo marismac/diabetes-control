@@ -75,6 +75,13 @@ public class CadPacienteWS {
 			progressDialog.setMessage("Sincronizando");
 			progressDialog.show();
 		}
+		
+		private void carregaCodPaciente() {
+			PacienteDAO pacDao = new PacienteDAO(ctx);
+			pacDao.open();
+			Paciente.setCODIGOPACIENTE(pacDao.getCodPac());
+			pacDao.close();
+		}
 
 		@Override
 		protected void onPostExecute(Void result) {
@@ -82,6 +89,7 @@ public class CadPacienteWS {
 				if ("sucess".equals(mensagem)) {
 					salvaPaciente(pac);
 					Utils.criaAlertSalvar(ctx, null);
+					carregaCodPaciente();
 				} else if ("internet".equals(mensagem)) {
 					Utils.criarAlertaErro(
 							ctx,
@@ -89,7 +97,7 @@ public class CadPacienteWS {
 									+ Utils.URL_WS(ctx));
 				} else if ("duplicado".equals(mensagem)) {
 					Utils.criarAlertaErro(ctx,
-							"O Código de Paciente informado está em uso. Favor selecione outro!");
+							"O Código de Paciente está em uso. Informe outro!");
 				} else {
 					Utils.criarAlertaErro(ctx,
 							"Não foi possível salvar o registro! Verifique a internet!");

@@ -24,7 +24,6 @@ import com.android.diabetescontrol.webservice.GetRegistroWS;
 public class ListaRegistrosMedicosActivity extends ListActivity {
 	String codPaciente;
 	Context ctx = this;
-	Boolean salvar = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +48,8 @@ public class ListaRegistrosMedicosActivity extends ListActivity {
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		Registro registro = (Registro) l.getAdapter().getItem(position);
 		final NotaRegistroMedico nrm = new NotaRegistroMedico();
-		nrm.setIdRegistro(registro.getId());
+		nrm.setIdRegistro(registro.getCodCelPac());
+		nrm.setCodPaciente(registro.getCodPaciente());
 		nrm.setSincronizado("N");
 		nrm.setTipoUser(Utils.tipo_modo(this));
 
@@ -74,7 +74,12 @@ public class ListaRegistrosMedicosActivity extends ListActivity {
 							nrmDao.open();
 							nrmDao.criarNotaRegistroMedico(nrm);
 							nrmDao.close();
-							salvar = true;
+							if (Utils
+									.existConnectionInternet((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))
+									&& Utils.isSelectSynchronize(ctx)) {
+								new CadNotaWS(nrm, ctx).sincNota();
+							}
+							Utils.criaAlertSalvar(ctx, null);
 						}
 					}
 				});
@@ -88,14 +93,6 @@ public class ListaRegistrosMedicosActivity extends ListActivity {
 				});
 		builder.create();
 		builder.show();
-		// Fecha criação da AlertDialog
-		if (salvar) {
-			if (Utils
-					.existConnectionInternet((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))
-					&& Utils.isSelectSynchronize(ctx)) {
-				new CadNotaWS(nrm, ctx).sincNota();
-			}
-		}
 		super.onListItemClick(l, v, position, id);
 	}
 

@@ -40,12 +40,12 @@ public class PrincipalActivity extends Activity {
 	private Button btEditar;
 	private Button btGraficos;
 	private Button btConfiguracoes;
-	private Button btRelatoriosPacientes;
+	private Button btAdicionaNota;
 	private Button btCadastrarPaciente;
 	private Button btRelatorios;
 	private Button btAdicionarPaciente;
 	private Button btGraficosPaciente;
-	private Button btNotasMedicas;
+	private Button btListaNotasMedicas;
 	private TextView tvValorHoje;
 	private TextView tvValorOntem;
 	private TextView tvValorSemana;
@@ -140,14 +140,14 @@ public class PrincipalActivity extends Activity {
 				startActivity(i);
 			}
 		});
-		btRelatoriosPacientes.setOnClickListener(new OnClickListener() {
+		btAdicionaNota.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				Intent i = new Intent(PrincipalActivity.this,
 						ListaPacientesActivity.class);
 				startActivity(i);
 			}
 		});
-		btNotasMedicas.setOnClickListener(new OnClickListener() {
+		btListaNotasMedicas.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				Intent i = new Intent(PrincipalActivity.this,
 						ListaNotasRegistrosMedicosActivity.class);
@@ -168,8 +168,8 @@ public class PrincipalActivity extends Activity {
 	private void inicializaObjetosMedico() {
 		btConfiguracoes = (Button) findViewById(R.id.btConfiguracoes);
 		btAdicionarPaciente = (Button) findViewById(R.id.btAddPaciente);
-		btRelatoriosPacientes = (Button) findViewById(R.id.btRelatoriosPacientes);
-		btNotasMedicas = (Button) findViewById(R.id.btNotasMedicas);
+		btAdicionaNota = (Button) findViewById(R.id.btAdicionaNota);
+		btListaNotasMedicas = (Button) findViewById(R.id.btListaNotasMedicas);
 		btGraficosPaciente = (Button) findViewById(R.id.btGraficosPaciente);
 	}
 
