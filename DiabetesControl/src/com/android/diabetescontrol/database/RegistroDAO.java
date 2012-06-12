@@ -147,12 +147,15 @@ public class RegistroDAO extends BasicoDAO {
 	 */
 	public Cursor consultarRegistrosPorTipo(String tipoCategoria) {
 		String selection = "";
-		if (Paciente.getCODIGOPACIENTE() != null) {
+		if (Constante.TIPO_MODO_MEDICO.equals(Constante.TIPO_MODO)) {
 			selection = COLUNA_TIPO + " LIKE '" + tipoCategoria + "' AND "
 					+ COLUNA_CODPAC + " = '" + Paciente.getCODIGOPACIENTE()
-					+ "' ";
+					+ "' AND " + COLUNA_TIPO_USER + " = '"
+					+ Constante.TIPO_MODO + "' ";
 		} else {
-			selection = COLUNA_TIPO + " LIKE '" + tipoCategoria + "'";
+			selection = COLUNA_TIPO + " LIKE '" + tipoCategoria + "' AND "
+					+ COLUNA_TIPO_USER + " = '" + Constante.TIPO_MODO + "' ";
+			;
 		}
 		Cursor mCursor = mDb.query(TABELA_REGISTRO, null, selection, null,
 				null, null, null);
@@ -200,27 +203,6 @@ public class RegistroDAO extends BasicoDAO {
 		return mDb.query(TABELA_REGISTRO, new String[] { COLUNA_ID,
 				COLUNA_DATAHORA, COLUNA_VALOR, COLUNA_TIPO, COLUNA_CATEGORIA },
 				null, null, null, null, orderby);
-	}
-
-	/**
-	 * 
-	 * Permite realizar uma consulta na tabela de Registros selecionando uma
-	 * quantidade máxima e informando um tipo de ordenação.
-	 * 
-	 * @param orderby
-	 *            Coluna para informar a ordenação, que deve ser excluir o ORDER
-	 *            BY. Exemplos: DATAHORA ASC ou VALOR DESC
-	 * @param qtde
-	 *            Coluna para informar a quantidade de registros a serem
-	 *            trazidos na consulta
-	 * 
-	 * @return Cursos com os Registros ordenados
-	 */
-	public Cursor consultarAlgunsRegistrosGlicoseOrdenados(String orderby,
-			Integer qtde) {
-		return mDb.query(TABELA_REGISTRO, null, COLUNA_TIPO + " = '"
-				+ Constante.TIPO_GLICOSE + "'", null, null, null, orderby,
-				qtde.toString());
 	}
 
 	/**

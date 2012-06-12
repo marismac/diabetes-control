@@ -10,6 +10,7 @@ import android.content.Context;
 import android.database.Cursor;
 
 import com.android.diabetescontrol.database.RegistroDAO;
+import com.android.diabetescontrol.model.Paciente;
 import com.android.diabetescontrol.model.Registro;
 import com.android.diabetescontrol.util.Constante;
 
@@ -30,10 +31,23 @@ public class GlicoseValorMinMaxBusiness {
 		while (!c.isAfterLast()) {
 			m = new HashMap<String, String>();
 			Registro reg = regDAO.deCursorParaRegistro(c);
-			m.put("Master", reg.getValor().toString() + " mmo/l");
+			if (Constante.TIPO_PRESSAO.equals(reg.getTipo())) {
+				m.put("Master", reg.getValorPressao() + " " + reg.getUnidade()
+						+ " de " + reg.getTipo());
+			} else {
+				m.put("Master",
+						reg.getValor().toString() + " " + reg.getUnidade()
+								+ " de " + reg.getTipo());
+			}
 			String formattedDateHour = sdhf.format(reg.getDataHora());
-			m.put("Detail", formattedDateHour + " - "
-					+ reg.getCategoria().toString());
+			if (Constante.TIPO_MEDICAMENTO.equals(reg.getTipo())) {
+				m.put("Detail", reg.getMedicamento() + " - "
+						+ formattedDateHour + " - "
+						+ reg.getCategoria().toString());
+			} else {
+				m.put("Detail", formattedDateHour + " - "
+						+ reg.getCategoria().toString());
+			}
 			l.add(m);
 			c.moveToNext();
 		}
@@ -45,6 +59,7 @@ public class GlicoseValorMinMaxBusiness {
 	private String getWhereValores(Double valorMin, Double valorMax,
 			RegistroDAO regDAO) {
 		StringBuilder where = new StringBuilder();
+
 		if ((valorMax != null || !valorMax.isNaN())
 				&& (valorMin != null || !valorMin.isNaN())) {
 			where.append(regDAO.COLUNA_VALOR + " <= " + valorMax.intValue());
@@ -66,6 +81,15 @@ public class GlicoseValorMinMaxBusiness {
 		} else {
 			where.append(regDAO.COLUNA_TIPO + " = '" + Constante.TIPO_GLICOSE
 					+ "'");
+		}
+		if (Constante.TIPO_MODO_MEDICO.equals(Constante.TIPO_MODO)) {
+			where.append(" AND " + regDAO.COLUNA_CODPAC + " = '"
+					+ Paciente.getCODIGOPACIENTE() + "' AND "
+					+ regDAO.COLUNA_TIPO_USER + " = '" + Constante.TIPO_MODO
+					+ "' ");
+		} else {
+			where.append(" AND " + regDAO.COLUNA_TIPO_USER + " = '"
+					+ Constante.TIPO_MODO + "' ");
 		}
 		return where.toString();
 	}

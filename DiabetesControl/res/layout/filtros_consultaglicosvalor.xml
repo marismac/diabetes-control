@@ -16,7 +16,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/filtro"
-            android:textColor="@color/branco"
             android:textSize="20dip"
             android:textStyle="bold" />
     </TableRow>
@@ -43,7 +42,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/valormim"
-            android:textColor="@color/branco"
             android:textSize="17dip" />
     </TableRow>
 
@@ -56,7 +54,7 @@
             android:id="@+id/etValorMin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="numberDecimal"
+            android:inputType="number"
             android:hint="Informe o Valor" >
 
             <requestFocus />
@@ -84,7 +82,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/valormax"
-            android:textColor="@color/branco"
             android:textSize="17dip" />
     </TableRow>
 
@@ -97,7 +94,7 @@
             android:id="@+id/etValorMax"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
+            android:inputType="number"
             android:hint="Informe o Valor" />
     </TableRow>
 

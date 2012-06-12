@@ -28,6 +28,7 @@ import com.android.diabetescontrol.database.PacienteDAO;
 import com.android.diabetescontrol.database.RegistroDAO;
 import com.android.diabetescontrol.model.Medicamento;
 import com.android.diabetescontrol.model.Paciente;
+import com.android.diabetescontrol.util.Constante;
 import com.android.diabetescontrol.util.Utils;
 
 public class PrincipalActivity extends Activity {
@@ -41,14 +42,13 @@ public class PrincipalActivity extends Activity {
 	private Button btAdicionarPacienteMedico;
 	private Button btAdicionaNotaMedico;
 	private Button btGraficosMedico;
+	private Button btListaNotasMedicas;
 
 	// Botões Pacientes
 	private Button btConfiguracoes;
 	private Button btAdicionar;
 	private Button btEditar;
 	private Button btGraficos;
-
-	private Button btListaNotasMedicas;
 
 	private Button btCadastrarPaciente;
 	private TextView tvValorHoje;
@@ -60,6 +60,7 @@ public class PrincipalActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		new ContextoDados(this);
 		Medicamento.preencheListaMedicamento(this);
+		Constante.TIPO_MODO = Utils.tipo_modo(this);
 		if (Utils.isPaciente(this)) {
 			setContentView(R.layout.main_paciente);
 			inicializaObjetosPaciente();
