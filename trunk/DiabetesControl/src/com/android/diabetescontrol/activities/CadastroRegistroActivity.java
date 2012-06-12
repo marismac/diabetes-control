@@ -10,6 +10,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -360,12 +361,12 @@ public class CadastroRegistroActivity extends Activity {
 			}
 			regDao.close();
 			Utils.criaAlertSalvar(ctx, null);
-		}
-		if (Utils
-				.existConnectionInternet((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))
-				&& Utils.isSelectSynchronize(ctx)
-				&& Paciente.getCODIGOPACIENTE() != null) {
-			new CadRegistroWS(this).sincRegistro(reg);
+			if (Utils
+					.existConnectionInternet((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))
+					&& Utils.isSelectSynchronize(ctx)
+					&& Paciente.getCODIGOPACIENTE() != null) {
+				new CadRegistroWS(this).sincRegistro(reg);
+			}
 		}
 	}
 
@@ -376,6 +377,7 @@ public class CadastroRegistroActivity extends Activity {
 				&& !"Pressão".equals(spinnerTipo.getSelectedItem().toString())) {
 			editTextValor.setFocusable(true);
 			editTextValor.setError("Obrigatório");
+			editTextValor.setBackgroundColor(Color.RED);
 			return null;
 		} else if ("".equals(editTextValorPressao.getText().toString())
 				&& "Pressão".equals(spinnerTipo.getSelectedItem().toString())) {

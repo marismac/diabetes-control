@@ -8,6 +8,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
@@ -108,6 +109,7 @@ public class CadastroPacienteActivity extends Activity {
 		if ("".equals(edittext.getText().toString())) {
 			edittext.setError("Campo Obrigatório");
 			edittext.setFocusable(true);
+			edittext.setBackgroundColor(Color.BLACK);
 			return false;
 		}
 		return true;

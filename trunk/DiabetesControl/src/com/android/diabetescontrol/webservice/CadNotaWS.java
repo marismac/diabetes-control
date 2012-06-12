@@ -74,7 +74,6 @@ public class CadNotaWS {
 			if (mensagem != null) {
 				if ("sucess".equals(mensagem)) {
 					salvaNota(nrm);
-					Utils.criaAlertSalvar(ctx, null);
 				} else if ("internet".equals(mensagem)) {
 					Utils.criarAlertaErro(
 							ctx,
