@@ -17,9 +17,9 @@
             android:background="@null" />
 
         <RelativeLayout>
-
+
             <Button
-                android:id="@+id/btAdicionaNota"
+                android:id="@+id/btAdicionaNotaMedico"
                 android:layout_width="wrap_content"
                 android:layout_height="80dp"
                 android:layout_alignParentLeft="true"
@@ -50,9 +50,9 @@
             android:background="@null" />
 
         <RelativeLayout>
-
+
             <Button
-                android:id="@+id/btGraficosPaciente"
+                android:id="@+id/btGraficosMedico"
                 android:layout_width="wrap_content"
                 android:layout_height="80dp"
                 android:layout_alignParentRight="true"
@@ -62,9 +62,9 @@
                 android:drawableTop="@drawable/chart"
                 android:text="@string/graficosPaciente"
                 android:textSize="12dp" />
-
+
             <Button
-                android:id="@+id/btConfiguracoes"
+                android:id="@+id/btRelatoriosMedico"
                 android:layout_width="wrap_content"
                 android:layout_height="80dp"
                 android:layout_alignParentLeft="true"
@@ -96,9 +96,9 @@
                 android:drawableTop="@drawable/user_add"
                 android:text="@string/cadmedico"
                 android:textSize="12dp" />
-
+
             <Button
-                android:id="@+id/btAddPaciente"
+                android:id="@+id/btAddPacienteMedico"
                 android:layout_width="wrap_content"
                 android:layout_height="80dp"
                 android:layout_alignParentRight="true"

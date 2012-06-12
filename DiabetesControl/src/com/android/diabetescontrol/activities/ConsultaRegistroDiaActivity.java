@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 
-public class consultaRegistroDiaActivity extends Activity {
+public class ConsultaRegistroDiaActivity extends Activity {
 	static final int TIME_DIALOG_ID = 1;
 	static final int DATE_DIALOG_ID = 0;
 	private Spinner spinnerTipo = null;
@@ -27,7 +27,7 @@ public class consultaRegistroDiaActivity extends Activity {
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.filtrosconsulta);
+		setContentView(R.layout.filtro_consultadia);
 		setCampos();
 		runListeners();
 		carregaSpinners();
@@ -43,7 +43,7 @@ public class consultaRegistroDiaActivity extends Activity {
 		buttonConsultar.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(consultaRegistroDiaActivity.this,
+				Intent i = new Intent(ConsultaRegistroDiaActivity.this,
 						ListaRegistroActivity.class);
 				i.putExtra("dataFiltro", buttonData.getText());
 				i.putExtra("tipoCategoria", spinnerTipo.getSelectedItem()

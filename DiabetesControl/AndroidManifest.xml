@@ -16,6 +16,9 @@
         <activity android:name="org.achartengine.GraphicalActivity" />
         <activity android:name=".GeneratedChartDemo" />
         <activity
+            android:name=".ListaNotasMedicasActivity"
+            android:theme="@style/MapBackground" />
+        <activity
             android:name=".ListaEditarRegistrosActivity"
             android:theme="@style/MapBackground" />
         <activity
@@ -52,8 +55,8 @@
             android:name=".ListaRegistrosMedicosActivity"
             android:theme="@style/MapBackground" />
         <activity
-            android:name=".consultaRegistroDiaActivity"
-            android:theme="@style/MapBackgroundNoTitle" />
+            android:name=".ConsultaRegistroDiaActivity"
+            android:theme="@style/MapBackground" />
         <activity
             android:name=".RelatorioGlicoseMediaActivity"
             android:theme="@style/MapBackground" />
@@ -70,7 +73,7 @@
             android:name=".ListaPacientesActivity"
             android:theme="@style/MapBackground" />
         <activity
-            android:name=".RelatoriosActivity"
+            android:name=".SelectRelatoriosActivity"
             android:theme="@style/MapBackground" >
             <intent-filter>
                 <action android:name="com.ptandroid.tutorial.MENU" />
