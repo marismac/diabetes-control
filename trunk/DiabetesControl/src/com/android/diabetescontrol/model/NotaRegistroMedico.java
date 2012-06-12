@@ -7,7 +7,7 @@ public class NotaRegistroMedico {
 	private String sincronizado;
 	private String tipoUser;
 	private String infoRegistro;
-	private String nomePaciente;
+	private String codPaciente;
 
 	public String getInfoRegistro() {
 		return infoRegistro;
@@ -17,12 +17,12 @@ public class NotaRegistroMedico {
 		this.infoRegistro = infoRegistro;
 	}
 
-	public String getNomePaciente() {
-		return nomePaciente;
+	public String getCodPaciente() {
+		return codPaciente;
 	}
 
-	public void setNomePaciente(String nomePaciente) {
-		this.nomePaciente = nomePaciente;
+	public void setCodPaciente(String nomePaciente) {
+		this.codPaciente = nomePaciente;
 	}
 
 	public Integer getId() {

@@ -43,6 +43,12 @@ public class NotaRegistroMedicoDAO extends BasicoDAO {
 		mDb.insert(TABELA_NOTA_REGISTRO_MEDICO, null, values);
 	}
 
+	public void atualizaNota(NotaRegistroMedico notaregMed) {
+		ContentValues values = deNotaRegistroMedicoParaContentValues(notaregMed);
+		mDb.update(TABELA_NOTA_REGISTRO_MEDICO, values, COLUNA_ID + " = "
+				+ notaregMed.getId(), null);
+	}
+
 	public static ContentValues deNotaRegistroMedicoParaContentValues(
 			NotaRegistroMedico notaregMed) {
 		ContentValues values = new ContentValues();
@@ -70,7 +76,7 @@ public class NotaRegistroMedicoDAO extends BasicoDAO {
 				.getColumnIndex(COLUNA_SINCRONIZADO)));
 		notaregMed.setTipoUser(c.getString(c.getColumnIndex(COLUNA_TIPO_USER)));
 		notaregMed.setInfoRegistro(infoRegistros(notaregMed.getId()));
-		notaregMed.setNomePaciente(codPaciente(notaregMed.getId()));
+		notaregMed.setCodPaciente(codPaciente(notaregMed.getId()));
 
 		return notaregMed;
 	}
