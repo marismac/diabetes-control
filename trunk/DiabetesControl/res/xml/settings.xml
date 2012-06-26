@@ -13,7 +13,7 @@
             android:title="@string/modo_titulo" />
 
         <CheckBoxPreference
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:key="webservice"
             android:summary="@string/ws_resumo"
             android:title="@string/ws_titulo" />
