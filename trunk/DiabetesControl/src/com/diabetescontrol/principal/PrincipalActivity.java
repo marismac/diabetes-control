@@ -209,7 +209,9 @@ public class PrincipalActivity extends Activity {
 	@Override
 	protected void onStart() {
 		super.onStart();
-
+		if (Utils.isPaciente(this)) {
+			carregaResumo();
+		}
 	}
 
 	private void carregaResumo() {

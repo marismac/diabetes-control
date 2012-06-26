@@ -16,6 +16,7 @@ import com.diabetescontrol.adapters.RegistroAdapter;
 import com.diabetescontrol.business.RegistrosMedicosBusiness;
 import com.diabetescontrol.database.NotaRegistroMedicoDAO;
 import com.diabetescontrol.model.NotaRegistroMedico;
+import com.diabetescontrol.model.Paciente;
 import com.diabetescontrol.model.Registro;
 import com.diabetescontrol.util.Constante;
 import com.diabetescontrol.util.Utils;
@@ -28,11 +29,8 @@ public class ListaRegistrosMedicosActivity extends ListActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		if (getIntent().getExtras().get("codPaciente") != null
-				&& !"".equals(getIntent().getExtras().get("codPaciente")
-						.toString())) {
-			codPaciente = (getIntent().getExtras().get("codPaciente")
-					.toString());
+		if (Paciente.getCODIGOPACIENTE() != null) {
+			codPaciente = Paciente.getCODIGOPACIENTE();
 			if (Utils
 					.existConnectionInternet((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))
 					&& Utils.isSelectSynchronize(ctx)) {

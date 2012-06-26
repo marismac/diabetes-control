@@ -74,7 +74,7 @@ public class Utils {
 
 	public static final String URL_WS(Context ctx) {
 		String url = PreferenceManager.getDefaultSharedPreferences(ctx)
-				.getString("endereco_ws", "192.168.2.2");
+				.getString("endereco_ws", "leonardo-pc");
 		return "http://" + url + ":8080/DiabetesWS/DiabetesWS?WSDL";
 	}
 
