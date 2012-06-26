@@ -1,7 +1,11 @@
 package com.diabetescontrol.activities;
 
+import java.util.List;
+
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
@@ -9,13 +13,24 @@ import android.widget.ListView;
 import com.diabetescontrol.adapters.PacienteAdapter;
 import com.diabetescontrol.business.PacientesBusiness;
 import com.diabetescontrol.model.Paciente;
+import com.diabetescontrol.util.Utils;
+import com.diabetescontrol.webservice.GetRegistroWS;
 
 public class ListaPacientesActivity extends ListActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setListAdapter(new PacienteAdapter(this,
-				new PacientesBusiness().getPacientesDoMedico(this)));
+		List<Paciente> lista = new PacientesBusiness()
+				.getPacientesDoMedico(this);
+		setListAdapter(new PacienteAdapter(this, lista));
+		for (Paciente pac : lista) {
+			if (Utils
+					.existConnectionInternet((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE))
+					&& Utils.isSelectSynchronize(this)) {
+				new GetRegistroWS(this).sincRegistrosMedico(pac
+						.getCodPaciente());
+			}
+		}
 	}
 
 	@Override
@@ -38,7 +53,11 @@ public class ListaPacientesActivity extends ListActivity {
 					SelectRelatoriosActivity.class);
 			Paciente.setCODIGOPACIENTE(paciente.getCodPaciente());
 			startActivity(i);
-
+		} else {
+			Intent i = new Intent(ListaPacientesActivity.this,
+					ListaRegistrosMedicosActivity.class);
+			Paciente.setCODIGOPACIENTE(paciente.getCodPaciente());
+			startActivity(i);
 		}
 		super.onListItemClick(l, v, position, id);
 	}
